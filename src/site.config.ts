@@ -47,11 +47,11 @@ export const theme: ThemeUserConfig = {
   /** Configure the header of your site. */
   header: {
     menu: [
-      { title: 'Blog', link: '/blog' },
-      { title: 'Docs', link: '/docs' },
-      { title: 'Projects', link: '/projects' },
-      { title: 'Links', link: '/links' },
-      { title: 'About', link: '/about' }
+      { title: 'Blog', link: 'vapourx-scalelab/blog' },
+      { title: 'Docs', link: 'vapourx-scalelab/docs' },
+      { title: 'Projects', link: 'vapourx-scalelab/projects' },
+      { title: 'Links', link: 'vapourx-scalelab/links' },
+      { title: 'About', link: 'vapourx-scalelab/about' }
     ]
   },
 
