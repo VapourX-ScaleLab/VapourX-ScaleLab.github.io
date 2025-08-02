@@ -1,0 +1,176 @@
+---
+import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
+import type { SiteMeta } from 'astro-pure/types'
+import BaseHead from '@/components/BaseHead.astro'
+import config from '@/site-config'
+
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseLayout /> component.
+import '@/assets/styles/app.css'
+
+interface Props {
+  meta: SiteMeta
+  highlightColor?: string
+  gradientType?: 'default' | 'radial' | 'mesh' | 'animated'
+}
+
+const {
+  meta: { articleDate, description = config.description, ogImage, title },
+  highlightColor,
+  gradientType = 'default',
+  ...props
+} = Astro.props
+---
+
+<html lang={config.locale.lang}>
+  <head>
+    <BaseHead {articleDate} {description} {ogImage} {title} />
+    <ThemeProvider />
+  </head>
+
+  <body class='flex justify-center bg-background text-foreground' data-gradient-type={gradientType} {...props}>
+    {/* 全局蓝绿紫渐变背景 */}
+    <div
+      id="global-gradient"
+      class='pointer-events-none fixed start-0 top-0 z-[-2] h-screen w-full'
+      style="background: linear-gradient(135deg, #4F46E50A 0%, #A855F70A 50%, #10B9810A 100%), radial-gradient(circle at 30% 70%, #4F46E50A 0%, transparent 60%), radial-gradient(circle at 70% 30%, #A855F70A 0%, transparent 60%), radial-gradient(circle at 50% 50%, #10B9810A 0%, transparent 60%); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; min-height: 100vh;"
+    />
+    
+    {
+      highlightColor && (
+        <div
+          id='highlight-gradient'
+          class='pointer-events-none fixed start-0 top-0 z-0 h-screen w-full opacity-25'
+          style={`background-image:linear-gradient(${highlightColor},transparent); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; min-height: 100vh;`}
+        />
+      )
+    }
+    
+    {/* 额外的渐变装饰层 */}
+    {gradientType === 'mesh' && (
+      <div
+        class='pointer-events-none fixed start-0 top-0 z-[-3] h-screen w-full opacity-30'
+        style={`
+          background-image: 
+            radial-gradient(circle at 25% 25%, ${highlightColor || '#5B8BB3'}20 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, ${highlightColor || '#5B8BB3'}15 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, ${highlightColor || '#5B8BB3'}10 0%, transparent 50%);
+          background-attachment: fixed;
+          background-size: cover;
+          background-repeat: no-repeat;
+          min-height: 100vh;
+        `}
+      />
+    )}
+    
+    {gradientType === 'animated' && (
+      <div
+        class='pointer-events-none fixed start-0 top-0 z-[-3] h-screen w-full opacity-20'
+        style={`
+          background: linear-gradient(-45deg, 
+            ${highlightColor || '#5B8BB3'}20, 
+            transparent 25%, 
+            transparent 50%, 
+            ${highlightColor || '#5B8BB3'}20, 
+            transparent 75%, 
+            transparent);
+          background-size: 400% 400%;
+          background-attachment: fixed;
+          background-repeat: no-repeat;
+          min-height: 100vh;
+        `}
+      />
+    )}
+    
+    <div class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10'>
+      <Header />
+      <slot />
+      <Footer />
+    </div>
+
+    {/* Set highlight color and gradient animations */}
+    <style define:vars={{ highlightColor }}>
+      :global(.highlight) {
+        color: var(--highlightColor, hsl(var(--primary) / var(--un-text-opacity))) !important;
+      }
+      :global(.highlight-bg) {
+        background-color: var(
+          --highlightColor,
+          hsl(var(--primary) / var(--un-text-opacity))
+        ) !important;
+      }
+    </style>
+
+    <script>
+      // 全局渐变透明度控制
+      function updateGlobalGradient() {
+        const gradientElement = document.getElementById('global-gradient');
+        if (!gradientElement) return;
+
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        
+        // 计算滚动百分比，在150%页面长度时完全透明
+        const maxScrollDistance = windowHeight * 1.5;
+        const scrollPercent = Math.min(scrollTop / maxScrollDistance, 1);
+        
+        // 计算透明度：从0.1到0
+        const maxOpacity = 0.1;
+        const currentOpacity = maxOpacity * (1 - scrollPercent);
+        
+        // 转换为十六进制透明度
+        const opacityHex = Math.round(currentOpacity * 255).toString(16).padStart(2, '0');
+        
+        // 更新渐变样式
+        const backgroundStyle = `
+          linear-gradient(135deg, 
+            #4F46E5${opacityHex} 0%, 
+            #A855F7${opacityHex} 50%, 
+            #10B981${opacityHex} 100%
+          ),
+          radial-gradient(circle at 30% 70%, #4F46E5${opacityHex} 0%, transparent 60%),
+          radial-gradient(circle at 70% 30%, #A855F7${opacityHex} 0%, transparent 60%),
+          radial-gradient(circle at 50% 50%, #10B981${opacityHex} 0%, transparent 60%)
+        `;
+        
+        gradientElement.style.background = backgroundStyle;
+        gradientElement.style.backgroundAttachment = 'fixed';
+        gradientElement.style.backgroundSize = 'cover';
+        gradientElement.style.backgroundRepeat = 'no-repeat';
+        gradientElement.style.minHeight = '100vh';
+      }
+
+      // 优化的滚动监听
+      let ticking = false;
+      function handleScroll() {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateGlobalGradient();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      // 监听滚动事件
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // 页面加载时初始化
+      document.addEventListener('DOMContentLoaded', updateGlobalGradient);
+      
+      // 页面可见性变化时重新初始化
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          setTimeout(updateGlobalGradient, 50);
+        }
+      });
+      
+      // 确保在脚本执行时立即初始化
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateGlobalGradient);
+      } else {
+        updateGlobalGradient();
+      }
+    </script>
+  </body>
+</html>

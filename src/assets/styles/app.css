@@ -1,0 +1,378 @@
+/* Font */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.ttf');
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-VariableItalic.ttf');
+  font-style: italic;
+  font-display: swap;
+}
+html {
+  font-family: 'Satoshi', sans-serif;
+}
+
+/* Theme */
+:root {
+  --background: 210 33% 99%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 220 29% 45%;
+  --primary-foreground: 0 0% 92.5%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95%;
+  --muted-foreground: 240 3.8% 28.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 72.22% 50.59%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 88%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.5rem;
+}
+.dark {
+  --background: 240 20.54% 5.2%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 215 95% 85%;
+  --primary-foreground: 240 3.7% 15.9%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 5.9% 12%;
+  --muted-foreground: 240 5% 74.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 19.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+}
+:root {
+  --un-default-border-color: hsl(var(--border) / 1);
+}
+html.dark {
+  color-scheme: dark;
+}
+
+/* Global */
+a {
+  transition: color 0.2s ease;
+  &:hover {
+    color: hsl(var(--primary) / var(--un-text-opacity, 1));
+  }
+}
+
+/* 增强的渐变背景样式 */
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* 主渐变背景 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  z-index: -2;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--background)) 0%,
+    hsl(var(--muted) / 0.15) 50%,
+    hsl(var(--background)) 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* 动态渐变装饰 */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, hsl(var(--accent) / 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, hsl(var(--secondary) / 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* 高亮渐变增强 */
+#highlight-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--highlightColor, hsl(var(--primary) / 0.3)) 0%,
+    transparent 50%,
+    var(--highlightColor, hsl(var(--primary) / 0.1)) 100%
+  ) !important;
+  filter: blur(1px);
+}
+
+
+
+/* 深色模式下的渐变调整 */
+.dark body::before {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--background)) 0%,
+    hsl(var(--muted) / 0.2) 50%,
+    hsl(var(--background)) 100%
+  );
+}
+
+.dark body::after {
+  background: 
+    radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, hsl(var(--accent) / 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, hsl(var(--secondary) / 0.03) 0%, transparent 50%);
+}
+
+/* 响应式渐变调整 */
+@media (max-width: 768px) {
+  body::after {
+    background: 
+      radial-gradient(circle at 50% 20%, hsl(var(--primary) / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, hsl(var(--accent) / 0.06) 0%, transparent 50%);
+  }
+}
+
+/* 毛玻璃效果样式 */
+.glass-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.glass-effect::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  border-radius: inherit;
+  z-index: -2;
+  filter: blur(1px);
+}
+
+/* 头像毛玻璃效果 */
+.avatar-glass {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.avatar-glass::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border-radius: inherit;
+  z-index: -2;
+  filter: blur(0.5px);
+}
+
+.avatar-glass img {
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-glass:hover img {
+  opacity: 1;
+}
+
+/* 深色模式下的毛玻璃效果 */
+.dark .glass-effect::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}
+
+.dark .glass-effect::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}
+
+/* 深色模式下的头像毛玻璃效果 */
+.dark .avatar-glass {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dark .avatar-glass::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+}
+
+.dark .avatar-glass::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+}
+
+.dark .avatar-glass img {
+  opacity: 0.85;
+}
+
+.dark .avatar-glass:hover img {
+  opacity: 0.95;
+}
+
+/* 圆形头像毛玻璃效果 */
+.avatar-glass.rounded-full {
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-glass.rounded-full::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  border-radius: 50%;
+}
+
+.avatar-glass.rounded-full::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  border-radius: 50%;
+  filter: blur(0.3px);
+}
+
+.avatar-glass.rounded-full img {
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-glass.rounded-full:hover img {
+  opacity: 0.95;
+}
+
+/* 深色模式下的圆形头像毛玻璃效果 */
+.dark .avatar-glass.rounded-full {
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dark .avatar-glass.rounded-full::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+.dark .avatar-glass.rounded-full::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+.dark .avatar-glass.rounded-full img {
+  opacity: 0.8;
+}
+
+.dark .avatar-glass.rounded-full:hover img {
+  opacity: 0.9;
+}

@@ -1,0 +1,152 @@
+---
+interface Props {
+  type?: 'fade' | 'color-shift' | 'intensity' | 'multi-layer'
+  primaryColor?: string
+  secondaryColor?: string
+  tertiaryColor?: string
+  baseOpacity?: number
+  className?: string
+}
+
+const {
+  type = 'fade',
+  primaryColor = '#5B8BB3',
+  secondaryColor = '#A855F7',
+  tertiaryColor = '#10B981',
+  baseOpacity = 0.4,
+  className = ''
+} = Astro.props
+---
+
+<div
+  id="advanced-scroll-gradient"
+  class={`pointer-events-none fixed start-0 top-0 z-[-2] h-screen w-full transition-all duration-500 ${className}`}
+  data-type={type}
+  data-primary={primaryColor}
+  data-secondary={secondaryColor}
+  data-tertiary={tertiaryColor}
+  data-base-opacity={baseOpacity}
+>
+</div>
+
+<script>
+  function updateAdvancedScrollGradient() {
+    const gradientElement = document.getElementById('advanced-scroll-gradient');
+    if (!gradientElement) return;
+
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    // 计算滚动百分比 (0-1)
+    const scrollPercent = scrollTop / (documentHeight - windowHeight);
+    
+    // 获取配置
+    const type = gradientElement.dataset.type || 'fade';
+    const primaryColor = gradientElement.dataset.primary || '#5B8BB3';
+    const secondaryColor = gradientElement.dataset.secondary || '#A855F7';
+    const tertiaryColor = gradientElement.dataset.tertiary || '#10B981';
+    const maxOpacity = parseFloat(gradientElement.dataset.baseOpacity || '0.4');
+    
+    let backgroundStyle = '';
+    
+    switch (type) {
+      case 'fade':
+        // 简单的透明度渐变
+        const fadeOpacity = maxOpacity - (scrollPercent * (maxOpacity - 0.05));
+        const fadeOpacityHex = Math.round(fadeOpacity * 255).toString(16).padStart(2, '0');
+        backgroundStyle = `
+          linear-gradient(135deg, 
+            ${primaryColor}${fadeOpacityHex} 0%, 
+            ${secondaryColor}${fadeOpacityHex} 50%, 
+            ${tertiaryColor}${fadeOpacityHex} 100%
+          )
+        `;
+        break;
+        
+      case 'color-shift':
+        // 颜色随滚动变化
+        const shiftOpacity = maxOpacity - (scrollPercent * (maxOpacity - 0.1));
+        const shiftOpacityHex = Math.round(shiftOpacity * 255).toString(16).padStart(2, '0');
+        const colorShift = Math.round(scrollPercent * 360);
+        backgroundStyle = `
+          linear-gradient(${colorShift}deg, 
+            ${primaryColor}${shiftOpacityHex} 0%, 
+            ${secondaryColor}${shiftOpacityHex} 33%, 
+            ${tertiaryColor}${shiftOpacityHex} 66%, 
+            ${primaryColor}${shiftOpacityHex} 100%
+          )
+        `;
+        break;
+        
+      case 'intensity':
+        // 强度变化
+        const intensityOpacity = maxOpacity * (1 - scrollPercent * 0.8);
+        const intensityOpacityHex = Math.round(intensityOpacity * 255).toString(16).padStart(2, '0');
+        const intensity = 1 - scrollPercent * 0.5;
+        backgroundStyle = `
+          radial-gradient(circle at ${50 + scrollPercent * 20}% ${50 - scrollPercent * 20}%, 
+            ${primaryColor}${intensityOpacityHex} 0%, 
+            ${secondaryColor}${Math.round(intensityOpacity * intensity * 255).toString(16).padStart(2, '0')} 50%, 
+            transparent 100%
+          )
+        `;
+        break;
+        
+      case 'multi-layer':
+        // 多层渐变效果
+        const layerOpacity = maxOpacity - (scrollPercent * (maxOpacity - 0.05));
+        const layerOpacityHex = Math.round(layerOpacity * 255).toString(16).padStart(2, '0');
+        const layer1Opacity = Math.round(layerOpacity * 0.8 * 255).toString(16).padStart(2, '0');
+        const layer2Opacity = Math.round(layerOpacity * 0.6 * 255).toString(16).padStart(2, '0');
+        
+        backgroundStyle = `
+          radial-gradient(circle at 20% 80%, ${primaryColor}${layerOpacityHex} 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, ${secondaryColor}${layer1Opacity} 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, ${tertiaryColor}${layer2Opacity} 0%, transparent 50%),
+          linear-gradient(135deg, 
+            ${primaryColor}${Math.round(layerOpacity * 0.3 * 255).toString(16).padStart(2, '0')} 0%, 
+            transparent 50%, 
+            ${secondaryColor}${Math.round(layerOpacity * 0.3 * 255).toString(16).padStart(2, '0')} 100%
+          )
+        `;
+        break;
+    }
+    
+    // 应用背景样式
+    gradientElement.style.background = backgroundStyle;
+    gradientElement.style.backgroundAttachment = 'fixed';
+    gradientElement.style.backgroundSize = 'cover';
+    gradientElement.style.backgroundRepeat = 'no-repeat';
+    gradientElement.style.minHeight = '100vh';
+    
+    // 添加一些额外的视觉效果
+    if (type === 'color-shift') {
+      gradientElement.style.filter = `hue-rotate(${scrollPercent * 30}deg)`;
+    } else {
+      gradientElement.style.filter = 'none';
+    }
+  }
+
+  // 使用节流函数优化性能
+  function throttle(func: Function, limit: number) {
+    let inThrottle: boolean = false;
+    return function(this: any, ...args: any[]) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    }
+  }
+
+  // 监听滚动事件（使用节流）
+  const throttledUpdate = throttle(updateAdvancedScrollGradient, 16); // 约60fps
+  window.addEventListener('scroll', throttledUpdate, { passive: true });
+  
+  // 页面加载时初始化
+  document.addEventListener('DOMContentLoaded', updateAdvancedScrollGradient);
+  
+  // 窗口大小改变时重新计算
+  window.addEventListener('resize', updateAdvancedScrollGradient);
+</script> 

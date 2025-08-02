@@ -1,0 +1,173 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import GradientBackground from '@/components/GradientBackground.astro'
+import ScrollGradient from '@/components/ScrollGradient.astro'
+import AdvancedScrollGradient from '@/components/AdvancedScrollGradient.astro'
+import { Button, Card } from 'astro-pure/user'
+import config from '@/site-config'
+
+const gradientTypes = [
+  { type: 'default', name: '默认渐变', primaryColor: '#5B8BB3', secondaryColor: '#A855F7' },
+  { type: 'radial', name: '径向渐变', primaryColor: '#4F46E5', secondaryColor: '#EC4899' },
+  { type: 'mesh', name: '网格渐变', primaryColor: '#10B981', secondaryColor: '#F59E0B' },
+  { type: 'animated', name: '动画渐变', primaryColor: '#A855F7', secondaryColor: '#EF4444' },
+  { type: 'gradient', name: '多色渐变', primaryColor: '#06B6D4', secondaryColor: '#84CC16' }
+]
+
+const scrollGradientTypes = [
+  { type: 'default', name: '滚动默认渐变', primaryColor: '#5B8BB3', secondaryColor: '#A855F7' },
+  { type: 'radial', name: '滚动径向渐变', primaryColor: '#4F46E5', secondaryColor: '#EC4899' },
+  { type: 'mesh', name: '滚动网格渐变', primaryColor: '#10B981', secondaryColor: '#F59E0B' },
+  { type: 'animated', name: '滚动动画渐变', primaryColor: '#A855F7', secondaryColor: '#EF4444' },
+  { type: 'gradient', name: '滚动多色渐变', primaryColor: '#06B6D4', secondaryColor: '#84CC16' }
+]
+
+const advancedScrollTypes = [
+  { type: 'fade', name: '淡出效果', primaryColor: '#5B8BB3', secondaryColor: '#A855F7', tertiaryColor: '#10B981' },
+  { type: 'color-shift', name: '颜色变换', primaryColor: '#4F46E5', secondaryColor: '#EC4899', tertiaryColor: '#F59E0B' },
+  { type: 'intensity', name: '强度变化', primaryColor: '#10B981', secondaryColor: '#F59E0B', tertiaryColor: '#EF4444' },
+  { type: 'multi-layer', name: '多层效果', primaryColor: '#A855F7', secondaryColor: '#EF4444', tertiaryColor: '#06B6D4' }
+]
+---
+
+<PageLayout meta={{ title: '渐变背景演示' }} highlightColor='#5B8BB3'>
+  <div class="space-y-8">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold mb-4">渐变背景效果演示</h1>
+      <p class="text-muted-foreground">点击下面的按钮查看不同的渐变效果</p>
+    </div>
+
+    <!-- 静态渐变效果 -->
+    <div class="space-y-4">
+      <h2 class="text-2xl font-semibold text-center">静态渐变效果</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {gradientTypes.map((gradient) => (
+          <Card class="p-6 text-center">
+            <h3 class="text-lg font-semibold mb-2">{gradient.name}</h3>
+            <div class="h-32 rounded-lg mb-4 relative overflow-hidden">
+              <GradientBackground 
+                type={gradient.type as any}
+                primaryColor={gradient.primaryColor}
+                secondaryColor={gradient.secondaryColor}
+                opacity={0.4}
+                className="!fixed !relative"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-sm font-medium">预览效果</span>
+              </div>
+            </div>
+            <Button 
+              title={`应用 ${gradient.name}`}
+              href={`/gradient-demo?type=${gradient.type}&primary=${gradient.primaryColor}&secondary=${gradient.secondaryColor}`}
+              style="ahead"
+              class="w-full"
+            />
+          </Card>
+        ))}
+      </div>
+    </div>
+
+    <!-- 滚动渐变效果 -->
+    <div class="space-y-4">
+      <h2 class="text-2xl font-semibold text-center">滚动渐变效果</h2>
+      <p class="text-center text-muted-foreground">滚动时透明度会逐渐降低</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {scrollGradientTypes.map((gradient) => (
+          <Card class="p-6 text-center">
+            <h3 class="text-lg font-semibold mb-2">{gradient.name}</h3>
+            <div class="h-32 rounded-lg mb-4 relative overflow-hidden">
+              <ScrollGradient 
+                type={gradient.type as any}
+                primaryColor={gradient.primaryColor}
+                secondaryColor={gradient.secondaryColor}
+                baseOpacity={0.4}
+                className="!fixed !relative"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-sm font-medium">预览效果</span>
+              </div>
+            </div>
+            <Button 
+              title={`应用 ${gradient.name}`}
+              href={`/gradient-demo?scroll=true&type=${gradient.type}&primary=${gradient.primaryColor}&secondary=${gradient.secondaryColor}`}
+              style="ahead"
+              class="w-full"
+            />
+          </Card>
+        ))}
+      </div>
+    </div>
+
+    <!-- 高级滚动渐变效果 -->
+    <div class="space-y-4">
+      <h2 class="text-2xl font-semibold text-center">高级滚动渐变效果</h2>
+      <p class="text-center text-muted-foreground">更复杂的滚动交互效果</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {advancedScrollTypes.map((gradient) => (
+          <Card class="p-6 text-center">
+            <h3 class="text-lg font-semibold mb-2">{gradient.name}</h3>
+            <div class="h-32 rounded-lg mb-4 relative overflow-hidden">
+              <AdvancedScrollGradient 
+                type={gradient.type as any}
+                primaryColor={gradient.primaryColor}
+                secondaryColor={gradient.secondaryColor}
+                tertiaryColor={gradient.tertiaryColor}
+                baseOpacity={0.4}
+                className="!fixed !relative"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-sm font-medium">预览效果</span>
+              </div>
+            </div>
+            <Button 
+              title={`应用 ${gradient.name}`}
+              href={`/gradient-demo?advanced=true&type=${gradient.type}&primary=${gradient.primaryColor}&secondary=${gradient.secondaryColor}&tertiary=${gradient.tertiaryColor}`}
+              style="ahead"
+              class="w-full"
+            />
+          </Card>
+        ))}
+      </div>
+    </div>
+
+    <div class="text-center">
+      <Button title="返回首页" href="/" style="back" />
+    </div>
+  </div>
+
+  {/* 根据URL参数显示选中的渐变效果 */}
+  {Astro.url.searchParams.get('type') && !Astro.url.searchParams.get('scroll') && !Astro.url.searchParams.get('advanced') && (
+    <GradientBackground 
+      type={Astro.url.searchParams.get('type') as any}
+      primaryColor={Astro.url.searchParams.get('primary') || '#5B8BB3'}
+      secondaryColor={Astro.url.searchParams.get('secondary') || '#A855F7'}
+      opacity={0.3}
+    />
+  )}
+
+  {/* 根据URL参数显示选中的滚动渐变效果 */}
+  {Astro.url.searchParams.get('type') && Astro.url.searchParams.get('scroll') && !Astro.url.searchParams.get('advanced') && (
+    <ScrollGradient 
+      type={Astro.url.searchParams.get('type') as any}
+      primaryColor={Astro.url.searchParams.get('primary') || '#5B8BB3'}
+      secondaryColor={Astro.url.searchParams.get('secondary') || '#A855F7'}
+      baseOpacity={0.4}
+    />
+  )}
+
+  {/* 根据URL参数显示选中的高级滚动渐变效果 */}
+  {Astro.url.searchParams.get('type') && Astro.url.searchParams.get('advanced') && (
+    <AdvancedScrollGradient 
+      type={Astro.url.searchParams.get('type') as any}
+      primaryColor={Astro.url.searchParams.get('primary') || '#5B8BB3'}
+      secondaryColor={Astro.url.searchParams.get('secondary') || '#A855F7'}
+      tertiaryColor={Astro.url.searchParams.get('tertiary') || '#10B981'}
+      baseOpacity={0.4}
+    />
+  )}
+
+  <!-- 添加一些内容来测试滚动效果 -->
+  <div class="h-96 bg-transparent"></div>
+  <div class="h-96 bg-transparent"></div>
+  <div class="h-96 bg-transparent"></div>
+</PageLayout> 
