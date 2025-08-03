@@ -3,9 +3,10 @@ import type { GetStaticPaths, Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 
 import { Paginator } from 'astro-pure/components/pages'
+import Icon from '@/components/custom/Icon.astro'
 import PostPreview from '@/components/custom/PostPreview.astro'
 import { getBlogCollection, getUniqueTags, sortMDByDate } from 'astro-pure/server'
-import { Button, Icon } from 'astro-pure/user'
+import { Button } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
 import { getUniqueAuthors } from '@/utils/authors'
@@ -111,7 +112,7 @@ const paginationProps = {
             {!!uniqueAuthors.length && (
               <div>
                 <h2 class='mb-4 flex items-center text-lg font-semibold'>
-                  <Icon name='github' class='me-2' />
+                  <Icon name='user' class='me-2' />
                   Authors
                 </h2>
                 <ul class='text-bgColor flex flex-wrap gap-2'>
