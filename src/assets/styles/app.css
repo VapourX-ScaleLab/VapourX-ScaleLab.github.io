@@ -1,4 +1,7 @@
 /* Font */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alibaba+PuHuiTi:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/Satoshi-Variable.ttf');
@@ -12,7 +15,10 @@
   font-display: swap;
 }
 html {
-  font-family: 'Satoshi', sans-serif;
+  font-family: 'Lexend', 'Alibaba PuHuiTi', 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  font-size: 16px;
 }
 
 /* Theme */
@@ -72,6 +78,21 @@ a {
   &:hover {
     color: hsl(var(--primary) / var(--un-text-opacity, 1));
   }
+}
+
+/* 现代感标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lexend', 'Alibaba PuHuiTi', 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+/* 具身智能社区特色文本样式 */
+.ai-text {
+  font-family: 'Lexend', 'Alibaba PuHuiTi', 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 /* 增强的渐变背景样式 */
@@ -577,6 +598,35 @@ html.dark .flex.flex-row.items-center.gap-x-3.rounded-full.border.px-4.py-2.text
 
 html.dark .flex.flex-row.items-center.gap-x-3.rounded-full.border.px-4.py-2.text-sm.shadow-sm:hover {
   background-color: hsl(var(--background) / 0.6) !important;
+}
+
+/* Header Logo 替换样式 */
+/* 隐藏Header中的文字标题 */
+header-component a[href="/"] {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 40px;
+  text-indent: -9999px;
+  overflow: hidden;
+  background-image: url('/src/assets/vapourx-logo-trans.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: filter 0.3s ease;
+}
+
+/* 深色模式下的logo颜色反转 */
+.dark header-component a[href="/"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  header-component a[href="/"] {
+    width: 120px;
+    height: 32px;
+  }
 }
 
 
