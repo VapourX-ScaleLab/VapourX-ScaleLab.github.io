@@ -24,6 +24,7 @@ const postDate = data.updatedDate ?? data.publishDate
   class={cn(
     'post-preview group/card flex flex-col relative rounded-2xl border bg-background transition-colors ease-in-out px-5 py-2.5 hover:bg-muted',
     detailed && 'max-sm:px-4 sm:py-5',
+    Tag === 'h2' && 'font-normal',
     className
   )}
   style={detailed &&
@@ -56,7 +57,7 @@ const postDate = data.updatedDate ?? data.publishDate
     <Tag class='z-10 flex-grow'>
       {/* title */}
       <div class='flex justify-between'>
-        <div class={detailed && 'font-medium'}>
+        <div class={detailed ? 'font-medium' : 'font-normal'}>
           {data.draft && <span class='text-red-500'>(Draft) </span>}
           {data.title}
         </div>
@@ -88,13 +89,13 @@ const postDate = data.updatedDate ?? data.publishDate
             {/* desc */}
             <p
               class={cn(
-                'line-clamp-2 pt-1 text-sm text-muted-foreground sm:line-clamp-3',
+                'line-clamp-2 pt-1 text-sm text-muted-foreground sm:line-clamp-3 font-normal',
                 data.heroImage && 'sm:me-24'
               )}
             >
               {data.description}
             </p>
-            <div class='flex items-center gap-2 py-1.5 text-sm leading-4 text-muted-foreground sm:py-3'>
+            <div class='flex items-center gap-2 py-1.5 text-sm leading-4 text-muted-foreground sm:py-3 italic font-normal'>
               {/* author */}
               {data.author && (
                 <span class='flex items-center gap-1'>
@@ -116,7 +117,7 @@ const postDate = data.updatedDate ?? data.publishDate
                         )
                       ) : (
                         <div 
-                          class="w-4 h-4 rounded-full flex items-center justify-center text-white text-xs font-medium"
+                          class="w-4 h-4 rounded-full flex items-center justify-center text-white text-xs font-medium not-italic"
                           style={`background: ${
                             data.author.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
                             data.author.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
