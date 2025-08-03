@@ -167,164 +167,140 @@ html.dark .glass-effect {
   border-color: transparent !important;
 }
 
-/* 头像毛玻璃效果 */
+/* 头像样式 - 简洁透明度效果 */
 .avatar-glass {
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  box-shadow: none;
 }
 
 .avatar-glass::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.15) 100%
-  );
-  border-radius: inherit;
-  z-index: -1;
+  display: none;
 }
 
 .avatar-glass::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  right: 1px;
-  bottom: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.15) 100%
-  );
-  border-radius: inherit;
-  z-index: -2;
-  filter: blur(0.5px);
+  display: none;
 }
 
 .avatar-glass img {
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  animation: breathe 3s ease-in-out infinite;
+  transform: scale(1);
 }
 
 .avatar-glass:hover img {
   opacity: 1;
+  animation: none;
+  transform: scale(1.1);
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
 }
 
 
 
-/* 深色模式下的头像毛玻璃效果 */
+/* 深色模式下的头像样式 */
 .dark .avatar-glass {
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: transparent;
+  box-shadow: none;
 }
 
 .dark .avatar-glass::before {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.03) 50%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
+  display: none;
 }
 
 .dark .avatar-glass::after {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.04) 50%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
+  display: none;
 }
 
 .dark .avatar-glass img {
-  opacity: 0.85;
+  opacity: 0.5;
+  filter: invert(1) hue-rotate(180deg);
+  animation: breathe-dark 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+  transform: scale(1);
 }
 
 .dark .avatar-glass:hover img {
-  opacity: 0.95;
+  opacity: 1;
+  filter: invert(1) hue-rotate(180deg);
+  animation: none;
+  transform: scale(1.1);
 }
 
-/* 圆形头像毛玻璃效果 */
+@keyframes breathe-dark {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* 圆形头像样式 */
 .avatar-glass.rounded-full {
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  box-shadow: none;
 }
 
 .avatar-glass.rounded-full::before {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.04) 50%,
-    rgba(255, 255, 255, 0.12) 100%
-  );
-  border-radius: 50%;
+  display: none;
 }
 
 .avatar-glass.rounded-full::after {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.06) 50%,
-    rgba(255, 255, 255, 0.12) 100%
-  );
-  border-radius: 50%;
-  filter: blur(0.3px);
+  display: none;
 }
 
 .avatar-glass.rounded-full img {
-  opacity: 0.85;
-  transition: opacity 0.3s ease;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  animation: breathe 3s ease-in-out infinite;
+  transform: scale(1);
 }
 
 .avatar-glass.rounded-full:hover img {
-  opacity: 0.95;
+  opacity: 1;
+  animation: none;
+  transform: scale(1.1);
 }
 
-/* 深色模式下的圆形头像毛玻璃效果 */
+/* 深色模式下的圆形头像样式 */
 .dark .avatar-glass.rounded-full {
-  background: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: transparent;
+  box-shadow: none;
 }
 
 .dark .avatar-glass.rounded-full::before {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
+  display: none;
 }
 
 .dark .avatar-glass.rounded-full::after {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.03) 50%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
+  display: none;
 }
 
 .dark .avatar-glass.rounded-full img {
-  opacity: 0.8;
+  opacity: 0.5;
+  filter: invert(1) hue-rotate(180deg);
+  animation: breathe-dark 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+  transform: scale(1);
 }
 
 .dark .avatar-glass.rounded-full:hover img {
-  opacity: 0.9;
+  opacity: 1;
+  filter: invert(1) hue-rotate(180deg);
+  animation: none;
+  transform: scale(1.1);
 }
 
 /* 自定义 Button 样式覆盖 */
@@ -491,5 +467,118 @@ html.dark .glass-effect.border {
   border-color: transparent !important;
   box-shadow: none !important;
 }
+
+/* 全局毛玻璃效果样式 */
+/* 为所有需要毛玻璃效果的组件添加统一的样式 */
+
+/* Blockquote 毛玻璃效果 (Quote 组件) */
+blockquote {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.dark blockquote {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+}
+
+/* Blockquote hover 效果 */
+blockquote:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+html.dark blockquote:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+/* 通用毛玻璃效果类 */
+.glass-effect {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.dark .glass-effect {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+}
+
+/* 通用毛玻璃效果 hover */
+.glass-effect:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+html.dark .glass-effect:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+/* 卡片类组件的毛玻璃效果 */
+.card-glass {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.dark .card-glass {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+}
+
+/* 卡片类组件 hover 效果 */
+.card-glass:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+html.dark .card-glass:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+/* 特定 Button 组件的毛玻璃效果 */
+/* 针对 flex flex-row items-center gap-x-3 rounded-full border px-4 py-2 text-sm shadow-sm 类名组合 */
+.flex.flex-row.items-center.gap-x-3.rounded-full.border.px-4.py-2.text-sm.shadow-sm {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 深色模式 */
+html.dark .flex.flex-row.items-center.gap-x-3.rounded-full.border.px-4.py-2.text-sm.shadow-sm {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* hover 效果 */
+.flex.flex-row.items-center.gap-x-3.rounded-full.border.px-4.py-2.text-sm.shadow-sm:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+html.dark .flex.flex-row.items-center.gap-x-3.rounded-full.border.px-4.py-2.text-sm.shadow-sm:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+
 
 
