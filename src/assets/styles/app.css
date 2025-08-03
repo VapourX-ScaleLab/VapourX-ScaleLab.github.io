@@ -160,44 +160,11 @@ body::after {
 }
 
 /* 毛玻璃效果样式 */
-.glass-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.glass-effect::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  border-radius: inherit;
-  z-index: -1;
-}
-
-.glass-effect::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  right: 1px;
-  bottom: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  border-radius: inherit;
-  z-index: -2;
-  filter: blur(1px);
+html.dark .glass-effect {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
 }
 
 /* 头像毛玻璃效果 */
@@ -255,24 +222,7 @@ body::after {
   opacity: 1;
 }
 
-/* 深色模式下的毛玻璃效果 */
-.dark .glass-effect::before {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-}
 
-.dark .glass-effect::after {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-}
 
 /* 深色模式下的头像毛玻璃效果 */
 .dark .avatar-glass {
@@ -380,84 +330,166 @@ body::after {
 /* 自定义 Button 样式覆盖 */
 /* 为所有 Button 组件添加 Get Template 风格的毛玻璃效果 */
 /* 使用更简单的选择器来覆盖 astro-pure 的 Button 组件 */
-[data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline {
-  background: hsl(var(--background) / 0.5) !important;
+/* Button 毛玻璃效果 - 使用与 header 相同的有效方案 */
+
+/* Button 毛玻璃效果 - 使用更简单的选择器 */
+/* 浅色模式 */
+.group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border {
+  background-color: hsl(var(--background) / 0.4) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid hsl(var(--foreground) / 0.2) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.2s ease !important;
-  position: relative !important;
-  overflow: hidden !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-[data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  ) !important;
-  border-radius: inherit !important;
-  z-index: -1 !important;
+/* 深色模式 */
+html.dark .group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-[data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline::after {
-  content: '' !important;
-  position: absolute !important;
-  top: 1px !important;
-  left: 1px !important;
-  right: 1px !important;
-  bottom: 1px !important;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  ) !important;
-  border-radius: inherit !important;
-  z-index: -2 !important;
-  filter: blur(1px) !important;
+/* 浅色模式 Button hover 效果 */
+.group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
 }
 
-[data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline:hover {
-  background: hsl(var(--background) / 0.7) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
-  transform: translateY(-1px) !important;
+/* 深色模式 Button hover 效果 */
+html.dark .group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
 }
 
-/* 深色模式下的调整 */
-.dark [data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline {
-  background: hsl(var(--background) / 0.3) !important;
-  border: 1px solid hsl(var(--foreground) / 0.15) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+
+
+/* Header 毛玻璃效果 */
+/* 浅色模式 */
+header-component[class*="not-top"] {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.dark [data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline::before {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  ) !important;
+/* 深色模式 */
+html.dark header-component[class*="not-top"] {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
 }
 
-.dark [data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline::after {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  ) !important;
+/* Collapse 毛玻璃效果 */
+/* 浅色模式 */
+collapse-component .rounded-xl.border.px-3.my-4.sm\\:px-4 {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.dark [data-astro-prefetch].group.inline-flex.items-center.gap-x-1.rounded-lg.bg-muted.border.px-2.py-1.text-sm.text-muted-foreground.transition-all.hover\\:bg-primary-foreground.no-underline:hover {
-  background: hsl(var(--background) / 0.5) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+/* 深色模式 */
+html.dark collapse-component .rounded-xl.border.px-3.my-4.sm\\:px-4 {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
 }
+
+/* CardList 毛玻璃效果 */
+/* 浅色模式 */
+.not-prose.my-3.flex.flex-col.gap-y-2.rounded-xl.border.px-4.py-3.sm\\:py-4 {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 深色模式 */
+html.dark .not-prose.my-3.flex.flex-col.gap-y-2.rounded-xl.border.px-4.py-3.sm\\:py-4 {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+}
+
+/* PostPreview 毛玻璃效果 */
+/* 浅色模式 */
+.post-preview {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 深色模式 */
+html.dark .post-preview {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+}
+
+/* PostPreview hover 效果增强 */
+.post-preview:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+html.dark .post-preview:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+/* Card 毛玻璃效果 */
+/* 浅色模式 */
+.not-prose.block.relative.rounded-2xl.border.bg-muted.px-5.py-3 {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 深色模式 */
+html.dark .not-prose.block.relative.rounded-2xl.border.bg-muted.px-5.py-3 {
+  background-color: hsl(var(--background) / 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: transparent !important;
+}
+
+/* Card hover 效果增强 */
+.not-prose.block.relative.rounded-2xl.border.bg-muted.px-5.py-3:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+html.dark .not-prose.block.relative.rounded-2xl.border.bg-muted.px-5.py-3:hover {
+  background-color: hsl(var(--background) / 0.6) !important;
+}
+
+/* Get Template 组件边框移除 */
+/* 使用更简单的选择器 */
+.glass-effect.border {
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.dark .glass-effect.border {
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+

@@ -15,7 +15,7 @@ if errorlevel 1 (
 )
 
 :: 获取commit消息参数
-set "commit_msg=%1"
+set "commit_msg=%*"
 if "%commit_msg%"=="" (
     set "commit_msg=update"
 )
