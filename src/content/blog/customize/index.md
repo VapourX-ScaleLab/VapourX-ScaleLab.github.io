@@ -8,6 +8,7 @@ tags:
   - Supabase
 heroImage: { src: './thumbnail.jpg', color: '#64574D' }
 language: 'English'
+author: 'VapourX1'
 ---
 
 ## Site Configuration

@@ -33,6 +33,16 @@ const blog = defineCollection({
         .optional(),
       tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
       language: z.string().optional(),
+      author: z.string().optional(),
+      authorAvatar: z.union([
+        z.string(),
+        z.object({
+          src: image(),
+          alt: z.string().optional(),
+          width: z.number().optional(),
+          height: z.number().optional()
+        })
+      ]).optional(),
       draft: z.boolean().default(false),
       // Special fields
       comment: z.boolean().default(true)
