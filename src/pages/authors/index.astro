@@ -1,0 +1,50 @@
+---
+import { getBlogCollection } from 'astro-pure/server'
+import { Button } from 'astro-pure/user'
+import { cn } from 'astro-pure/utils'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { getUniqueAuthorsWithCount } from '@/utils/authors'
+
+const allPosts = await getBlogCollection()
+const allAuthors = getUniqueAuthorsWithCount(allPosts)
+
+const meta = {
+  description: "A list of all the authors who have written posts",
+  title: 'All Authors'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='Back' href='/blog' style='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 text-3xl font-medium'>Authors</h1>
+    </div>
+
+    <div id='content' class='animate'>
+      {
+        allAuthors.length > 0 ? (
+          <ul class='flex flex-wrap gap-4'>
+            {allAuthors.map(([author, val]) => (
+              <li>
+                <Button
+                  href={`/authors/${author}`}
+                  style='pill'
+                  class={cn(
+                    'items-start gap-x-1',
+                    val > 2 ? 'rounded-xl px-3 py-1 text-xl' : val > 1 && 'text-lg'
+                  )}
+                >
+                  {author}
+                  <span class={val > 2 ? 'text-base' : 'text-xs'}>{val}</span>
+                </Button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Any author yet.</p>
+        )
+      }
+    </div>
+  </main>
+</PageLayout> 

@@ -8,26 +8,29 @@ import { getBlogCollection, getUniqueTags, sortMDByDate } from 'astro-pure/serve
 import { Button, Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import config from '@/site-config'
+import { getUniqueAuthors } from '@/utils/authors'
 
 export const prerender = true
 
 export const getStaticPaths = (async ({ paginate }) => {
   const collections = sortMDByDate(await getBlogCollection())
   const uniqueTags = getUniqueTags(collections)
+  const uniqueAuthors = getUniqueAuthors(collections)
   const collectionsCount = collections.length
   return paginate(collections, {
     pageSize: config.content.blogPageSize,
-    props: { uniqueTags, collectionsCount }
+    props: { uniqueTags, uniqueAuthors, collectionsCount }
   })
 }) satisfies GetStaticPaths
 
 interface Props {
   page: Page<CollectionEntry<'blog'>>
   uniqueTags: string[]
+  uniqueAuthors: string[]
   collectionsCount: number
 }
 
-const { page, uniqueTags, collectionsCount } = Astro.props
+const { page, uniqueTags, uniqueAuthors, collectionsCount } = Astro.props
 
 const meta = {
   description: 'Some posts or archives of my blog',
@@ -81,26 +84,51 @@ const paginationProps = {
           </section>
 
           {/* sidebar */}
-          {!!uniqueTags.length && (
-            <aside class='animate' id='sidebar'>
-              <h2 class='mb-4 flex items-center text-lg font-semibold'>
-                <Icon name='tag-2' class='me-2' />
-                Tags
-              </h2>
-              <ul class='text-bgColor flex flex-wrap gap-2'>
-                {uniqueTags.map((tag) => (
-                  <li>
-                    <Button title={tag} href={`/tags/${tag}`} style='pill' />
-                  </li>
-                ))}
-              </ul>
-              <span class='mt-4 block sm:text-end'>
-                <a aria-label='View all blog categories' href='/tags' data-astro-prefetch>
-                  View all →
-                </a>
-              </span>
-            </aside>
-          )}
+          <aside class='animate' id='sidebar'>
+            {/* Tags Section */}
+            {!!uniqueTags.length && (
+              <div class='mb-8'>
+                <h2 class='mb-4 flex items-center text-lg font-semibold'>
+                  <Icon name='tag-2' class='me-2' />
+                  Tags
+                </h2>
+                <ul class='text-bgColor flex flex-wrap gap-2'>
+                  {uniqueTags.map((tag) => (
+                    <li>
+                      <Button title={tag} href={`/tags/${tag}`} style='pill' />
+                    </li>
+                  ))}
+                </ul>
+                <span class='mt-4 block sm:text-end'>
+                  <a aria-label='View all blog categories' href='/tags' data-astro-prefetch>
+                    View all →
+                  </a>
+                </span>
+              </div>
+            )}
+
+            {/* Authors Section */}
+            {!!uniqueAuthors.length && (
+              <div>
+                <h2 class='mb-4 flex items-center text-lg font-semibold'>
+                  <Icon name='github' class='me-2' />
+                  Authors
+                </h2>
+                <ul class='text-bgColor flex flex-wrap gap-2'>
+                  {uniqueAuthors.map((author) => (
+                    <li>
+                      <Button title={author} href={`/authors/${author}`} style='pill' />
+                    </li>
+                  ))}
+                </ul>
+                <span class='mt-4 block sm:text-end'>
+                  <a aria-label='View all authors' href='/authors' data-astro-prefetch>
+                    View all →
+                  </a>
+                </span>
+              </div>
+            )}
+          </aside>
         </div>
       )
     }
