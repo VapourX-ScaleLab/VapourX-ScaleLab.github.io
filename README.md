@@ -1,103 +1,108 @@
-# Astro Theme Pure
+<div align="center">
 
-[English](./README.md) | [简体中文](./README-zh-CN.md)
+# VapourX Open Forum
 
-A simple, fast and powerful blog theme built by Astro.
+</div>
 
-[![GitHub deployments](https://img.shields.io/github/deployments/cworld1/astro-theme-pure/production?style=flat&logo=vercel&label=vercel)](https://astro-pure.js.org/)
-[![NPM Version](https://img.shields.io/npm/v/astro-pure?logo=npm&style=flat)](https://www.npmjs.com/package/astro-pure)
-[![GitHub Release](https://img.shields.io/github/v/release/cworld1/astro-theme-pure?include_prereleases&style=flat&label=template)](https://github.com/cworld1/astro-theme-pure/releases)
-[![GitHub License](https://img.shields.io/github/license/cworld1/astro-theme-pure?style=flat)](https://github.com/cworld1/astro-theme-pure/blob/main/LICENSE)
+<div align="center">
+  <img src=".github/assets/vapourx-clean.jpg" alt="VapourX Logo" width="200" height="auto">
 
-![image](./.github/assets/header.webp)
-![image](./.github/assets/body.webp)
+  <p><strong>人机合一，化具象为抽象</strong></p>
 
-> [!WARNING]
-> Theme template v4.0.2^ CSS engine changed to UnoCSS. Stabler version is [v4.0.1-beta](https://github.com/cworld1/astro-theme-pure/tree/v4.0.1-beta). Known issues:
->
-> 1. Header & customize options is still under development (template exposed still)
+  <p>
+    <a href="https://github.com/ACondaway/vapourx/stargazers">
+      <img src="https://img.shields.io/github/stars/ACondaway/vapourx?style=social" alt="GitHub stars">
+    </a>
+  </p>
+</div>
 
-## Introduction
 
-Checkout [Demo Site →](https://astro-pure.js.org/)
 
-### :fire: Features
 
-- [x] :rocket: Fast & high performance
-- [x] :star: Simple & clean design
-- [x] :iphone: Responsive design
-- [x] :mag: Full-site search built with [pagefind](https://pagefind.app/)
-- [x] :world_map: Sitemap & RSS feed
-- [x] :spider_web: SEO-friendly
-- [x] :book: TOC (table of contents)
-- [x] :framed_picture: Dynamic open graph generation for posts
-- [x] :framed_picture: Mediumzoom lightbox for images
+## 🚀我们正在做的
 
-### :package: Components
+VapourX 正在汇聚一群对具身智能充满热情的爱好者、专业人士和研究人员，致力于推动人类、数字人和机器人之间的自然交互，促使具身智能从研究走向现实，在产业与创新中实现无缝演进与深远影响。
 
-Theme includes a lot of components, which can not only be used in the theme, but also in other astro projects.
+## 🪐你可以得到的
 
-> For other astro projects, UnoCSS is required.
+- 高光论文分类整理
+- 来自我们每一位社区共建者的Blog
+- 未来可能的活动（Online Coffee Chat、Paper-reading Open Meeting等）
 
-- Basic components: `Aside`, `Tabs`, `Timeline`, `Steps`, `Spoiler`...
-- Advanced components: `GithubCard`, `LinkPreview`, `Quote`, `QRCode`...
+## 🌐 Website
 
-### :white_check_mark: Lighthouse score
+Visit our website: [VapourX Open Forum](https://vapourx-scalelab.github.io)
 
-[![lighthouse-score](./.github/assets/lighthouse-score.png)](https://pagespeed.web.dev/analysis/https-cworld-top/o229zrt5o4?form_factor=mobile&hl=en)
+## 🏋️欢迎加入建设
 
-## Documentation
+联系我们来加入共建团队，我们追求所有热爱具身智能的伙伴！
 
-[Docs](https://astro-pure.js.org/docs) | [Showcase](https://github.com/cworld1/astro-theme-pure/issues/10)
+## 👥 Community Contributors
 
-## Package
+<div align="center">
+  <h3>小伙伴们</h3>
 
-See [astro-theme-pure](https://www.npmjs.com/package/astro-pure) on npm.
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/ACondaway">
+          <img src="https://avatars.githubusercontent.com/ACondaway?v=4" width="100px;" alt="ACondaway"/>
+          <br />
+          <sub><b>ACondaway（徐聪晟）</b></sub>
+        </a>
+        <br />
+        <sub>VapourX主理人/SJTU</sub>
+      </td>
+      <td align="center">
+        <a href="https://github.com/10-OASIS-01">
+          <img src="https://avatars.githubusercontent.com/u/125074201?v=4" width="100px;" alt="OASIS"/>
+          <br />
+          <sub><b>OASIS（刘艺彬）</b></sub>
+        </a>
+        <br />
+        <sub>VapourX元老/NEU</sub>
+      </td>
+      <td align="center">
+        <a href="https://github.com/VioletEvar">
+          <img src="https://avatars.githubusercontent.com/u/113980234?v=4" width="100px;" alt="Violet"/>
+          <br />
+          <sub><b>Violet（刘伊天）</b></sub>
+        </a>
+        <br />
+        <sub>VapourX元老/SJTU</sub>
+      </td>
+      <td align="center">
+        <a href="https://github.com/hzyangjc">
+          <img src="https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250804004505453.jpg" width="100px;" alt="Andreo Y."/>
+          <br />
+          <sub><b>Andreo Y.（杨锦畅）</b></sub>
+        </a>
+        <br />
+        <sub>VapourX元老/SJTU</sub>
+      </td>
+    </tr>
+  </table>
 
-## Local development
+  <h3>贡献者统计</h3>
+  <img src="https://contrib.rocks/image?repo=vapourx-scalelab/vapourx-scalelab.github.io" alt="Contributors" />
 
-Environment requirements:
+  <p><em>想要成为贡献者？请联系我们！</em></p>
 
-- [Nodejs](https://nodejs.org/): 18.0.0+
+  <div style="margin-top: 20px;">
+    <p><strong>联系方式：</strong></p>
+    <p>
+      📧 <strong>邮箱：</strong> <a href="mailto:acondaway@sjtu.edu.cn">vpx-mail</a>
+    </p>
+    <p>
+      📱 <strong>小红书：</strong> <a href="https://www.xiaohongshu.com/user/profile/645fc2f60000000029014a80?xsec_token=YBr2weXWhfZAtQcADkrSlIJu0brI4Swl_YI5E_P87nf2A=&xsec_source=app_share&xhsshare=CopyLink&appuid=645fc2f60000000029014a80&apptime=1754037228&share_id=92ba06a8d77342a1a79de3e7837c18d0" target="_blank">@ACondawayUNo</a>
+    </p>
+  </div>
+</div>
 
-Clone the repository:
+## 📊 GitHub Star History
 
-```shell
-git clone https://github.com/cworld1/astro-theme-pure.git
-cd astro-theme-pure
-```
+<div align="center">
+  <img src="https://api.star-history.com/svg?repos=vapourx-scalelab/vapourx-scalelab.github.io&type=Date" alt="GitHub Star History Chart" width="300" height="auto" style="max-width: 100%; height: auto;">
+</div>
 
-Useful commands:
 
-```shell
-# install dependencies
-bun install
-
-# start the dev server
-bun dev
-
-# build the project
-bun run build
-
-# preview (after the build)
-bun preview
-
-# create a new post
-bun new-post
-```
-
-## Contributions
-
-To spend more time coding and less time fiddling with whitespace, this project uses code conventions and styles to encourage consistency. Code with a consistent style is easier (and less error-prone!) to review, maintain, and understand.
-
-## Thanks
-
-- [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus)
-- [Astro Resume](https://github.com/srleom/astro-theme-resume)
-- [Starlight](https://github.com/withastro/starlight)
-
-## License
-
-This project is licensed under the Apache 2.0 License.
-
-[![Star History Chart](https://api.star-history.com/svg?repos=cworld1/astro-theme-pure&type=Date)](https://star-history.com/#cworld1/astro-theme-pure&Date)
