@@ -95,6 +95,121 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.01em;
 }
 
+/* 动态渐变标题效果 */
+.animated-gradient-title {
+  background: linear-gradient(
+    45deg,
+    #4F46E5,
+    #7C3AED,
+    #A855F7,
+    #8B5CF6,
+    #10B981,
+    #7C3AED,
+    #4F46E5
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  --gradient-x: 50%;
+  --gradient-y: 50%;
+  background-position: var(--gradient-x) var(--gradient-y);
+  animation: gradientShift 12s ease-in-out infinite;
+}
+
+/* 深色模式下的渐变标题 */
+.dark .animated-gradient-title {
+  background: linear-gradient(
+    45deg,
+    #6366F1,
+    #8B5CF6,
+    #A855F7,
+    #8B5CF6,
+    #10B981,
+    #8B5CF6,
+    #6366F1
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-position: var(--gradient-x) var(--gradient-y);
+  animation: gradientShift 12s ease-in-out infinite;
+}
+
+.animated-gradient-title:hover {
+  animation: none;
+}
+
+.animated-gradient-title::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: linear-gradient(
+    45deg,
+    #4F46E5,
+    #7C3AED,
+    #A855F7,
+    #8B5CF6,
+    #10B981,
+    #7C3AED,
+    #4F46E5
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.2;
+  filter: blur(1.5px);
+  background-position: var(--gradient-x) var(--gradient-y);
+  animation: gradientShift 12s ease-in-out infinite reverse;
+}
+
+/* 深色模式下的阴影层 */
+.dark .animated-gradient-title::before {
+  background: linear-gradient(
+    45deg,
+    #6366F1,
+    #8B5CF6,
+    #A855F7,
+    #8B5CF6,
+    #10B981,
+    #8B5CF6,
+    #6366F1
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-position: var(--gradient-x) var(--gradient-y);
+  animation: gradientShift 12s ease-in-out infinite reverse;
+  opacity: 0.2;
+}
+
+.animated-gradient-title:hover::before {
+  animation: none;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: -200% 50%;
+  }
+}
+
+/* 鼠标悬停时的缩放效果 */
+.animated-gradient-title:hover {
+  transform: scale(1.01);
+}
+
 /* 增强的渐变背景样式 */
 body {
   position: relative;

@@ -35,7 +35,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
       </div>
 
       <div class='flex flex-col items-center gap-y-4'>
-        <h1 class='text-3xl font-bold'>{config.author}</h1>
+        <h1 class='animated-gradient-title text-3xl' data-text={config.author}>{config.author}</h1>
         <div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
           <Label title='China'>
             <Icon name='location' class='size-5' slot='icon' />

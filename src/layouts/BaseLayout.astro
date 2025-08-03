@@ -171,6 +171,49 @@ const {
       } else {
         updateGlobalGradient();
       }
+
+      // 鼠标驱动的渐变标题效果
+      function initGradientTitle() {
+        const title = document.querySelector('.animated-gradient-title') as HTMLElement;
+        if (!title) return;
+
+        title.addEventListener('mouseenter', () => {
+          // 悬停时停止动画，启用鼠标跟随
+          title.style.animation = 'none';
+          const beforeElement = title.querySelector('::before') || title;
+          if (beforeElement) {
+            (beforeElement as HTMLElement).style.animation = 'none';
+          }
+        });
+
+        title.addEventListener('mousemove', (e: MouseEvent) => {
+          const rect = title.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          
+          // 反转方向，让高亮点正确跟随鼠标
+          title.style.setProperty('--gradient-x', `${100 - x}%`);
+          title.style.setProperty('--gradient-y', `${100 - y}%`);
+        });
+
+        title.addEventListener('mouseleave', () => {
+          // 离开时恢复动画，重置位置
+          title.style.animation = '';
+          const beforeElement = title.querySelector('::before') || title;
+          if (beforeElement) {
+            (beforeElement as HTMLElement).style.animation = '';
+          }
+          title.style.setProperty('--gradient-x', '50%');
+          title.style.setProperty('--gradient-y', '50%');
+        });
+      }
+
+      // 初始化渐变标题效果
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGradientTitle);
+      } else {
+        initGradientTitle();
+      }
     </script>
   </body>
 </html>
