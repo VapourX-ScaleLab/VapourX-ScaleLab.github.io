@@ -10,8 +10,8 @@
   <p><strong>人机合一，化具象为抽象</strong></p>
 
   <p>
-    <a href="https://github.com/ACondaway/vapourx/stargazers">
-      <img src="https://img.shields.io/github/stars/ACondaway/vapourx?style=social" alt="GitHub stars">
+    <a href="https://github.com/vapourx-scalelab/vapourx-scalelab.github.io/stargazers">
+      <img src="https://img.shields.io/github/stars/vapourx-scalelab/vapourx-scalelab.github.io?style=social" alt="GitHub stars">
     </a>
   </p>
 </div>
