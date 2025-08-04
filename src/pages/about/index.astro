@@ -5,238 +5,163 @@ import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
+import WhoWeAre from '@/components/about/who-we-are.astro'
+import CommunityStats from '@/components/about/CommunityStats.astro'
 import Sponsors from '@/components/sponsorship/Sponsors.astro'
 import Sponsorship from '@/components/sponsorship/Sponsorship.astro'
 import alipay from '@/assets/alipay-qrcode.jpg'
 import wechat from '@/assets/wechat-qrcode.jpg'
+import avatar from '@/assets/vapourx-clean.jpg'
 
 const headings = [
-  { depth: 2, slug: 'hobbies', text: 'Hobbies' },
-  { depth: 2, slug: 'tools', text: 'Tools' },
-  { depth: 2, slug: 'social-networks', text: 'Social Networks' },
-  { depth: 2, slug: 'gossips', text: 'Gossips' },
-  { depth: 2, slug: 'about-blog', text: 'About Blog' },
+  { depth: 2, slug: 'what-we-are-doing', text: '我们正在做的' },
+  { depth: 2, slug: 'logo-meaning', text: 'Logo含义' },
+  { depth: 2, slug: 'what-we-need', text: '我们需要的' },
+  { depth: 2, slug: 'team', text: '核心团队' },
+  { depth: 2, slug: 'social-networks', text: '社交媒体' },
+  { depth: 2, slug: 'about-blog', text: '大事记' },
   { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
 ]
 ---
 
-<PageLayout title='About' {headings} info='/about'>
-  <p>Developer / Designer</p>
+<PageLayout title='What is VapourX' {headings} info='/about'>
+  <h2 id='what-we-are-doing'>
+    我们正在做的！
+  </h2>
   <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
+    VapourX 正在汇聚一群对具身智能充满热情的爱好者、专业人士和研究人员，致力于推动人类、数字人和机器人之间的自然交互，促使具身智能从研究走向现实，在产业与创新中实现无缝演进与深远影响。
+    </br>
+    <Spoiler>恭喜你发现了一个没有内容的彩蛋！</Spoiler>
   </p>
-  <p>
-    My motto: Stay hungry, Stay foolish. <Spoiler>这里可以夹私货，比如为什么要演奏春日影！</Spoiler>
-  </p>
-  <Button title='Sponsor Me' class='w-fit' href='#sponsorship' style='ahead' />
 
-  {/* general-talk */}
-  <h2 id='hobbies'>Hobbies</h2>
+  <h2 id='logo-meaning'>
+    Logo含义
+  </h2>
+  <Image src={avatar} alt="Logo" class="w-1/4" />
+  <p>
+    VapourX 的标志凝聚了我们对未来具身智能的愿景与信念。左侧放射状的图形，灵感来自神经元网络与群体协作系统，象征着人类、数字人和机器人之间高度自然且动态的感知连接。中央文字以现代几何字体呈现，融合断裂与弧度的设计语言，传达出智能系统的有机性与进化性，而结尾的 “X” 则代表交互、未知与融合的前沿探索。整体黑白配色简洁而充满力量，彰显 VapourX 作为一个面向未来、连接现实与虚拟的具身智能社区，将科技、人性与协同创新无缝交织，激励我们共同走向智能交互的新纪元。
+  </p>
+  <h2 id='what-we-need'>我们需要的！</h2>
   <ul>
-    <li>Lorem ipsum dolor sit amet, vidit suscipit at mei.</li>
-    <li>
-      Quem denique mea id. Usu ei regione indoctum dissentiunt, cu meliore fuisset mei, vel quod
-      voluptua ne.
-    </li>
-    <li>Ex dicat impedit mel, at eum oratio possit voluptatum.</li>
-    <li>Impetus fuisset ullamcorper pri cu, his posse iisque ad, aliquam honestatis usu id.</li>
+    <li>具身智能领域深耕的研究者。</li>
+    <li>初出茅庐的具身智能小白。</li>
+    <li>在其他领域有技术积累并想要转向具身智能的开发者。</li>
+    <li>对具身智能有兴趣的爱好者。</li>
   </ul>
+  <p>
+    总的来说，只要你对具身智能有热情，想要为社区做出各种意义的贡献，欢迎你加入VapourX的大家庭！
+  </p>
 
-  {/* tools */}
-  <h2 id='tools'>Tools</h2>
-  <p>Current support tools as follow:</p>
-  <ToolSection
+  {/* team members */}
+  <h2 id='team'>核心团队</h2>
+  <p>欢迎所有有志于投身社区建设的朋友们！</p>
+  
+  {/* 社区统计 */}
+  <CommunityStats
     class='mb-5'
-    title='Design'
-    tools={[
+    title='社区统计'
+    stats={[
       {
-        name: 'Photoshop',
-        description: 'Picture Editing',
-        href: 'https://www.adobe.com/products/photoshop',
-        icon: import('@/assets/tools/photoshop.svg?raw')
+        label: '核心成员',
+        value: '3',
+        icon: 'github',
+        description: '核心团队成员',
+        link: 'https://github.com/VapourX-ScaleLab'
       },
       {
-        name: 'Illustrator',
-        description: 'Vector Drawing',
-        href: 'https://www.adobe.com/products/illustrator',
-        icon: import('@/assets/tools/illustrator.svg?raw')
+        label: 'GitHub 关注者',
+        value: '动态统计',
+        icon: 'github',
+        description: 'GitHub Org 关注者',
+        link: 'https://github.com/VapourX-ScaleLab'
       },
       {
-        name: 'After Effects',
-        description: 'Motion Graphics',
-        href: 'https://www.adobe.com/products/aftereffects',
-        icon: import('@/assets/tools/aftereffects.svg?raw')
-      },
-      {
-        name: 'Premiere Pro',
-        description: 'Video Editing',
-        href: 'https://www.adobe.com/products/premiere',
-        icon: import('@/assets/tools/premiere.svg?raw')
+        label: '社区活跃度',
+        value: '高',
+        icon: 'github',
+        description: '基于贡献和互动',
+        color: '#10B981'
       }
     ]}
   />
-  <ToolSection
+  
+  <WhoWeAre
     class='mb-5'
-    title='Productivity'
-    tools={[
+    title='团队成员'
+    members={[
       {
-        name: 'Chrome',
-        description: 'Browser',
-        href: 'https://www.google.com/chrome/',
-        icon: import('@/assets/tools/chrome.svg?raw')
+        name: 'ACondawayUNo（徐聪晟）',
+        avatar: 'https://avatars.githubusercontent.com/u/115391544?v=4',
+        organization: 'SJTU ScaleLab',
+        role: '社区创始人',
+        slogan: '人机合一，化具象为抽象。',
+        href: 'https://acondaway.github.io/'
       },
       {
-        name: 'Firefox',
-        description: 'Browser',
-        href: 'https://www.mozilla.org/en-US/firefox',
-        icon: import('@/assets/tools/firefox.svg?raw')
+        name: 'Andreo（杨锦畅）',
+        avatar: 'https://avatars.githubusercontent.com/u/33977087?v=4',
+        organization: 'SJTU',
+        role: '社区网页设计师',
+        slogan: '我是关羽',
+        href: 'https://github.com/hzyangjc'
       },
       {
-        name: 'Notion',
-        description: 'Note Taking',
-        href: 'https://www.notion.so/',
-        icon: import('@/assets/tools/notion.svg?raw')
+        name: 'Violet（刘伊天）',
+        avatar: 'https://avatars.githubusercontent.com/u/113980234?v=4',
+        organization: 'SJTU ScaleLab',
+        role: '社区运营团队负责人',
+        slogan: '我也是个人',
+        href: 'https://github.com/VioletEvar'
       },
       {
-        name: 'Typora',
-        description: 'Markdown Editor',
-        href: 'https://typora.io/',
-        icon: import('@/assets/tools/typora.svg?raw')
+        name: 'HuaiNan（帅哲）',
+        avatar: 'https://avatars.githubusercontent.com/u/165187020?v=4',
+        organization: 'SJTU DS',
+        role: '社区视觉传达总设计师',
+        slogan: '我也是个人',
+        href: 'https://github.com/HuaiNanPror'
       }
     ]}
   />
-  <ToolSection
-    class='mb-5'
-    title='Development'
-    tools={[
-      {
-        name: 'VS Code',
-        description: 'IDE',
-        href: 'https://code.visualstudio.com/',
-        icon: import('@/assets/tools/vscode.svg?raw')
-      },
-      {
-        name: 'Neovim',
-        description: 'IDE',
-        href: 'https://neovim.io/',
-        icon: import('@/assets/tools/neovim.svg?raw')
-      },
-      {
-        name: 'Sublime Text',
-        description: 'IDE',
-        href: 'https://www.sublimetext.com/',
-        icon: import('@/assets/tools/sublime.svg?raw')
-      }
-    ]}
-  />
-  <ToolSection
-    class='mb-5'
-    title='Environment'
-    tools={[
-      {
-        name: 'Arch Linux',
-        description: 'Linux Distribution',
-        href: 'https://archlinux.org/',
-        icon: import('@/assets/tools/archlinux.svg?raw')
-      },
-      {
-        name: 'Ubuntu 24.04 LTS',
-        description: 'Linux Distribution',
-        href: 'https://ubuntu.com/',
-        icon: import('@/assets/tools/ubuntu.svg?raw')
-      },
-      {
-        name: 'MacOS Tahoe',
-        description: 'MacBook Air',
-        href: 'https://www.apple.com/macos/',
-        icon: import('@/assets/tools/apple.svg?raw')
-      },
-      {
-        name: 'Windows 11',
-        description: 'Framework Laptop 16',
-        href: 'https://news.microsoft.com/windows11-general-availability/',
-        icon: import('@/assets/tools/windows11.svg?raw')
-      }
-    ]}
-  />
+
 
   {/* social-networks */}
   <h2 id='social-networks'>Social Networks</h2>
-  <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne.
-  </p>
+  <p>等待补充...</p>
   <Substats
     stats={[
       {
-        platform: 'GitHub',
+        platform: '小红书',
         icon: 'github',
-        link: 'https://github.com/cworld1',
+        color: '#FF2442',
+        link: 'https://www.xiaohongshu.com/user/profile/645fc2f60000000029014a80?xsec_token=YBr2weXWhfZAtQcADkrSlIJmDeqFb7bxaG7NdJJ9JgJwU=&xsec_source=app_share&xhsshare=CopyLink&appuid=645fc2f60000000029014a80&apptime=1754334164&share_id=12d2a08d949c44ebb2219b31e5f94728',
         text: 'followers',
-        api: 'github/cworld1'
-      },
-      {
-        platform: 'Telegram',
-        icon: 'telegram',
-        color: '#2ca5e0',
-        link: 'https://t.me/cworld0_cn',
-        text: 'subscribers',
-        api: 'telegram/cworld0_cn'
-      },
-      {
-        platform: 'Weibo',
-        icon: 'weibo',
-        color: '#e71f19',
-        link: 'https://weibo.com/cworld0',
-        text: 'followers',
-        api: 'weibo/5501674056'
-      },
-      {
-        platform: 'Steam',
-        icon: 'steam',
-        color: '#50769d',
-        link: 'https://steamcommunity.com/id/cworld',
-        text: 'games',
-        api: 'steamgames/76561199021278120'
+        api: 'xiaohongshu/645fc2f60000000029014a80'
       }
     ]}
   />
 
-  {/* gossips */}
-  <h2 id='gossips'>Gossips</h2>
-  <Collapse title='Lorem ipsum'>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
-  </Collapse>
-
   {/* about-blog */}
-  <h2 id='about-blog'>About Blog</h2>
+  <h2 id='about-blog'>大事记</h2>
   <p>Website history:</p>
   <Timeline
     events={[
       {
-        date: '2024-04-29',
+        date: '2025-08-01',
         content:
-          'Website refactored using <a href="https://astro.build/" target="_blank">Astro</a> and <a href="https://github.com/srleom/astro-theme-resume" target="_blank">Astro Theme Resume</a>'
+          '网站开始进行开发，由Andreo设计了网页，并且由ACondawayUNo进行了信息的补充'
       },
       {
-        date: '2024-07-26',
-        content:
-          'Website abstracted as a theme and published on <a href="https://github.com/cworld1/astro-theme-pure"target="_blank">Github</a>'
+        date: '2025-06-21',
+        content: '由ACondawayUNo、Tourist以及VioletEvar联合发布修订版ScaleLab实习生指南，并成立VapourX元老群。'
       },
       {
-        date: '2024-07-27',
-        content: 'Began writing website docs'
+        date: '2025-05-01',
+        content: '由HuaiNan设计的社区Logo首次亮相。'
       }
     ]}
   />
-  <p>
-    The smooth operation and personalized customization of website also rely on the resources and
-    technical support provided by the following excellent projects/service providers:
-  </p>
+  <h2>致谢</h2>
   <ul>
     <li>Domain: <a href='#' target='_blank'>Vercel</a></li>
     <li>

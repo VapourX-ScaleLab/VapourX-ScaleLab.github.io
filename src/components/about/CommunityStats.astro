@@ -1,0 +1,60 @@
+---
+import { Icon } from 'astro-pure/user'
+import { socialLinks, type iconsType } from 'astro-pure/types'
+
+interface CommunityStat {
+  label: string
+  value: number | string
+  icon: (typeof socialLinks)[number]
+  color?: string
+  description?: string
+  link?: string
+}
+
+interface Props {
+  class?: string
+  title: string
+  stats: CommunityStat[]
+}
+
+const { class: className, title, stats, ...props } = Astro.props
+---
+
+<div
+  class={`not-prose flex flex-col rounded-xl border py-3 px-3 gap-y-3 sm:gap-y-4 ${className || ''}`}
+  {...props}
+>
+  <div class='m-0 px-2 text-lg font-medium'>{title}</div>
+  <div class='grid grid-cols-1 gap-x-3 gap-y-3 sm:grid-cols-2 lg:grid-cols-3'>
+    {
+      stats.map((stat) => {
+        const content = (
+          <div class='group relative text-sm leading-normal no-underline'>
+            <div class='flex items-center gap-x-3 rounded-lg border border-transparent px-3 py-3 transition-colors hover:border-border hover:bg-muted'>
+              <div class='flex-shrink-0'>
+                <Icon name={stat.icon as iconsType} color={stat.color} class='size-6' />
+              </div>
+              <div class='flex-1 min-w-0'>
+                <div class='font-medium text-foreground'>{stat.label}</div>
+                {stat.description && (
+                  <div class='text-xs text-muted-foreground'>{stat.description}</div>
+                )}
+              </div>
+              <div class='flex-shrink-0'>
+                <div class='text-lg font-bold text-primary'>{stat.value}</div>
+              </div>
+            </div>
+          </div>
+        )
+
+        return stat.link ? (
+          <a href={stat.link} target='_blank' rel='noopener noreferrer'>
+            {content}
+          </a>
+        ) : (
+          content
+        )
+      })
+    }
+  </div>
+</div> 

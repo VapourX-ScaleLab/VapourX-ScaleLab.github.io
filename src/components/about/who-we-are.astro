@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets'
+import { cn } from 'astro-pure/utils'
+
+interface Props {
+  class?: string
+  title: string
+  members: {
+    name: string
+    avatar: string | ImageMetadata
+    organization: string
+    role: string
+    slogan: string
+    href?: string
+  }[]
+}
+
+const { class: className, title, members, ...props } = Astro.props
+---
+
+<div
+  class={cn('not-prose flex flex-col rounded-xl border py-3 px-3 gap-y-3 sm:gap-y-4', className)}
+  {...props}
+>
+  <div class='m-0 px-2 text-lg font-medium'>{title}</div>
+  <div class='grid grid-cols-1 gap-x-3 gap-y-3 sm:grid-cols-2 lg:grid-cols-3'>
+    {
+      members.map((member) => {
+        const content = (
+          <div class='group relative text-sm leading-normal no-underline'>
+            <div class='flex flex-col items-center gap-y-3 rounded-lg border border-transparent px-4 py-4 transition-colors hover:border-border hover:bg-muted'>
+              {/* 椭圆头像 */}
+              <div class='relative'>
+                <div class='size-16 overflow-hidden rounded-full border-2 border-border bg-muted'>
+                  {typeof member.avatar === 'string' ? (
+                    <img 
+                      src={member.avatar} 
+                      alt={member.name} 
+                      class='h-full w-full object-cover'
+                      width={64}
+                      height={64}
+                    />
+                  ) : (
+                    <Image 
+                      src={member.avatar} 
+                      alt={member.name} 
+                      class='h-full w-full object-cover'
+                      width={64}
+                      height={64}
+                    />
+                  )}
+                </div>
+                {/* 可选的在线状态指示器 */}
+                <div class='absolute -bottom-1 -right-1 size-4 rounded-full border-2 border-background bg-green-500'></div>
+              </div>
+              
+              {/* 成员信息 */}
+              <div class='z-20 flex flex-col items-center text-center'>
+                <div class='font-semibold text-foreground'>{member.name}</div>
+                <div class='text-xs text-muted-foreground'>{member.organization}</div>
+                <div class='text-xs text-primary font-medium'>{member.role}</div>
+                <div class='mt-2 text-xs italic text-muted-foreground leading-relaxed'>
+                  "{member.slogan}"
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+
+        return member.href ? (
+          <a href={member.href} target='_blank' rel='noopener noreferrer'>
+            {content}
+          </a>
+        ) : (
+          content
+        )
+      })
+    }
+  </div>
+</div>
