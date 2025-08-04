@@ -4,6 +4,7 @@ import { Image } from 'astro:assets'
 import { Quote } from 'astro-pure/advanced'
 import PostPreview from '@/components/custom/PostPreview.astro'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
+import { getCollection } from 'astro:content'
 import { Button, Card, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import ProjectCard from '@/components/home/ProjectCard.astro'
@@ -17,12 +18,50 @@ const languages = ['Html', 'JavaScript', 'CSS', 'Shell']
 const frontend = ['TypeScript', 'Vite', 'Webpack', 'Astro']
 const backend = ['Vercel', 'Waline']
 
-const MAX_POSTS = 5
+const MAX_POSTS = 6
 const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+const allActivities = await getCollection('activities')
+const recentActivities = allActivities.slice(0, 3)
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#5B8BB3'>
+  <style>
+    .masonry-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .masonry-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .masonry-container {
+        flex-direction: row;
+        gap: 1.5rem;
+      }
+      .masonry-column {
+        flex: 1;
+      }
+    }
+    /* 移动端重新排序 */
+    @media (max-width: 767px) {
+      .masonry-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .masonry-column {
+        display: contents;
+      }
+      .masonry-item {
+        order: var(--order);
+      }
+    }
+  </style>
+  
   <main class='flex w-full flex-col items-center'>
     <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
       <div class='avatar-glass h-28 w-auto p-1'>
@@ -80,13 +119,22 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
       {
         allPostsByDate.length > 0 && (
           <Section title='Recent Posts'>
-            <ul class='flex flex-col gap-y-3 sm:gap-y-4'>
-              {allPostsByDate.map((p) => (
-                <li>
-                  <PostPreview post={p} detailed />
-                </li>
-              ))}
-            </ul>
+            <div class='masonry-container'>
+              <div class='masonry-column'>
+                {allPostsByDate.filter((_, index) => index % 2 === 0).map((p, colIndex) => (
+                  <div class='masonry-item' style={`--order: ${colIndex * 2}`}>
+                    <PostPreview post={p} detailed />
+                  </div>
+                ))}
+              </div>
+              <div class='masonry-column'>
+                {allPostsByDate.filter((_, index) => index % 2 === 1).map((p, colIndex) => (
+                  <div class='masonry-item' style={`--order: ${colIndex * 2 + 1}`}>
+                    <PostPreview post={p} detailed />
+                  </div>
+                ))}
+              </div>
+            </div>
             <Button title='More posts' class='w-fit self-end' href='/blog' style='ahead' />
           </Section>
         )
@@ -141,35 +189,18 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
       </Section>} */
     }
 
-      <Section title='Activities'>
-        <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
-          <ProjectCard
-            href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-            heading='Lorem ipsum'
-            subheading='dolor sit amet, oratio ornatus explicari pro ex'
-            imagePath='/src/assets/projects/alex-tyson-2BAXJ7ha74s-unsplash.jpg'
-          />
-          <ProjectCard
-            href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-            heading='Lorem ipsum'
-            subheading='dolor sit amet, oratio ornatus explicari pro ex'
-            imagePath='/src/assets/projects/angelica-teran-Bk9hpaXHK4o-unsplash.jpg'
-          />
-          <ProjectCard
-            href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-            heading='Lorem ipsum'
-            subheading='dolor sit amet, oratio ornatus explicari pro ex'
-            imagePath='/src/assets/projects/kseniia-zapiatkina-yATU3rg8tNI-unsplash.jpg'
-          />
-          <ProjectCard
-            href='/activities'
-            heading='View Activities'
-            subheading='Check out our team activities and achievements'
-            imagePath='/src/assets/projects/wen-qiao-g_w8I64FiO0-unsplash.jpg'
-          />
-        </div>
-        <Button title='View all activities' class='w-fit self-end' href='/activities' style='ahead' />
-      </Section>
+      {
+        allActivities.length > 0 && (
+          <Section title='Recent Activities'>
+            <div class='flex flex-col gap-4'>
+              {recentActivities.map((activity: any) => (
+                <PostPreview post={activity} detailed />
+              ))}
+            </div>
+            <Button title='View all activities' class='w-fit self-end' href='/activities' style='ahead' />
+          </Section>
+        )
+      }
 
       {/* <Section title='Certifications'>
         <Card

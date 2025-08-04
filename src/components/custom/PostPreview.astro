@@ -9,10 +9,11 @@ import { Button, FormattedDate, Icon } from 'astro-pure/user'
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
   post: CollectionEntry<CollectionKey>
   detailed?: boolean
+  layout?: 'default' | 'two-column'
   class?: string
 }
 
-const { as: Tag = 'div', post, detailed = false, class: className } = Astro.props
+const { as: Tag = 'div', post, detailed = false, layout = 'default', class: className } = Astro.props
 
 // Determine the correct URL based on collection type
 const getPostUrl = (post: CollectionEntry<CollectionKey>) => {
@@ -28,10 +29,11 @@ const { remarkPluginFrontmatter } = await render(post)
 const postDate = data.updatedDate ?? data.publishDate
 ---
 
-<li
+  <li
   class={cn(
     'post-preview group/card flex flex-col relative rounded-2xl border bg-background transition-colors ease-in-out px-5 py-2.5 hover:bg-muted',
     detailed && 'max-sm:px-4 sm:py-5',
+    layout === 'two-column' && 'sm:flex-row sm:items-start sm:gap-4 sm:py-4',
     Tag === 'h2' && 'font-normal',
     className
   )}
@@ -40,128 +42,147 @@ const postDate = data.updatedDate ?? data.publishDate
     `--preview-highlight:color-mix(in srgb,${data.heroImage.color} 40%,hsl(var(--foreground)/var(--un-text-opacity,1)));
     --preview-highlight-bg:hsl(from ${data.heroImage.color} h s l/20%)`}
 >
-  <a
+      <a
     class={cn(
       'group/link w-full flex flex-col transition-all hover:text-primary',
       !detailed && 'sm:flex-row',
-      detailed && data.heroImage && 'max-md:pt-24'
+      detailed && data.heroImage && 'max-md:pt-24',
+      layout === 'two-column' && 'sm:flex-row sm:items-start sm:gap-4'
     )}
     href={getPostUrl(post)}
     data-astro-prefetch
   >
     {
-      detailed && data.heroImage && (
+      (detailed && data.heroImage) || (layout === 'two-column' && data.heroImage) ? (
         <Image
           alt={data.heroImage.alt || data.title}
-          class='cover-image absolute end-0 top-0 z-0 h-2/3 w-full rounded-2xl object-cover opacity-50 transition-opacity duration-300 group-hover/card:opacity-70 md:h-full md:w-3/5'
+          class={cn(
+            'cover-image object-cover transition-opacity duration-300 group-hover/card:opacity-70',
+            detailed && 'absolute end-0 top-0 z-0 h-2/3 w-full rounded-2xl opacity-50 md:h-full md:w-3/5',
+            layout === 'two-column' && 'relative z-0 h-16 w-16 rounded-lg opacity-90 sm:h-20 sm:w-20 flex-shrink-0'
+          )}
           loading='eager'
           {...data.heroImage}
         />
-      )
+      ) : layout === 'two-column' ? (
+        <div class={cn(
+          'flex-shrink-0 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg',
+          'h-16 w-16 sm:h-20 sm:w-20'
+        )}>
+          {data.title.charAt(0).toUpperCase()}
+        </div>
+      ) : null
     }
 
-    <FormattedDate class='min-w-[95px] py-1 text-xs' date={postDate} />
+    <div class={cn(
+      'flex flex-col',
+      layout === 'two-column' && 'flex-1'
+    )}>
+      <FormattedDate class='min-w-[95px] py-1 text-xs' date={postDate} />
 
-    <Tag class='z-10 flex-grow'>
-      {/* title */}
-      <div class='flex justify-between'>
-        <div class={detailed ? 'font-medium' : 'font-normal'}>
-          {data.draft && <span class='text-red-500'>(Draft) </span>}
-          {data.title}
+      <Tag class='z-10 flex-grow'>
+        {/* title */}
+        <div class='flex justify-between'>
+          <div class={detailed ? 'font-medium' : 'font-normal'}>
+            {data.draft && <span class='text-red-500'>(Draft) </span>}
+            {data.title}
+          </div>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='16'
+            height='16'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke-width='2.5'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'
+            ><line
+              x1='5'
+              y1='12'
+              x2='19'
+              y2='12'
+              class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'
+            ></line><polyline
+              points='12 5 19 12 12 19'
+              class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'
+            ></polyline></svg
+          >
         </div>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='16'
-          height='16'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke-width='2.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'
-          ><line
-            x1='5'
-            y1='12'
-            x2='19'
-            y2='12'
-            class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'
-          ></line><polyline
-            points='12 5 19 12 12 19'
-            class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'
-          ></polyline></svg
-        >
-      </div>
-      {
-        detailed && (
-          <>
-            {/* desc */}
-            <p
-              class={cn(
-                'line-clamp-2 pt-1 text-sm text-muted-foreground sm:line-clamp-3 font-normal',
-                data.heroImage && 'sm:me-24'
-              )}
-            >
-              {data.description}
-            </p>
-            <div class='flex items-center gap-2 py-1.5 text-sm leading-4 text-muted-foreground sm:py-3 italic font-normal'>
-              {/* author */}
-              {data.author && (
-                <span class='flex items-center gap-1'>
-                  <div class='flex items-center gap-1'>
-                    {
-                      data.authorAvatar ? (
-                        typeof data.authorAvatar === 'string' ? (
-                          <img 
-                            src={data.authorAvatar} 
-                            alt={`${data.author} avatar`}
-                            class='w-4 h-4 rounded-full object-cover'
-                          />
+        {
+          (detailed || layout === 'two-column') && (
+            <>
+              {/* desc */}
+              <p
+                class={cn(
+                  'line-clamp-2 pt-1 text-sm text-muted-foreground font-normal',
+                  detailed && 'sm:line-clamp-3',
+                  layout === 'two-column' && 'line-clamp-2',
+                  detailed && data.heroImage && 'sm:me-24'
+                )}
+              >
+                {data.description}
+              </p>
+              <div class='flex items-center gap-2 py-1.5 text-sm leading-4 text-muted-foreground sm:py-3 italic font-normal'>
+                {/* author */}
+                {data.author && (
+                  <span class='flex items-center gap-1'>
+                    <div class='flex items-center gap-1'>
+                      {
+                        data.authorAvatar ? (
+                          typeof data.authorAvatar === 'string' ? (
+                            <img 
+                              src={data.authorAvatar} 
+                              alt={`${data.author} avatar`}
+                              class='w-4 h-4 rounded-full object-cover'
+                            />
+                          ) : (
+                            <Image
+                              alt={`${data.author} avatar`}
+                              class='w-4 h-4 rounded-full object-cover'
+                              {...data.authorAvatar}
+                            />
+                          )
                         ) : (
-                          <Image
-                            alt={`${data.author} avatar`}
-                            class='w-4 h-4 rounded-full object-cover'
-                            {...data.authorAvatar}
-                          />
+                          <div 
+                            class="w-4 h-4 rounded-full flex items-center justify-center text-white text-xs font-medium not-italic"
+                            style={`background: ${
+                              data.author.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
+                              data.author.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
+                              data.author.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
+                              'linear-gradient(135deg, #ec4899, #f43f5e)'
+                            }`}
+                          >
+                            {data.author.charAt(0).toUpperCase()}
+                          </div>
                         )
-                      ) : (
-                        <div 
-                          class="w-4 h-4 rounded-full flex items-center justify-center text-white text-xs font-medium not-italic"
-                          style={`background: ${
-                            data.author.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
-                            data.author.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
-                            data.author.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
-                            'linear-gradient(135deg, #ec4899, #f43f5e)'
-                          }`}
-                        >
-                          {data.author.charAt(0).toUpperCase()}
-                        </div>
-                      )
-                    }
-                    <span>{data.author}</span>
-                  </div>
-                </span>
-              )}
-              {/* reading time */}
-              <span class='flex items-center gap-1'>
-                <Icon name='time' class='size-4' />
-                {remarkPluginFrontmatter.minutesRead}
-              </span>
-              {/* language */}
-              {data.language && (
+                      }
+                      <span>{data.author}</span>
+                    </div>
+                  </span>
+                )}
+                {/* reading time */}
                 <span class='flex items-center gap-1'>
-                  <Icon name='earth' class='size-4' />
-                  {data.language}
+                  <Icon name='time' class='size-4' />
+                  {remarkPluginFrontmatter.minutesRead}
                 </span>
-              )}
-            </div>
-          </>
-        )
-      }
-    </Tag>
+                {/* language */}
+                {data.language && (
+                  <span class='flex items-center gap-1'>
+                    <Icon name='earth' class='size-4' />
+                    {data.language}
+                  </span>
+                )}
+              </div>
+            </>
+          )
+        }
+      </Tag>
+    </div>
   </a>
   <!-- tags -->
   {
-    detailed && data.tags && (
+    (detailed || layout === 'two-column') && data.tags && (
       <ul class='tag-list mt-1 flex flex-wrap gap-2'>
         {data.tags.map((tag: string) => (
           <li>
