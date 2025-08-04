@@ -161,7 +161,6 @@ export const integ: IntegrationUserConfig = {
       },
       imageUploader: false,
       login: 'force',
-      reaction: true,
       requiredMeta: ['nick'],
     }
   }
