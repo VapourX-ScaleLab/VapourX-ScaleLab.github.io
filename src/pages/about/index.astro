@@ -1,16 +1,22 @@
 ---
+import { Image } from 'astro:assets'
 import { Comment } from 'astro-pure/advanced'
 import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
+import Sponsors from '@/components/sponsorship/Sponsors.astro'
+import Sponsorship from '@/components/sponsorship/Sponsorship.astro'
+import alipay from '@/assets/alipay-qrcode.jpg'
+import wechat from '@/assets/wechat-qrcode.jpg'
 
 const headings = [
   { depth: 2, slug: 'hobbies', text: 'Hobbies' },
   { depth: 2, slug: 'tools', text: 'Tools' },
   { depth: 2, slug: 'social-networks', text: 'Social Networks' },
   { depth: 2, slug: 'gossips', text: 'Gossips' },
-  { depth: 2, slug: 'about-blog', text: 'About Blog' }
+  { depth: 2, slug: 'about-blog', text: 'About Blog' },
+  { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
 ]
 ---
 
@@ -24,7 +30,7 @@ const headings = [
   <p>
     My motto: Stay hungry, Stay foolish. <Spoiler>这里可以夹私货，比如为什么要演奏春日影！</Spoiler>
   </p>
-  <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' style='ahead' />
+  <Button title='Sponsor Me' class='w-fit' href='#sponsorship' style='ahead' />
 
   {/* general-talk */}
   <h2 id='hobbies'>Hobbies</h2>
@@ -257,5 +263,21 @@ const headings = [
       >
     </li>
   </ul>
+
+  {/* sponsorship */}
+  <h2 id='sponsorship'>Sponsorship</h2>
+  <p>Please leave a message or contact me proactively after sponsorship.</p>
+  <Sponsorship
+    methods={[
+      { name: 'WeChat', icon: 'wechat-pay', image: wechat },
+      { name: 'Alipay', icon: 'alipay', image: alipay }
+    ]}
+  />
+  <p>Thanks to the following sponsors:</p>
+  <Sponsors
+    sponsors={[
+      { name: 'Anonymous', amount: '20.00', date: '2022-04-06' },
+    ]}
+  />
   <Comment slot='bottom' />
 </PageLayout>

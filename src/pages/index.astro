@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets'
 
 import { Quote } from 'astro-pure/advanced'
-import { PostPreview } from 'astro-pure/components/pages'
+import PostPreview from '@/components/custom/PostPreview.astro'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
 import { Button, Card, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
@@ -17,7 +17,7 @@ const languages = ['Html', 'JavaScript', 'CSS', 'Shell']
 const frontend = ['TypeScript', 'Vite', 'Webpack', 'Astro']
 const backend = ['Vercel', 'Waline']
 
-const MAX_POSTS = 10
+const MAX_POSTS = 5
 const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 ---
@@ -68,7 +68,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
     </section>
 
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
-      <Section title='About'>
+      {/* <Section title='About'>
         <p class='text-muted-foreground'>Developer / Designer</p>
         <p class='text-muted-foreground'>
           Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione
@@ -76,16 +76,16 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
           at eum oratio possit voluptatum.
         </p>
         <Button title='More about me' class='w-fit self-end' href='/about' style='ahead' />
-      </Section>
+      </Section> */}
       {
         allPostsByDate.length > 0 && (
-          <Section title='Posts'>
-            <ul class='flex flex-col gap-y-1.5 sm:gap-y-2'>
-                              {allPostsByDate.map((p) => (
-                  <li class='flex flex-col gap-x-2 sm:flex-row'>
-                    <PostPreview post={p} />
-                  </li>
-                ))}
+          <Section title='Recent Posts'>
+            <ul class='flex flex-col gap-y-3 sm:gap-y-4'>
+              {allPostsByDate.map((p) => (
+                <li>
+                  <PostPreview post={p} detailed />
+                </li>
+              ))}
             </ul>
             <Button title='More posts' class='w-fit self-end' href='/blog' style='ahead' />
           </Section>
@@ -121,7 +121,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
       />
     </Section> */
       }
-      <Section title='Education'>
+      {/* <Section title='Education'>
         <Card
           as='a'
           heading='Lorem ipsum'
@@ -136,12 +136,12 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
             molestiae laboriosam pariatur!
           </li>
           <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
-        </ul> */
-          }
+        </ul> 
         </Card>
-      </Section>
+      </Section>} */
+    }
 
-      <Section title='Website List'>
+      <Section title='Activities'>
         <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <ProjectCard
             href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
@@ -162,15 +162,16 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
             imagePath='/src/assets/projects/kseniia-zapiatkina-yATU3rg8tNI-unsplash.jpg'
           />
           <ProjectCard
-            href='/projects'
-            heading='More projects'
-            subheading='Check out more projects'
+            href='/activities'
+            heading='View Activities'
+            subheading='Check out our team activities and achievements'
             imagePath='/src/assets/projects/wen-qiao-g_w8I64FiO0-unsplash.jpg'
           />
         </div>
+        <Button title='View all activities' class='w-fit self-end' href='/activities' style='ahead' />
       </Section>
 
-      <Section title='Certifications'>
+      {/* <Section title='Certifications'>
         <Card
           as='a'
           heading='Lorem ipsum'
@@ -184,8 +185,18 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
         <SkillLayout title='Languages' skills={languages} />
         <SkillLayout title='Frontend' skills={frontend} />
         <SkillLayout title='Backend' skills={backend} />
+      </Section> */}
+
+      <Section title='About'>
+        <p class='text-muted-foreground'>Developer / Designer</p>
+        <p class='text-muted-foreground'>
+          Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione
+          indoctum dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel,
+          at eum oratio possit voluptatum.
+        </p>
+        <Button title='More about us' class='w-fit self-end' href='/about' style='ahead' />
       </Section>
     </div>
-    <Quote class='mt-12' />
+    {/* <Quote class='mt-12' /> */}
   </main>
 </PageLayout>

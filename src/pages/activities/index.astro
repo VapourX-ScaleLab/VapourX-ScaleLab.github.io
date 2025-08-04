@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content'
+import { sortMDByDate } from 'astro-pure/server'
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import PostPreview from '@/components/custom/PostPreview.astro'
+
+export const prerender = true
+
+// Get all activities
+const allActivities = await getCollection('activities')
+const sortedActivities = sortMDByDate(allActivities)
+
+const meta = {
+  description: 'Our team activities, events, and achievements',
+  title: 'Activities'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='Back' href='/' style='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>Activities</h1>
+      <p class='text-muted-foreground mb-8'>
+        近期活动公告，欢迎捧场！
+      </p>
+    </div>
+    
+    {
+      sortedActivities.length === 0 ? (
+        <p>No activities yet.</p>
+      ) : (
+        <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
+          <section aria-label='Activities list' class='animate' id='content'>
+            {/* header */}
+            <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
+              <span class='text-muted-foreground'>
+                Showing {sortedActivities.length} activities
+              </span>
+            </div>
+            
+            {/* activities */}
+            <ul class='flex flex-col gap-y-4 text-start'>
+              {sortedActivities.map((activity) => (
+                <PostPreview post={activity} detailed />
+              ))}
+            </ul>
+          </section>
+
+          {/* sidebar */}
+          <aside class='animate' id='sidebar'>
+            {/* Statistics */}
+            <div>
+              <h2 class='mb-4 flex items-center text-lg font-semibold'>
+                Statistics
+              </h2>
+              <div class='space-y-3 text-sm'>
+                <div class='flex justify-between'>
+                  <span class='text-muted-foreground'>Total Activities:</span>
+                  <span class='font-medium'>{sortedActivities.length}</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      )
+    }
+  </main>
+</PageLayout> 

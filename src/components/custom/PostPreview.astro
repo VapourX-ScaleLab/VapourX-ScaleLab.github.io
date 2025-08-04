@@ -14,6 +14,14 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 
 const { as: Tag = 'div', post, detailed = false, class: className } = Astro.props
 
+// Determine the correct URL based on collection type
+const getPostUrl = (post: CollectionEntry<CollectionKey>) => {
+  if (post.collection === 'activities') {
+    return `/activities/${post.id}`
+  }
+  return `/blog/${post.id}`
+}
+
 const { id, data } = post
 
 const { remarkPluginFrontmatter } = await render(post)
@@ -38,7 +46,7 @@ const postDate = data.updatedDate ?? data.publishDate
       !detailed && 'sm:flex-row',
       detailed && data.heroImage && 'max-md:pt-24'
     )}
-    href={`/blog/${id}`}
+    href={getPostUrl(post)}
     data-astro-prefetch
   >
     {

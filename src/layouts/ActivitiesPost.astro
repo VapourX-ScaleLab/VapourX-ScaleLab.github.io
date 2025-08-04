@@ -1,0 +1,136 @@
+---
+import type { MarkdownHeading } from 'astro'
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+
+import { Comment } from 'astro-pure/advanced'
+import { TOC } from 'astro-pure/components/pages'
+import { Button, FormattedDate, Icon } from 'astro-pure/user'
+import { cn } from 'astro-pure/utils'
+import Copyright from '@/components/custom/Copyright.astro'
+import PageLayout from '@/layouts/ContentLayout.astro'
+
+interface Props {
+  activity: CollectionEntry<'activities'>
+  Content: any
+  headings?: MarkdownHeading[]
+}
+
+const { activity, Content, headings = [] } = Astro.props
+const { data } = activity
+const postDate = data.updatedDate ?? data.publishDate
+---
+
+<PageLayout meta={{ title: data.title }} back='/activities'>
+  {!!headings.length && <TOC {headings} slot='sidebar' />}
+
+  <header slot='header' class='mb-6 sm:mb-8'>
+    <div class='mb-4 flex flex-col gap-y-2 sm:mb-6'>
+      <div class='flex items-center gap-x-2 text-sm text-muted-foreground'>
+        <FormattedDate date={postDate} />
+        {data.draft && <span class='text-red-500'>(Draft)</span>}
+      </div>
+      <h1 class='text-3xl font-medium sm:text-4xl'>{data.title}</h1>
+      <p class='text-muted-foreground'>{data.description}</p>
+    </div>
+
+    {/* Activity specific info */}
+    <div class='flex flex-wrap items-center gap-4 text-sm text-muted-foreground'>
+      {data.activityType && (
+        <span class='flex items-center gap-1'>
+          <Icon name='calendar' class='size-4' />
+          {data.activityType.charAt(0).toUpperCase() + data.activityType.slice(1)}
+        </span>
+      )}
+      {data.location && (
+        <span class='flex items-center gap-1'>
+          <Icon name='location' class='size-4' />
+          {data.location}
+        </span>
+      )}
+      {data.duration && (
+        <span class='flex items-center gap-1'>
+          <Icon name='time' class='size-4' />
+          {data.duration}
+        </span>
+      )}
+      {data.participants && (
+        <span class='flex items-center gap-1'>
+          <span class='text-sm'>👥</span>
+          {data.participants} participants
+        </span>
+      )}
+    </div>
+
+    {/* Author info */}
+    {data.author && (
+      <div class='mt-4 flex items-center gap-2'>
+        {data.authorAvatar ? (
+          typeof data.authorAvatar === 'string' ? (
+            <img 
+              src={data.authorAvatar} 
+              alt={`${data.author} avatar`}
+              class='w-6 h-6 rounded-full object-cover'
+            />
+          ) : (
+            <Image
+              alt={`${data.author} avatar`}
+              class='w-6 h-6 rounded-full object-cover'
+              {...data.authorAvatar}
+            />
+          )
+        ) : (
+          <div 
+            class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-medium"
+            style={`background: ${
+              data.author.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
+              data.author.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
+              data.author.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
+              'linear-gradient(135deg, #ec4899, #f43f5e)'
+            }`}
+          >
+            {data.author.charAt(0).toUpperCase()}
+          </div>
+        )}
+        <span class='text-sm'>{data.author}</span>
+      </div>
+    )}
+  </header>
+
+  {/* hero image */}
+  {
+    data.heroImage && (
+      <div class='mb-6 sm:mb-8'>
+        <Image
+          alt={data.heroImage.alt || data.title}
+          class='h-auto w-full rounded-2xl'
+          {...data.heroImage}
+        />
+      </div>
+    )
+  }
+
+  {/* content */}
+  <div class='prose prose-lg max-w-none'>
+    <Content />
+  </div>
+
+  {/* tags */}
+  {
+    data.tags && data.tags.length > 0 && (
+      <div class='mt-8 flex flex-wrap gap-2'>
+        {data.tags.map((tag: string) => (
+          <Button title={tag} href={`/activities/tag/${tag}`} style='pill' />
+        ))}
+      </div>
+    )
+  }
+
+  <Fragment slot='bottom'>
+    {/* Copyright */}
+    <Copyright {data} />
+    
+    {/* Comment */}
+    {!data.draft && data.comment && <Comment class='mt-8 sm:mt-12' />}
+  </Fragment>
+</PageLayout> 

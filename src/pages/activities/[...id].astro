@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+
+import { getCollection, render } from 'astro:content'
+import { Button } from 'astro-pure/user'
+import ActivitiesPost from '@/layouts/ActivitiesPost.astro'
+import PageLayout from '@/layouts/BaseLayout.astro'
+
+export const prerender = true
+
+export const getStaticPaths = (async () => {
+  const activities = await getCollection('activities')
+  return activities.map((activity) => ({
+    params: { id: activity.id },
+    props: { activity }
+  }))
+}) satisfies GetStaticPaths
+
+interface Props {
+  activity: CollectionEntry<'activities'>
+}
+
+const { activity } = Astro.props
+const { Content, headings } = await render(activity)
+---
+
+<ActivitiesPost {activity} {Content} {headings} /> 
