@@ -98,13 +98,24 @@ const activities = defineCollection({
 // Define docs collection
 const docs = defineCollection({
   loader: glob({ base: './src/content/docs', pattern: '**/*.{md,mdx}' }),
-  schema: () =>
+  schema: ({ image }) =>
     z.object({
       title: z.string().max(60),
       description: z.string().max(160),
       publishDate: z.coerce.date().optional(),
       updatedDate: z.coerce.date().optional(),
       tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+      language: z.string().optional(),
+      author: z.string().optional(),
+      authorAvatar: z.union([
+        z.string(),
+        z.object({
+          src: image(),
+          alt: z.string().optional(),
+          width: z.number().optional(),
+          height: z.number().optional()
+        })
+      ]).optional(),
       draft: z.boolean().default(false),
       // Special fields
       order: z.number().default(999)

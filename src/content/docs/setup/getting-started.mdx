@@ -1,7 +1,9 @@
 ---
 title: 'Getting Started'
-description: 'Get started with the Astro Theme Pure'
+description: 'Quick start guide for the theme'
 order: 1
+author: 'VapourX'
+authorAvatar: 'https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250804004505453.jpg'
 ---
 
 import { Steps, Aside, Tabs, TabItem } from 'astro-pure/user'
@@ -126,84 +128,4 @@ The theme file structure is as follows:
   - `types`: Typescript type definitions
   - `utils`: Utilities
   - `site.config.ts`: Theme configuration file
-- `astro.config.mjs`: Astro configuration file
-- `eslint.config.mjs`: ESLint configuration file
-- `prettier.config.mjs`: Prettier configuration file
-- `uno.config.ts`: UnoCSS configuration file
-- `tsconfig.json`: Typescript configuration file
-- `package.json`: Package information
-
-## Simple Setup
-
-
-<Steps>
-
-1. Remove docs files
-
-   - Remove the `src/pages/docs` directory
-   - Remove the menu declaration in `src/site.config.ts`:
-   
-   ```ts title="src/site.config.ts"
-   export const theme: ThemeUserConfig = {
-      // ...
-      /** Configure the header of your site. */
-      header: {
-         menu: [
-            { title: 'Blog', link: '/blog' },
-            { title: 'Docs', link: '/docs' }, // [!code --]
-            // ...
-         ],
-      },
-   }
-   ```
-
-   - Remove the Content Collection for docs in `src/content.config.ts`:
-
-   ```ts title="src/content.config.ts"
-   const docs = defineCollection({ // [!code --]
-   loader: glob({ base: './src/content/docs', pattern: '**/*.{md,mdx}' }), // [!code --]
-   schema: ({ image }) => // [!code --]
-      z.object({ // [!code --]
-         ... // [!code --]
-      }) // [!code --]
-   }) // [!code --]
-   export const collections = { blog, docs } // [!code --]
-   export const content = { blog } // [!code ++]
-   ```
-
-2. Remove `packages` directory (this will be imported by our NPM package)
-
-3. Change the site favicon.
-
-   <Aside type='tip'>
-   [Favicon.io](https://favicon.io/) is a great tool that can help you generate favicons quickly.
-   </Aside>
-
-   Replace the `public/favicon/*` files with your own favicon.
-
-4. Replace your avatar image.
-
-   Replace the `src/assets/avatar.png` file with your own avatar image.
-
-5. Configure the site
-
-   You can configure your project inside the `src/site.config.ts` configuration file:
-
-   ```ts title="src/site.config.ts"
-   export const theme: ThemeUserConfig = {
-      author: 'CWorld',
-      title: 'Astro Theme Pure',
-      site: 'https://astro-pure.js.org',
-      description: 'Stay hungry, stay foolish',
-      // ...
-   }
-
-   export const integ: IntegrationUserConfig = { /* ... */ }
-   // ...
-   ```
-
-6. Typescript Syntax
-
-   The configuration file `site.config.ts` uses Typescript syntax. If you are not familiar with TS syntax, please read about it [here](https://learnxinyminutes.com/docs/typescript/) first.
-
-</Steps>
+- `

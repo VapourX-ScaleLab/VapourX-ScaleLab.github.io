@@ -5,47 +5,62 @@ import { Button } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import PostPreview from '@/components/custom/PostPreview.astro'
 import Icon from '@/components/custom/Icon.astro'
-import { getUniqueActivityTypes, getActivityTypeDisplayName } from '@/utils/activities'
+import { getUniqueActivityTypes, getActivityTypeDisplayName, getActivitiesByType } from '@/utils/activities'
 
 export const prerender = true
+
+export async function getStaticPaths() {
+  const allActivities = await getCollection('activities')
+  const uniqueActivityTypes = getUniqueActivityTypes(allActivities)
+  
+  return uniqueActivityTypes.map((activityType) => ({
+    params: { activityType },
+    props: { activityType }
+  }))
+}
+
+const { activityType } = Astro.props
 
 // Get all activities
 const allActivities = await getCollection('activities') as CollectionEntry<'activities'>[]
 const sortedActivities = sortMDByDate(allActivities) as CollectionEntry<'activities'>[]
+const filteredActivities = getActivitiesByType(sortedActivities, activityType)
 const uniqueActivityTypes = getUniqueActivityTypes(sortedActivities)
 
 const meta = {
-  description: 'Our team activities, events, and achievements',
-  title: 'Activities'
+  description: `Activities of type: ${getActivityTypeDisplayName(activityType)}`,
+  title: `${getActivityTypeDisplayName(activityType)} - Activities`
 }
 ---
 
 <PageLayout {meta}>
-  <Button title='Back' href='/' style='back' />
+  <Button title='Back' href='/activities' style='back' />
   <main class='mt-6 lg:mt-10'>
     <div id='content-header' class='animate'>
-      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>Activities</h1>
+      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>
+        {getActivityTypeDisplayName(activityType)} 活动
+      </h1>
       <p class='text-muted-foreground mb-8'>
-        近期活动公告，欢迎捧场！
+        查看所有 {getActivityTypeDisplayName(activityType)} 类型的活动
       </p>
     </div>
     
     {
-      sortedActivities.length === 0 ? (
-        <p>No activities yet.</p>
+      filteredActivities.length === 0 ? (
+        <p>No activities found for this type.</p>
       ) : (
         <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
           <section aria-label='Activities list' class='animate' id='content'>
             {/* header */}
             <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
               <span class='text-muted-foreground'>
-                Showing {sortedActivities.length} activities
+                Showing {filteredActivities.length} of {sortedActivities.length} activities
               </span>
             </div>
             
             {/* activities */}
             <ul class='flex flex-col gap-y-4 text-start'>
-              {sortedActivities.map((activity) => (
+              {filteredActivities.map((activity) => (
                 <PostPreview post={activity} detailed />
               ))}
             </ul>
@@ -66,16 +81,16 @@ const meta = {
                     <Button 
                       title="全部" 
                       href="/activities" 
-                      style='default'
+                      style={activityType === 'all' ? 'default' : 'pill'}
                     />
                   </li>
                   {/* 其他类型 */}
-                  {uniqueActivityTypes.map((activityType) => (
+                  {uniqueActivityTypes.map((type) => (
                     <li>
                       <Button 
-                        title={getActivityTypeDisplayName(activityType)} 
-                        href={`/activities/type/${activityType}`} 
-                        style='pill' 
+                        title={getActivityTypeDisplayName(type)} 
+                        href={`/activities/type/${type}`} 
+                        style={type === activityType ? 'default' : 'pill'}
                       />
                     </li>
                   ))}

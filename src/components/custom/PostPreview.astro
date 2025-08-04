@@ -20,6 +20,9 @@ const getPostUrl = (post: CollectionEntry<CollectionKey>) => {
   if (post.collection === 'activities') {
     return `/activities/${post.id}`
   }
+  if (post.collection === 'docs') {
+    return `/docs/${post.id}`
+  }
   return `/blog/${post.id}`
 }
 

@@ -1,5 +1,6 @@
 ---
 import { render, type CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
 
 import { MediumZoom } from 'astro-pure/advanced'
 import { TOC } from 'astro-pure/components/pages'
@@ -24,7 +25,7 @@ type Props = {
 
 const { post } = Astro.props
 const { Content, headings } = await render(post)
-const { description, title } = post.data
+const { description, title, author, authorAvatar } = post.data
 ---
 
 <PageLayout meta={{ description, title }} back='/docs'>
@@ -38,6 +39,45 @@ const { description, title } = post.data
       {title}
     </h1>
     <div class='mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs leading-6 text-muted-foreground'>
+      {
+        // Author (moved to first position)
+        author && (
+          <span class='flex items-center gap-1'>
+            <div class='flex items-center gap-1'>
+              {
+                authorAvatar ? (
+                  typeof authorAvatar === 'string' ? (
+                    <img 
+                      src={authorAvatar} 
+                      alt={`${author} avatar`}
+                      class='w-5 h-5 rounded-full object-cover'
+                    />
+                  ) : (
+                    <Image
+                      alt={`${author} avatar`}
+                      class='w-5 h-5 rounded-full object-cover'
+                      {...authorAvatar}
+                    />
+                  )
+                ) : (
+                  <div 
+                    class="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-medium"
+                    style={`background: ${
+                      author.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
+                      author.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
+                      author.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
+                      'linear-gradient(135deg, #ec4899, #f43f5e)'
+                    }`}
+                  >
+                    {author.charAt(0).toUpperCase()}
+                  </div>
+                )
+              }
+              <span>{author}</span>
+            </div>
+          </span>
+        )
+      }
       {
         // Description
         description && (
