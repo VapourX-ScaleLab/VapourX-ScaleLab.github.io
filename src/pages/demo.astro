@@ -1,0 +1,49 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { Button, Card } from 'astro-pure/user'
+---
+
+<PageLayout meta={{ title: '功能演示' }}>
+  <main class='flex w-full flex-col items-center'>
+    <section class='animate mb-10 flex flex-col items-center gap-y-7'>
+      <h1 class='animated-gradient-title text-3xl'>博客上传功能演示</h1>
+      <p class='text-muted-foreground text-center max-w-2xl'>
+        这是一个演示页面，展示博客上传功能的各个组件。
+      </p>
+    </section>
+
+    <div class='w-full max-w-4xl mx-auto px-4 space-y-8'>
+      <Card class='p-6'>
+        <h2 class='text-xl font-semibold mb-4'>功能特性</h2>
+        <ul class='space-y-2 text-muted-foreground'>
+          <li>• Markdown编辑器，支持实时预览</li>
+          <li>• 自动生成frontmatter</li>
+          <li>• 自动创建GitHub Pull Request</li>
+          <li>• 响应式设计，支持移动端</li>
+          <li>• 表单验证和错误处理</li>
+        </ul>
+      </Card>
+
+      <div class='flex justify-center gap-4'>
+        <Button href='/login' style='ahead'>
+          GitHub登录
+        </Button>
+        <Button href='/simple' style='outline'>
+          简化测试
+        </Button>
+        <Button href='/test' style='outline'>
+          功能测试
+        </Button>
+        <Button href='/api-test' style='outline'>
+          API测试
+        </Button>
+        <Button href='/newblog' style='outline'>
+          创建文章
+        </Button>
+        <Button href='/' style='back'>
+          返回首页
+        </Button>
+      </div>
+    </div>
+  </main>
+</PageLayout> 

@@ -1,0 +1,89 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { Button, Card, Label } from 'astro-pure/user'
+---
+
+<PageLayout meta={{ title: '简化测试' }}>
+  <main class='flex w-full flex-col items-center'>
+    <section class='animate mb-10 flex flex-col items-center gap-y-7'>
+      <h1 class='animated-gradient-title text-3xl'>简化测试页面</h1>
+      <p class='text-muted-foreground text-center max-w-2xl'>
+        这是一个完全简化的测试页面，用于验证基本功能。
+      </p>
+    </section>
+
+    <div class='w-full max-w-4xl mx-auto px-4'>
+      <Card class='p-6'>
+        <form id='simpleForm' class='space-y-6'>
+          <div>
+            <Label for='title'>文章标题</Label>
+            <input id='title' name='title' required placeholder='输入文章标题' class='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary' />
+          </div>
+
+          <div>
+            <Label for='content'>文章内容</Label>
+            <textarea id='content' name='content' rows='10' required placeholder='在这里编写文章内容...' class='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary'></textarea>
+          </div>
+
+          <div class='flex justify-end'>
+            <button type='submit' class='px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors'>
+              测试提交
+            </button>
+          </div>
+        </form>
+      </Card>
+
+      <!-- 结果显示 -->
+      <div id='result' class='w-full max-w-4xl mx-auto px-4 mt-8 hidden'>
+        <Card class='p-6'>
+          <h2 class='text-xl font-semibold mb-4'>提交结果</h2>
+          <div id='resultContent' class='bg-gray-100 p-4 rounded-md'></div>
+          <div class='mt-4 flex gap-2'>
+            <button onclick='hideResult()' class='px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors'>关闭</button>
+            <button onclick='resetForm()' class='px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors'>重置</button>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </main>
+</PageLayout>
+
+<script>
+  const form = document.getElementById('simpleForm') as HTMLFormElement;
+  const result = document.getElementById('result');
+  const resultContent = document.getElementById('resultContent');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = {
+      title: formData.get('title'),
+      content: formData.get('content'),
+      timestamp: new Date().toISOString()
+    };
+
+    if (result && resultContent) {
+      resultContent.innerHTML = `
+        <h3 class='font-semibold text-green-600 mb-2'>✅ 提交成功！</h3>
+        <p class='text-gray-700 mb-4'>您的文章已成功提交。</p>
+        <pre class='bg-white p-3 rounded border text-sm overflow-x-auto'>${JSON.stringify(data, null, 2)}</pre>
+      `;
+      result.classList.remove('hidden');
+      result.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  function hideResult() {
+    result?.classList.add('hidden');
+  }
+
+  function resetForm() {
+    form?.reset();
+    result?.classList.add('hidden');
+  }
+
+  // 全局函数
+  (window as any).hideResult = hideResult;
+  (window as any).resetForm = resetForm;
+</script> 

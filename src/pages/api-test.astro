@@ -1,0 +1,183 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { Button, Card, Label } from 'astro-pure/user'
+---
+
+<PageLayout meta={{ title: 'API测试' }}>
+  <main class='flex w-full flex-col items-center'>
+    <section class='animate mb-10 flex flex-col items-center gap-y-7'>
+      <h1 class='animated-gradient-title text-3xl'>API测试页面</h1>
+      <p class='text-muted-foreground text-center max-w-2xl'>
+        这个页面会真实调用API，显示创建PR的状态。
+      </p>
+    </section>
+
+    <div class='w-full max-w-4xl mx-auto px-4'>
+      <Card class='p-6'>
+        <form id='apiTestForm' class='space-y-6'>
+          <div>
+            <Label for='title'>文章标题</Label>
+            <input id='title' name='title' required placeholder='输入文章标题' class='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary' />
+          </div>
+
+          <div>
+            <Label for='folderName'>文件夹名称</Label>
+            <input id='folderName' name='folderName' required placeholder='英文，如：test-article' class='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary' />
+          </div>
+
+          <div>
+            <Label for='content'>文章内容</Label>
+            <textarea id='content' name='content' rows='10' required placeholder='在这里编写文章内容...' class='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary'></textarea>
+          </div>
+
+          <div class='flex justify-end'>
+            <button type='submit' id='submitBtn' class='px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors'>
+              调用API创建PR
+            </button>
+          </div>
+        </form>
+      </Card>
+
+      <!-- 加载状态 -->
+      <div id='loading' class='w-full max-w-4xl mx-auto px-4 mt-8 hidden'>
+        <Card class='p-6'>
+          <div class='flex items-center justify-center'>
+            <div class='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mr-4'></div>
+            <span>正在调用API创建Pull Request...</span>
+          </div>
+        </Card>
+      </div>
+
+      <!-- API结果显示 -->
+      <div id='apiResult' class='w-full max-w-4xl mx-auto px-4 mt-8 hidden'>
+        <Card class='p-6'>
+          <h2 class='text-xl font-semibold mb-4'>API调用结果</h2>
+          <div id='apiResultContent' class='bg-gray-100 p-4 rounded-md'></div>
+          <div class='mt-4 flex gap-2'>
+            <button onclick='hideApiResult()' class='px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors'>关闭</button>
+            <button onclick='resetApiForm()' class='px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors'>重置</button>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </main>
+</PageLayout>
+
+<script>
+  const form = document.getElementById('apiTestForm') as HTMLFormElement;
+  const submitBtn = document.getElementById('submitBtn');
+  const loading = document.getElementById('loading');
+  const apiResult = document.getElementById('apiResult');
+  const apiResultContent = document.getElementById('apiResultContent');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // 显示加载状态
+    loading?.classList.remove('hidden');
+    apiResult?.classList.add('hidden');
+    submitBtn?.setAttribute('disabled', 'true');
+    
+    const formData = new FormData(form);
+    const data = {
+      title: formData.get('title'),
+      folderName: formData.get('folderName'),
+      content: formData.get('content'),
+      publishDate: new Date().toISOString().split('T')[0],
+      tags: '测试',
+      description: 'API测试文章',
+      author: '测试用户',
+      language: 'Chinese'
+    };
+
+    try {
+      console.log('调用API:', data);
+      
+      const response = await fetch('/api/create-blog', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      console.log('API响应:', result);
+
+      if (apiResult && apiResultContent) {
+        let statusHtml = '';
+        
+        if (response.ok) {
+          if (result.success) {
+            statusHtml = `
+              <div class='mb-4'>
+                <h3 class='font-semibold text-green-600 mb-2'>✅ API调用成功！</h3>
+                <p class='text-gray-700 mb-2'>Pull Request已创建。</p>
+                ${result.prUrl ? `<a href="${result.prUrl}" target="_blank" class="text-blue-500 hover:underline">查看Pull Request</a>` : ''}
+              </div>
+            `;
+          } else {
+            statusHtml = `
+              <div class='mb-4'>
+                <h3 class='font-semibold text-yellow-600 mb-2'>⚠️ 部分成功</h3>
+                <p class='text-gray-700 mb-2'>${result.error || 'GitHub配置问题'}</p>
+                ${result.prUrl ? `<a href="${result.prUrl}" target="_blank" class="text-blue-500 hover:underline">查看Pull Request</a>` : ''}
+              </div>
+            `;
+          }
+        } else {
+          statusHtml = `
+            <div class='mb-4'>
+              <h3 class='font-semibold text-red-600 mb-2'>❌ API调用失败</h3>
+              <p class='text-gray-700 mb-2'>${result.error || '未知错误'}</p>
+            </div>
+          `;
+        }
+
+        apiResultContent.innerHTML = `
+          ${statusHtml}
+          <h4 class='font-semibold mb-2'>请求数据:</h4>
+          <pre class='bg-white p-3 rounded border text-sm overflow-x-auto mb-4'>${JSON.stringify(data, null, 2)}</pre>
+          <h4 class='font-semibold mb-2'>API响应:</h4>
+          <pre class='bg-white p-3 rounded border text-sm overflow-x-auto'>${JSON.stringify(result, null, 2)}</pre>
+        `;
+        
+        apiResult.classList.remove('hidden');
+        apiResult.scrollIntoView({ behavior: 'smooth' });
+      }
+    } catch (error) {
+      console.error('API调用错误:', error);
+      
+      if (apiResult && apiResultContent) {
+        apiResultContent.innerHTML = `
+          <div class='mb-4'>
+            <h3 class='font-semibold text-red-600 mb-2'>❌ 网络错误</h3>
+            <p class='text-gray-700 mb-2'>无法连接到API服务器</p>
+          </div>
+          <h4 class='font-semibold mb-2'>错误详情:</h4>
+          <pre class='bg-white p-3 rounded border text-sm overflow-x-auto'>${error}</pre>
+        `;
+        
+        apiResult.classList.remove('hidden');
+        apiResult.scrollIntoView({ behavior: 'smooth' });
+      }
+    } finally {
+      // 隐藏加载状态
+      loading?.classList.add('hidden');
+      submitBtn?.removeAttribute('disabled');
+    }
+  });
+
+  function hideApiResult() {
+    apiResult?.classList.add('hidden');
+  }
+
+  function resetApiForm() {
+    form?.reset();
+    apiResult?.classList.add('hidden');
+  }
+
+  // 全局函数
+  (window as any).hideApiResult = hideApiResult;
+  (window as any).resetApiForm = resetApiForm;
+</script> 
