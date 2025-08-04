@@ -15,10 +15,10 @@ export function getActivitiesByType(
 
 export function getActivityTypeDisplayName(activityType: string): string {
   const displayNames: Record<string, string> = {
-    'event': '活动',
-    'project': '项目',
-    'achievement': '成就',
-    'other': '其他'
+    'event': 'Event',
+    'project': 'Project',
+    'achievement': 'Achievement',
+    'other': 'Other'
   }
   return displayNames[activityType] || activityType
 } 
