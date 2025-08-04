@@ -147,9 +147,9 @@ export const integ: IntegrationUserConfig = {
   waline: {
     enable: true,
     // Server service link
-    server: 'https://astro-theme-pure-waline.arthals.ink/',
+    server: 'https://waline-nmg7ufv4q-hzyangjcs-projects.vercel.app/',
     // Refer https://waline.js.org/en/guide/features/emoji.html
-    emoji: ['bmoji', 'weibo'],
+    emoji: ['bmoji', 'soul-emoji', 'tieba'],
     // Refer https://waline.js.org/en/reference/client/props.html
     additionalConfigs: {
       // search: false,
@@ -157,9 +157,12 @@ export const integ: IntegrationUserConfig = {
       comment: true,
       locale: {
         reaction0: 'Like',
-        placeholder: 'Welcome to comment. (Email to receive replies. Login is unnecessary)'
+        placeholder: 'Welcome to comment.'
       },
-      imageUploader: false
+      imageUploader: false,
+      login: 'force',
+      reaction: true,
+      requiredMeta: ['nick'],
     }
   }
 }
