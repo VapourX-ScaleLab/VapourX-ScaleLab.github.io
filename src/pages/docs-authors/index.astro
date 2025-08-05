@@ -14,9 +14,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allDocsByDate = sortMDByDate(allDocs)
   const authorsWithCount = getUniqueDocsAuthorsWithCount(allDocsByDate)
 
+  // 确保 authorsWithCount 是一个数组
+  const safeAuthorsWithCount = Array.isArray(authorsWithCount) ? authorsWithCount : []
+
   return [{
     params: {},
-    props: { authorsWithCount }
+    props: { authorsWithCount: safeAuthorsWithCount }
   }]
 }
 
@@ -43,30 +46,36 @@ const meta = {
 
     <section id='content' class='animate' aria-label='Authors list'>
       <div class='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {authorsWithCount.map(([author, count]) => (
-          <a
-            href={`/docs-authors/${author}`}
-            class='group block rounded-lg border p-4 transition-colors hover:bg-muted'
-          >
-            <div class='flex items-center justify-between'>
-              <div class='flex items-center gap-2'>
-                <div 
-                  class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium"
-                  style={`background: ${
-                    author.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
-                    author.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
-                    author.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
-                    'linear-gradient(135deg, #ec4899, #f43f5e)'
-                  }`}
-                >
-                  {author.charAt(0).toUpperCase()}
+        {authorsWithCount && authorsWithCount.length > 0 ? (
+          authorsWithCount.map(([author, count]) => (
+            <a
+              href={`/docs-authors/${author}`}
+              class='group block rounded-lg border p-4 transition-colors hover:bg-muted'
+            >
+              <div class='flex items-center justify-between'>
+                <div class='flex items-center gap-2'>
+                  <div 
+                    class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium"
+                    style={`background: ${
+                      author.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
+                      author.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
+                      author.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
+                      'linear-gradient(135deg, #ec4899, #f43f5e)'
+                    }`}
+                  >
+                    {author.charAt(0).toUpperCase()}
+                  </div>
+                  <span class='font-medium group-hover:underline'>{author}</span>
                 </div>
-                <span class='font-medium group-hover:underline'>{author}</span>
+                <span class='text-sm text-muted-foreground'>{count} docs</span>
               </div>
-              <span class='text-sm text-muted-foreground'>{count} docs</span>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))
+        ) : (
+          <div class='col-span-full text-center text-muted-foreground py-8'>
+            暂无文档作者
+          </div>
+        )}
       </div>
     </section>
   </main>

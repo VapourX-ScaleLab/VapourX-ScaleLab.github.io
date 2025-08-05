@@ -1,0 +1,68 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+import { cn } from 'astro-pure/utils'
+
+type Props = HTMLAttributes<'time'> & {
+  date: Date | string | number | null | undefined
+  dateTimeOptions?: Intl.DateTimeFormatOptions
+  class?: string
+}
+
+const { date, dateTimeOptions, class: className, ...attrs } = Astro.props
+
+// 处理无效日期
+const isValidDate = (date: any): date is Date | string | number => {
+  if (!date) return false
+  if (date instanceof Date) return !isNaN(date.getTime())
+  if (typeof date === 'string' || typeof date === 'number') {
+    const parsed = new Date(date)
+    return !isNaN(parsed.getTime())
+  }
+  return false
+}
+
+// 安全的日期格式化函数
+const getFormattedDate = (date: Date | string | number | null | undefined, options?: Intl.DateTimeFormatOptions) => {
+  if (!isValidDate(date)) {
+    return '日期未知'
+  }
+  
+  try {
+    const dateObj = new Date(date)
+    if (isNaN(dateObj.getTime())) {
+      return '日期未知'
+    }
+    
+    if (typeof options !== 'undefined') {
+      return dateObj.toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        ...options
+      })
+    }
+    
+    return dateObj.toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  } catch (error) {
+    return '日期未知'
+  }
+}
+
+const postDate = getFormattedDate(date, dateTimeOptions)
+const dateTime = isValidDate(date) ? new Date(date).toISOString() : undefined
+---
+
+<span class={cn('text-muted-foreground font-mono', className)} {...attrs}>
+  {dateTime ? (
+    <time datetime={dateTime}>
+      {postDate}
+    </time>
+  ) : (
+    <span>{postDate}</span>
+  )}
+</span>

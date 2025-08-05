@@ -3,7 +3,8 @@ import { Image } from 'astro:assets'
 import type { InferEntrySchema } from 'astro:content'
 
 import { PageInfo } from 'astro-pure/components/pages'
-import { FormattedDate, Icon } from 'astro-pure/user'
+import { Icon } from 'astro-pure/user'
+import FormattedDate from './FormattedDate.astro'
 
 interface Props {
   data: InferEntrySchema<'blog'>
