@@ -9,7 +9,7 @@ tags:
 language: English
 author: Andreo Y.
 authorAvatar:
-  src: https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250804004505453.jpg?imageSlim
+  src: https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250804004505453.jpg
 heroImage:
   src: src/assets/images/图片2.png
   color: FFFFFF
