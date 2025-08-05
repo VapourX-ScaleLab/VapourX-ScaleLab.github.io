@@ -1,11 +1,19 @@
 backend:
   name: git-gateway
   branch: main
+  commit_messages:
+    create: 'Content: create {{collection}} "{{slug}}"'
+    update: 'Content: update {{collection}} "{{slug}}"'
+    delete: 'Content: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Media: upload "{{path}}"'
+    deleteMedia: 'Media: delete "{{path}}"'
 
 local_backend: true
 
 media_folder: "src/assets/images"
 public_folder: "src/assets/images"
+
+publish_mode: editorial_workflow
 
 collections:
   - name: "blog"
