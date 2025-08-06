@@ -58,7 +58,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       organization: 'SJTU',
       role: '社区网页设计师',
       href: '/peoples/andreo',
-      tags: ['前端开发', 'UI/UX设计', 'Web技术', '用户体验', '响应式设计']
+      tags: ['前端开发', 'UI-UX设计', 'Web技术', '用户体验', '响应式设计']
     },
     {
       name: 'Violet（刘伊天）',
@@ -186,16 +186,16 @@ const meta = {
               ).length
               
               return count > 0 ? (
-                <li>
-                  <Button
-                    href={`/peoples/tags/${relatedTag}`}
-                    style='pill'
-                    class='items-start gap-x-1'
-                  >
-                    {relatedTag}
-                    <span class='text-xs'>{count}</span>
-                  </Button>
-                </li>
+                                 <li>
+                   <Button
+                     href={`/peoples/tags/${relatedTag}`}
+                     style='pill'
+                     class='items-start gap-x-1'
+                   >
+                     {relatedTag}
+                     <span class='text-xs'>{count}</span>
+                   </Button>
+                 </li>
               ) : null
             })
             .filter(Boolean)
