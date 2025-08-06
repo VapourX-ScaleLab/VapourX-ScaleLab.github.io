@@ -25,7 +25,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: 'https://vapourX-scaleLab.github.io',
+  site: 'https://vapour-x.cn',
   // base: '/vapourx-scalelab',
   trailingSlash: 'never',
 
