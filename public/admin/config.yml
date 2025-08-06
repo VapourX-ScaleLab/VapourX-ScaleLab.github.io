@@ -15,7 +15,7 @@ public_folder: "src/assets/images"
 
 publish_mode: editorial_workflow
 
-logo_url: public/favicon/android-chrome-512x512.png
+logo_url: /favicon/android-chrome-512x512.png
 
 collections:
   - name: "blog"
