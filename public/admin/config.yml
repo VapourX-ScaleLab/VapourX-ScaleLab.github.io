@@ -14,6 +14,7 @@ media_folder: "src/assets/images"
 public_folder: "src/assets/images"
 
 publish_mode: editorial_workflow
+logo_url: public/favicon/favicon.ico
 
 collections:
   - name: "blog"
