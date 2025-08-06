@@ -22,7 +22,7 @@ public_folder: "src/assets/images"
 # Editorial workflow ensures all content must be reviewed before publishing
 publish_mode: editorial_workflow
 
-logo_url: /favicon/android-chrome-512x512.png
+logo_url: /favicon/android-chrome-192x192.png
 
 collections:
   - name: "blog"
