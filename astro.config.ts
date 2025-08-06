@@ -26,7 +26,6 @@ import config from './src/site.config.ts'
 export default defineConfig({
   // Top-Level Options
   site: 'https://vapour-x.cn',
-  // base: '/vapourx-scalelab',
   trailingSlash: 'never',
 
   // Adapter
