@@ -27,10 +27,10 @@ collections:
       - { label: "Publish Date", name: "publishDate", widget: "datetime" }
       - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
       - { label: "Tags", name: "tags", widget: "list", field: { label: "Tag", name: "tag", widget: "string" } }
-      - { label: "Language", name: "language", widget: "select", options: ["English", "Chinese"], default: "English" }
+      - { label: "Language", name: "language", widget: "string" }
       - { label: "Author", name: "author", widget: "string" }
-      - { label: "Author Avatar", name: "authorAvatar", widget: "object", fields: [{ label: "Avatar URL", name: "src", widget: "string" }], required: false }
-      - { label: "Hero Image", name: "heroImage", widget: "object", fields: [{ label: "Image", name: "src", widget: "image" }, { label: "Color", name: "color", widget: "string" }], required: false }
+      - { label: "Author Avatar", name: "authorAvatar", widget: "image", required: false }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "activities"
@@ -48,7 +48,7 @@ collections:
       - { label: "Duration", name: "duration", widget: "string" }
       - { label: "Participants", name: "participants", widget: "number", required: false }
       - { label: "Author", name: "author", widget: "string" }
-      - { label: "Author Avatar", name: "authorAvatar", widget: "string", required: false }
+      - { label: "Author Avatar", name: "authorAvatar", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "docs"
@@ -61,5 +61,5 @@ collections:
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Order", name: "order", widget: "number" }
       - { label: "Author", name: "author", widget: "string" }
-      - { label: "Author Avatar", name: "authorAvatar", widget: "string", required: false }
+      - { label: "Author Avatar", name: "authorAvatar", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
