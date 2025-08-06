@@ -152,7 +152,7 @@ back: '/terms/list'
 
 <p>If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR.</p>
 <p>We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data.</p>
-<p> If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at <b>andreo_y@sjtu.edu.cn</b>.</p>
+<p> If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at <b>vapourx-open-forum@outlook.com</b>.</p>
 <p>In certain circumstances, you have the following data protection rights:</p>
 <p>0.1. the right to access, update or to delete the information we have on you;</p>
 <p>0.2. the right of rectification. You have the right to have your information rectified if that information is inaccurate or incomplete;</p>
@@ -170,7 +170,7 @@ back: '/terms/list'
 <p>0.1. users can visit our site anonymously;</p>
 <p>0.2. our Privacy Policy link includes the word “Privacy”, and can easily be found on the home page of our website;</p>
 <p>0.3. users will be notified of any privacy policy changes on our Privacy Policy Page;</p>
-<p>0.4. users are able to change their personal information by emailing us at <b>andreo_y@sjtu.edu.cn</b>.</p>
+<p>0.4. users are able to change their personal information by emailing us at <b>vapourx-open-forum@outlook.com</b>.</p>
 <p>Our Policy on “Do Not Track” Signals:</p>
 <p>We honor Do Not Track signals and do not track, plant cookies, or use advertising when a Do Not Track browser mechanism is in place. Do Not Track is a preference you can set in your web browser to inform websites that you do not want to be tracked.</p>
 <p>You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser.</p>
@@ -191,7 +191,7 @@ back: '/terms/list'
 <p><b>0.3. To stop selling your personal information. We don’t sell or rent your personal information to any third parties for any purpose. We do not sell your personal information for monetary consideration. However, under some circumstances, a transfer of personal information to a third party, or within our family of companies, without monetary consideration may be considered a “sale” under California law. You are the only owner of your Personal Data and can request disclosure or deletion at any time.</b></p>
 <p>If you submit a request to stop selling your personal information, we will stop making such transfers.</p>
 <p>Please note, if you ask us to delete or stop selling your data, it may impact your experience with us, and you may not be able to participate in certain programs or membership services which require the usage of your personal information to function. But in no circumstances, we will discriminate against you for exercising your rights.</p>
-<p>To exercise your California data protection rights described above, please send your request(s) by email: <b>andreo_y@sjtu.edu.cn</b>.</p>
+<p>To exercise your California data protection rights described above, please send your request(s) by email: <b>vapourx-open-forum@outlook.com</b>.</p>
 <p>Your data protection rights, described above, are covered by the CCPA, short for the California Consumer Privacy Act. To find out more, visit the official California Legislative Information website. The CCPA took effect on 01/01/2020.</p>
 
 <p>13. <b>Service Providers</b></p>
@@ -238,6 +238,6 @@ back: '/terms/list'
 
 <p>20. <b>Contact Us</b></p>
 
-<p>If you have any questions about this Privacy Policy, please contact us by email: <b>andreo_y@sjtu.edu.cn</b>.</p>
+<p>If you have any questions about this Privacy Policy, please contact us by email: <b>vapourx-open-forum@outlook.com</b>.</p>
 	 
 

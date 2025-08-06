@@ -25,5 +25,5 @@ back: '/terms/list'
 <p><b>LOGOS AND TRADEMARKS DISCLAIMER</b></p>
 <p>All logos and trademarks of third parties referenced on vapour-x.cn are the trademarks and logos of their respective owners. Any inclusion of such trademarks or logos does not imply or constitute any approval, endorsement or sponsorship of VapourX Open Forum by such owners.</p> 
 <p><b>CONTACT US</b></p>	 	 
-<p>Should you have any feedback, comments, requests for technical support or other inquiries, please contact us by email: <b>andreo_y@sjtu.edu.cn</b>.</p> 	 
+<p>Should you have any feedback, comments, requests for technical support or other inquiries, please contact us by email: <b>vapourx-open-forum@outlook.com</b>.</p> 	 
 

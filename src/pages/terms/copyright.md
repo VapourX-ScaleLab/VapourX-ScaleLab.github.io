@@ -98,7 +98,7 @@ back: '/terms/list'
 
 <p>For questions about this Copyright Notice or to report copyright infringement, please contact us at:</p>
 
-<p><b>Email:</b> andreo_y@sjtu.edu.cn</p>
+<p><b>Email:</b> vapourx-open-forum@outlook.com</p>
 <p><b>Website:</b> vapour-x.cn</p>
 
 <p>12. <b>Severability</b></p>
