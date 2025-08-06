@@ -1,0 +1,214 @@
+---
+import type { GetStaticPaths } from 'astro'
+import { Button, Card } from 'astro-pure/user'
+import PageLayout from '@/layouts/CommonPage.astro'
+
+export const prerender = true
+
+// 定义所有成员的标签数据
+const membersData = [
+  {
+    name: 'ACondawayUNo（徐聪晟）',
+    avatar: 'https://avatars.githubusercontent.com/u/115391544?v=4',
+    organization: 'SJTU ScaleLab',
+    role: '社区创始人',
+    href: '/peoples/acondaway',
+    tags: ['具身智能', '人机交互', '计算机视觉', '深度学习', '机器人学']
+  },
+  {
+    name: 'Andreo（杨锦畅）',
+    avatar: 'https://avatars.githubusercontent.com/u/33977087?v=4',
+    organization: 'SJTU',
+    role: '社区网页设计师',
+    href: '/peoples/andreo',
+    tags: ['前端开发', 'UI/UX设计', 'Web技术', '用户体验', '响应式设计']
+  },
+  {
+    name: 'Violet（刘伊天）',
+    avatar: 'https://avatars.githubusercontent.com/u/113980234?v=4',
+    organization: 'SJTU ScaleLab',
+    role: '社区运营团队负责人',
+    href: '/peoples/violet',
+    tags: ['社区运营', '项目管理', '团队协作', '活动策划', '内容运营']
+  },
+  {
+    name: 'HuaiNan（帅哲）',
+    avatar: 'https://avatars.githubusercontent.com/u/165187020?v=4',
+    organization: 'SJTU DS',
+    role: '社区视觉传达总设计师',
+    href: '/peoples/huainan',
+    tags: ['视觉设计', '品牌设计', 'UI设计', '创意设计', '插画设计']
+  }
+]
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // 定义所有成员的标签数据
+  const membersData = [
+    {
+      name: 'ACondawayUNo（徐聪晟）',
+      avatar: 'https://avatars.githubusercontent.com/u/115391544?v=4',
+      organization: 'SJTU ScaleLab',
+      role: '社区创始人',
+      href: '/peoples/acondaway',
+      tags: ['具身智能', '人机交互', '计算机视觉', '深度学习', '机器人学']
+    },
+    {
+      name: 'Andreo（杨锦畅）',
+      avatar: 'https://avatars.githubusercontent.com/u/33977087?v=4',
+      organization: 'SJTU',
+      role: '社区网页设计师',
+      href: '/peoples/andreo',
+      tags: ['前端开发', 'UI/UX设计', 'Web技术', '用户体验', '响应式设计']
+    },
+    {
+      name: 'Violet（刘伊天）',
+      avatar: 'https://avatars.githubusercontent.com/u/113980234?v=4',
+      organization: 'SJTU ScaleLab',
+      role: '社区运营团队负责人',
+      href: '/peoples/violet',
+      tags: ['社区运营', '项目管理', '团队协作', '活动策划', '内容运营']
+    },
+    {
+      name: 'HuaiNan（帅哲）',
+      avatar: 'https://avatars.githubusercontent.com/u/165187020?v=4',
+      organization: 'SJTU DS',
+      role: '社区视觉传达总设计师',
+      href: '/peoples/huainan',
+      tags: ['视觉设计', '品牌设计', 'UI设计', '创意设计', '插画设计']
+    }
+  ]
+  
+  // 获取所有唯一的标签
+  const allTags = [...new Set(membersData.flatMap(member => member.tags))]
+  
+  return allTags.map(tag => ({
+    params: { tag },
+    props: { tag }
+  }))
+}
+
+interface Props {
+  tag: string
+}
+
+const { tag } = Astro.props
+
+// 重新计算所有标签（用于运行时）
+const allTags = [...new Set(membersData.flatMap(member => member.tags))]
+
+// 筛选具有该标签的成员
+const filteredMembers = membersData.filter(member => member.tags.includes(tag))
+
+const headings = [
+  { depth: 2, slug: 'members', text: '相关成员' },
+  { depth: 2, slug: 'related-tags', text: '相关标签' }
+]
+
+const meta = {
+  description: `查看具有 "${tag}" 标签的社区成员`,
+  title: `标签: ${tag}`
+}
+---
+
+<PageLayout title={meta.title} info={`/peoples/tags/${tag}`}>
+  <Button title='Back To All Tags' href='/peoples/tags' style='back' />
+  <div class='mx-auto max-w-4xl'>
+    <!-- 页面标题 -->
+    <div class='mb-8 text-center'>
+      <h1 class='mb-4 text-4xl font-bold text-foreground'>标签: {tag}</h1>
+      <p class='text-lg text-muted-foreground'>
+        找到 {filteredMembers.length} 位具有此标签的社区成员
+      </p>
+    </div>
+
+    <!-- 相关成员 -->
+    <section id='members' class='mb-12 scroll-mt-20'>
+      <h2 class='mb-6 text-2xl font-semibold text-foreground'>相关成员</h2>
+      <div class='grid gap-6 md:grid-cols-2'>
+        {filteredMembers.map((member) => (
+          <Card class='group p-6 transition-all hover:shadow-lg'>
+            <div class='flex items-start gap-4'>
+              {/* 头像 */}
+              <div class='flex-shrink-0'>
+                <div class='relative'>
+                  <img 
+                    src={member.avatar} 
+                    alt={member.name} 
+                    class='h-16 w-16 rounded-full border-2 border-border object-cover'
+                    width={64}
+                    height={64}
+                  />
+                  <div class='absolute -bottom-1 -right-1 size-4 rounded-full border-2 border-background bg-green-500'></div>
+                </div>
+              </div>
+              
+              {/* 成员信息 */}
+              <div class='flex-1 min-w-0'>
+                <div class='mb-2'>
+                  <h3 class='text-lg font-semibold text-foreground'>{member.name}</h3>
+                  <p class='text-sm text-muted-foreground'>{member.organization}</p>
+                  <p class='text-sm text-primary font-medium'>{member.role}</p>
+                </div>
+                
+                {/* 标签 */}
+                <div class='mb-3 flex flex-wrap gap-1'>
+                  {member.tags.map((memberTag) => (
+                    <span class={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
+                      memberTag === tag 
+                        ? 'bg-primary text-white' 
+                        : 'bg-primary/10 text-primary'
+                    }`}>
+                      {memberTag}
+                    </span>
+                  ))}
+                </div>
+                
+                <Button href={member.href} style='primary' class='text-sm'>
+                  查看个人主页
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </section>
+
+    <!-- 相关标签 -->
+    <section id='related-tags' class='scroll-mt-20'>
+      <h2 class='mb-6 text-2xl font-semibold text-foreground'>相关标签</h2>
+      <div class='mb-8'>
+        <ul class='flex flex-wrap gap-4'>
+          {allTags
+            .filter(t => t !== tag)
+            .map((relatedTag) => {
+              const count = membersData.filter(member => 
+                member.tags.includes(tag) && member.tags.includes(relatedTag)
+              ).length
+              
+              return count > 0 ? (
+                <li>
+                  <Button
+                    href={`/peoples/tags/${relatedTag}`}
+                    style='pill'
+                    class='items-start gap-x-1'
+                  >
+                    {relatedTag}
+                    <span class='text-xs'>{count}</span>
+                  </Button>
+                </li>
+              ) : null
+            })
+            .filter(Boolean)
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- 返回按钮 -->
+    <div class='mt-8 text-center'>
+      <Button href='/peoples/tags' style='outline'>
+        返回标签列表
+      </Button>
+    </div>
+  </div>
+</PageLayout> 

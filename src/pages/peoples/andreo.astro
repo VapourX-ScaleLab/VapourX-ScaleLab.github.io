@@ -1,0 +1,152 @@
+---
+import { Button, Card } from 'astro-pure/user'
+import PersonLayout from '@/layouts/PersonLayout.astro'
+
+const headings = [
+  { depth: 2, slug: 'skills', text: '技能专长' },
+  { depth: 2, slug: 'projects', text: '项目作品' },
+  { depth: 2, slug: 'experience', text: '工作经历' }
+]
+
+const person = {
+  name: 'Andreo（杨锦畅）',
+  avatar: 'https://avatars.githubusercontent.com/u/33977087?v=4',
+  organization: 'SJTU',
+  role: '社区网页设计师',
+  slogan: '我是关羽',
+  tags: ['前端开发', 'UI/UX设计', 'Web技术', '用户体验', '响应式设计'],
+  description: '专注于前端开发和用户体验设计，致力于创造美观且实用的Web界面。擅长将复杂的设计需求转化为优雅的用户界面，注重用户体验的每一个细节。',
+  github: 'https://github.com/hzyangjc',
+  website: 'https://andreo.dev',
+  email: 'andreo@sjtu.edu.cn',
+  linkedin: 'https://www.linkedin.com/in/andreo-yang',
+  twitter: 'https://twitter.com/andreo_yang',
+  skills: [
+    {
+      title: '前端开发',
+      description: '精通现代前端技术栈，包括 React、Vue、TypeScript 等，能够构建高性能的 Web 应用。',
+      technologies: ['React', 'Vue', 'TypeScript', 'JavaScript', 'HTML/CSS']
+    },
+    {
+      title: 'UI/UX 设计',
+      description: '具备专业的 UI/UX 设计能力，能够从用户角度思考，创造直观易用的界面。',
+      technologies: ['Figma', 'Sketch', 'Adobe XD', '用户研究', '原型设计']
+    },
+    {
+      title: 'Web 技术',
+      description: '熟悉现代 Web 开发技术，包括性能优化、SEO、无障碍设计等。',
+      technologies: ['性能优化', 'SEO', '无障碍设计', 'PWA', 'Web API']
+    }
+  ],
+  projects: [
+    {
+      name: 'VapourX 官网设计',
+      description: '为 VapourX 社区设计并开发官方网站，采用现代化的设计语言和响应式布局。',
+      link: 'https://vapourx.org',
+      tech: ['Astro', 'TypeScript', 'Tailwind CSS', '响应式设计']
+    },
+    {
+      name: '个人作品集网站',
+      description: '展示个人设计作品和项目经历的响应式网站，采用简约现代的设计风格。',
+      link: 'https://andreo.dev',
+      tech: ['Next.js', 'Framer Motion', 'GSAP', 'Three.js']
+    },
+    {
+      name: '企业管理系统 UI',
+      description: '为企业客户设计的管理系统界面，注重用户体验和操作效率。',
+      link: '#',
+      tech: ['Vue 3', 'Element Plus', 'ECharts', 'WebSocket']
+    }
+  ],
+  experience: [
+    {
+      title: '前端开发工程师',
+      company: '某知名互联网公司',
+      period: '2023 - 至今',
+      description: '负责公司核心产品的前端开发工作，参与多个大型项目的架构设计和实现。'
+    },
+    {
+      title: 'UI/UX 设计师',
+      company: '设计工作室',
+      period: '2022 - 2023',
+      description: '为客户提供专业的 UI/UX 设计服务，完成多个成功的商业项目。'
+    },
+    {
+      title: 'Web 开发实习生',
+      company: '初创公司',
+      period: '2021 - 2022',
+      description: '参与公司产品的 Web 端开发，积累了丰富的实战经验。'
+    }
+  ]
+}
+---
+
+<PersonLayout title={person.name} {headings} {person}>
+  <!-- 技能专长 -->
+  <section id='skills' class='scroll-mt-20'>
+    <h2 class='mb-6 text-2xl font-semibold text-foreground'>技能专长</h2>
+    <div class='grid gap-4 md:grid-cols-2'>
+      {person.skills.map((skill) => (
+        <Card class='p-4'>
+          <h3 class='mb-2 text-lg font-semibold text-foreground'>{skill.title}</h3>
+          <p class='mb-3 text-muted-foreground'>{skill.description}</p>
+          <div class='flex flex-wrap gap-1'>
+            {skill.technologies.map((tech) => (
+              <span class='inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary'>
+                {tech}
+              </span>
+            ))}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  <!-- 项目作品 -->
+  <section id='projects' class='scroll-mt-20'>
+    <h2 class='mb-6 text-2xl font-semibold text-foreground'>项目作品</h2>
+    <div class='space-y-4'>
+      {person.projects.map((project) => (
+        <Card class='p-6'>
+          <div class='flex flex-col gap-4 md:flex-row md:items-start'>
+            <div class='flex-1'>
+              <h3 class='mb-2 text-lg font-semibold text-foreground'>{project.name}</h3>
+              <p class='mb-3 text-muted-foreground'>{project.description}</p>
+              <div class='flex flex-wrap gap-1'>
+                {project.tech.map((tech) => (
+                  <span class='inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground'>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            {project.link && (
+              <Button href={project.link} target='_blank' style='outline' class='flex-shrink-0'>
+                查看项目
+              </Button>
+            )}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  <!-- 工作经历 -->
+  <section id='experience' class='scroll-mt-20'>
+    <h2 class='mb-6 text-2xl font-semibold text-foreground'>工作经历</h2>
+    <div class='space-y-4'>
+      {person.experience.map((exp) => (
+        <Card class='p-4'>
+          <div class='flex flex-col gap-2 md:flex-row md:items-start md:justify-between'>
+            <div class='flex-1'>
+              <h3 class='text-lg font-semibold text-foreground'>{exp.title}</h3>
+              <p class='text-sm text-muted-foreground'>{exp.company}</p>
+              <p class='text-sm text-muted-foreground'>{exp.period}</p>
+              <p class='mt-2 text-muted-foreground'>{exp.description}</p>
+            </div>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+</PersonLayout> 
