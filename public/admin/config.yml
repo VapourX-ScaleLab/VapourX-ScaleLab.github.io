@@ -8,85 +8,19 @@ backend:
     uploadMedia: 'Media: upload "{{path}}"'
     deleteMedia: 'Media: delete "{{path}}"'
 
-# User Role Configuration
-roles:
-  - name: "admin"
-    label: "Administrator"
-    description: "Full access permissions"
-    permissions:
-      - "publish"
-      - "review"
-      - "create"
-      - "update"
-      - "delete"
-  
-  - name: "editor"
-    label: "Editor"
-    description: "Can create and edit content, but cannot publish"
-    permissions:
-      - "create"
-      - "update"
-      - "review"
-  
-  - name: "author"
-    label: "Author"
-    description: "Can only create draft content"
-    permissions:
-      - "create"
-      - "update"
+# IMPORTANT: User permissions are controlled through:
+# 1. Git repository access permissions
+# 2. Netlify Identity (if using Netlify)
+# 3. Branch protection rules
+# 4. Editorial workflow (prevents direct publishing)
 
 local_backend: true
 
 media_folder: "src/assets/images"
 public_folder: "src/assets/images"
 
+# Editorial workflow ensures all content must be reviewed before publishing
 publish_mode: editorial_workflow
-
-# Workflow Configuration
-workflow:
-  # Workflow States
-  states:
-    - name: "draft"
-      label: "Draft"
-      description: "Content is being written"
-      color: "#ff6b6b"
-    
-    - name: "review"
-      label: "In Review"
-      description: "Content is waiting for review"
-      color: "#feca57"
-    
-    - name: "ready"
-      label: "Ready"
-      description: "Content has been reviewed and approved, waiting for publication"
-      color: "#48dbfb"
-    
-    - name: "published"
-      label: "Published"
-      description: "Content has been published to the website"
-      color: "#1dd1a1"
-  
-  # State Transition Rules
-  transitions:
-    - from: "draft"
-      to: "review"
-      label: "Submit for Review"
-      permissions: ["admin", "editor"]
-    
-    - from: "review"
-      to: "ready"
-      label: "Approve"
-      permissions: ["admin", "editor"]
-    
-    - from: "review"
-      to: "draft"
-      label: "Request Changes"
-      permissions: ["admin", "editor"]
-    
-    - from: "ready"
-      to: "published"
-      label: "Publish"
-      permissions: ["admin"]
 
 logo_url: /favicon/android-chrome-512x512.png
 
@@ -96,12 +30,7 @@ collections:
     folder: "src/content/blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    # Permission Control
-    publish_mode: editorial_workflow
-    # Only administrators and editors can create blog posts
-    create_permissions: ["admin", "editor"]
-    # Only administrators can publish
-    publish_permissions: ["admin"]
+    # Editorial workflow ensures content review before publishing
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
@@ -119,12 +48,7 @@ collections:
     folder: "src/content/activities"
     create: true
     slug: "{{slug}}"
-    # Permission Control
-    publish_mode: editorial_workflow
-    # Only administrators and editors can create activities
-    create_permissions: ["admin", "editor"]
-    # Only administrators can publish
-    publish_permissions: ["admin"]
+    # Editorial workflow ensures content review before publishing
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
@@ -143,11 +67,7 @@ collections:
     folder: "src/content/docs"
     create: true
     slug: "{{slug}}"
-    # Permission Control
-    publish_mode: editorial_workflow
-    # Only administrators can create and publish documentation
-    create_permissions: ["admin"]
-    publish_permissions: ["admin"]
+    # Editorial workflow ensures content review before publishing
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
