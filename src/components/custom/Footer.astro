@@ -60,7 +60,7 @@ const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1) || []
           }
           {/* Busuanzi site statistics */}
           <span class='ml-2'>
-            • Total visits <span id="busuanzi_container_site_pv" style="display: inline !important;">
+            • Total visits <span id="busuanzi_container_site_pv" style="display: inline !important; visibility: visible !important; opacity: 1 !important;">
               <span id="busuanzi_value_site_pv"></span>
             </span>
           </span>
@@ -101,4 +101,38 @@ const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1) || []
 </footer>
 
 <!-- Busuanzi 统计脚本 -->
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>
+  // 强制显示页脚不蒜子统计
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('busuanzi_container_site_pv');
+    if (container) {
+      container.style.display = 'inline';
+      container.style.visibility = 'visible';
+      container.style.opacity = '1';
+    }
+  });
+  
+  // 监听页脚不蒜子脚本加载完成后的变化
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+        const container = document.getElementById('busuanzi_container_site_pv');
+        if (container && container.style.display === 'none') {
+          container.style.display = 'inline';
+          container.style.visibility = 'visible';
+          container.style.opacity = '1';
+        }
+      }
+    });
+  });
+  
+  // 开始观察页脚
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('busuanzi_container_site_pv');
+    if (container) {
+      observer.observe(container, { attributes: true, attributeFilter: ['style'] });
+    }
+  });
+</script> 
