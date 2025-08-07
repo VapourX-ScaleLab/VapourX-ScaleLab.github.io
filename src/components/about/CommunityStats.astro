@@ -9,6 +9,7 @@ interface CommunityStat {
   color?: string
   description?: string
   link?: string
+  api?: string // 新增 API 字段
 }
 
 interface Props {
@@ -18,6 +19,40 @@ interface Props {
 }
 
 const { class: className, title, stats, ...props } = Astro.props
+
+// 获取 GitHub 数据的函数
+async function getGitHubData(api: string): Promise<string> {
+  try {
+    const response = await fetch(`https://api.github.com/${api}`)
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.status}`)
+    }
+    const data = await response.json()
+    
+    // 根据不同的 API 端点返回不同的数据
+    if (api.includes('orgs/')) {
+      return data.public_repos?.toString() || '0'
+    } else if (api.includes('users/')) {
+      return data.followers?.toString() || '0'
+    } else {
+      return '0'
+    }
+  } catch (error) {
+    console.error('Error fetching GitHub data:', error)
+    return '0'
+  }
+}
+
+// 处理统计数据，获取动态数据
+const processedStats = await Promise.all(
+  stats.map(async (stat) => {
+    if (stat.api) {
+      const dynamicValue = await getGitHubData(stat.api)
+      return { ...stat, value: dynamicValue }
+    }
+    return stat
+  })
+)
 ---
 
 <div
@@ -27,7 +62,7 @@ const { class: className, title, stats, ...props } = Astro.props
   <div class='m-0 px-2 text-lg font-medium'>{title}</div>
   <div class='grid grid-cols-1 gap-x-3 gap-y-3 sm:grid-cols-2 lg:grid-cols-3'>
     {
-      stats.map((stat) => {
+      processedStats.map((stat) => {
         const content = (
           <div class='group relative text-sm leading-normal no-underline'>
             <div class='flex items-center gap-x-3 rounded-lg border border-transparent px-3 py-3 transition-colors hover:border-border hover:bg-muted'>

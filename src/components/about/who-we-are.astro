@@ -68,7 +68,7 @@ const { class: className, title, members, ...props } = Astro.props
         )
 
         return member.href ? (
-          <a href={member.href} target='_blank' rel='noopener noreferrer'>
+          <a href={member.href} target={member.href.startsWith('http') ? '_blank' : '_self'} rel={member.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
             {content}
           </a>
         ) : (

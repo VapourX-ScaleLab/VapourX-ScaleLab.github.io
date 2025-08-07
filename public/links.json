@@ -1,43 +1,46 @@
 {
+  "orgs": [
+    {
+      "id_name": "orgs",
+      "desc": "Co-organizations",
+      "link_list": [
+        {
+        "name": "Lumina具身社区",
+        "intro": "我们是具身智能的燧石，碰撞出人机共生的星火。",
+        "link": "https://lumina-embodied.ai/",
+        "avatar": "https://lumina-embodied.ai/_image?href=%2F_astro%2Ffavicon_bbox.BRwUK4Bp.png&w=600&h=766&f=webp"
+        },
+        {
+          "name": "ScaleLab@SJTU",
+          "intro": "由上海交通大学穆尧、杨小康等老师领衔。",
+          "link": "https://scalelab-sjtu.github.io",
+          "avatar": "https://scalelab-sjtu.github.io/images/logo.png"
+        },
+        {
+          "name": "MARS-EAI社区",
+          "intro": "Building Real-World Embodied Society with Agents",
+          "link": "https://mars-eai.github.io/",
+          "avatar": "https://mars-eai.github.io/MARS-System/assets/outputnew-315577d3.png"
+        }
+      ]
+    }
+  ],
   "friends": [
     {
       "id_name": "cf-links",
       "desc": "Common links included in circle friends",
       "link_list": [
         {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png"
+          "name": "灵巧智能",
+          "intro": "灵心启智能 巧手创未来",
+          "link": "https://www.dex-robot.com",
+          "avatar": "https://activestatic.brandsh.cn/dexrobot/image/logo1.png"
         },
         {
-          "name": "CWorld Site",
-          "intro": "求知若愚，虚怀若谷",
-          "link": "https://cworld0.com/",
-          "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200"
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "Inactive or rule-breaking friends",
-      "link_list": []
-    },
-    {
-      "id_name": "special-links",
-      "desc": "Other special links",
-      "link_list": [
-        {
-          "name": "虫洞",
-          "intro": "随机前往十年之约的成员博客",
-          "link": "https://www.foreverblog.cn/go.html",
-          "avatar": "/images/wormhole.png"
-        },
-        {
-          "name": "开往",
-          "intro": "随机前往开往的成员博客",
-          "link": "https://www.travellings.cn/go.html",
-          "avatar": "https://www.travellings.cn/assets/travelling.png"
+          "name": "将然科技",
+          "intro": "能见已然，亦能能见将然。",
+          "link": "https://emagen.ai",
+          "avatar": "https://emagen.ai/cagen-logo.svg"
         }
       ]
     }

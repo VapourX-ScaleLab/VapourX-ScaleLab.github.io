@@ -1,0 +1,146 @@
+---
+import { Button, Card } from 'astro-pure/user'
+import PersonLayout from '@/layouts/PersonLayout.astro'
+
+const headings = [
+  { depth: 2, slug: 'management', text: '管理经验' },
+  { depth: 2, slug: 'activities', text: '活动策划' },
+  { depth: 2, slug: 'achievements', text: '成就荣誉' }
+]
+
+const person = {
+  name: 'Violet（刘伊天）',
+  avatar: 'https://avatars.githubusercontent.com/u/113980234?v=4',
+  organization: 'SJTU ScaleLab',
+  role: '社区运营团队负责人',
+  slogan: '我也是个人',
+  tags: ['社区运营', '项目管理', '团队协作', '活动策划', '内容运营'],
+  description: '负责社区运营和项目管理，致力于构建活跃的开发者社区。擅长组织技术交流活动，促进社区成员之间的合作与成长。',
+  github: 'https://github.com/VioletEvar',
+  email: 'violet@sjtu.edu.cn',
+  linkedin: 'https://www.linkedin.com/in/violet-liu',
+  management: [
+    {
+      title: '社区运营管理',
+      description: '负责 VapourX 社区的日常运营工作，包括成员管理、内容策划、活动组织等。',
+      responsibilities: ['成员招募', '内容策划', '活动组织', '社区维护']
+    },
+    {
+      title: '项目管理',
+      description: '协调社区项目的开发进度，确保项目按时高质量完成。',
+      responsibilities: ['进度跟踪', '资源协调', '质量把控', '风险管控']
+    },
+    {
+      title: '团队协作',
+      description: '促进团队成员之间的有效沟通和协作，营造良好的工作氛围。',
+      responsibilities: ['沟通协调', '团队建设', '冲突解决', '文化建设']
+    }
+  ],
+  activities: [
+    {
+      name: 'VapourX 技术分享会',
+      description: '定期组织社区技术分享活动，邀请行业专家和社区成员分享最新技术动态。',
+      participants: '50+ 参与者',
+      frequency: '每月一次',
+      link: '#'
+    },
+    {
+      name: '开源项目协作',
+      description: '组织社区成员参与开源项目开发，提升技术能力和团队协作能力。',
+      participants: '20+ 贡献者',
+      frequency: '持续进行',
+      link: 'https://github.com/VapourX-ScaleLab'
+    },
+    {
+      name: '新人引导计划',
+      description: '为新加入社区的成员提供引导和培训，帮助他们快速融入社区。',
+      participants: '30+ 新人',
+      frequency: '按需开展',
+      link: '#'
+    }
+  ],
+  achievements: [
+    {
+      title: '社区活跃度提升',
+      description: '通过有效的运营策略，将社区活跃度提升了 200%，成员参与度显著提高。',
+      year: '2024'
+    },
+    {
+      title: '优秀社区管理者',
+      description: '获得学校颁发的优秀社区管理者称号，表彰在社区建设方面的突出贡献。',
+      year: '2023'
+    },
+    {
+      title: '技术活动组织奖',
+      description: '因成功组织多次技术交流活动，获得技术活动组织奖。',
+      year: '2023'
+    }
+  ]
+}
+---
+
+<PersonLayout title={person.name} {headings} {person}>
+  <!-- 管理经验 -->
+  <section id='management' class='scroll-mt-20'>
+    <h2 class='mb-6 text-2xl font-semibold text-foreground'>管理经验</h2>
+    <div class='grid gap-4 md:grid-cols-2'>
+      {person.management.map((item) => (
+        <Card class='p-4'>
+          <h3 class='mb-2 text-lg font-semibold text-foreground'>{item.title}</h3>
+          <p class='mb-3 text-muted-foreground'>{item.description}</p>
+          <div class='flex flex-wrap gap-1'>
+            {item.responsibilities.map((resp) => (
+              <span class='inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary'>
+                {resp}
+              </span>
+            ))}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  <!-- 活动策划 -->
+  <section id='activities' class='scroll-mt-20'>
+    <h2 class='mb-6 text-2xl font-semibold text-foreground'>活动策划</h2>
+    <div class='space-y-4'>
+      {person.activities.map((activity) => (
+        <Card class='p-6'>
+          <div class='flex flex-col gap-4 md:flex-row md:items-start'>
+            <div class='flex-1'>
+              <h3 class='mb-2 text-lg font-semibold text-foreground'>{activity.name}</h3>
+              <p class='mb-3 text-muted-foreground'>{activity.description}</p>
+              <div class='flex flex-wrap gap-4 text-sm text-muted-foreground'>
+                <span>参与者: {activity.participants}</span>
+                <span>频率: {activity.frequency}</span>
+              </div>
+            </div>
+            {activity.link && (
+              <Button href={activity.link} target='_blank' style='outline' class='flex-shrink-0'>
+                了解更多
+              </Button>
+            )}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  <!-- 成就荣誉 -->
+  <section id='achievements' class='scroll-mt-20'>
+    <h2 class='mb-6 text-2xl font-semibold text-foreground'>成就荣誉</h2>
+    <div class='space-y-4'>
+      {person.achievements.map((achievement) => (
+        <Card class='p-4'>
+          <div class='flex flex-col gap-2 md:flex-row md:items-start md:justify-between'>
+            <div class='flex-1'>
+              <h3 class='text-lg font-semibold text-foreground'>{achievement.title}</h3>
+              <p class='mt-1 text-muted-foreground'>{achievement.description}</p>
+            </div>
+            <span class='text-sm text-muted-foreground'>{achievement.year}</span>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+</PersonLayout> 
