@@ -1,13 +1,13 @@
 ---
 import { cn } from 'astro-pure/utils'
 
-const { class: className, hideComment, ...props } = Astro.props
+const { class: className, hideComment, path: customPath, ...props } = Astro.props
 
-const path = Astro.url.pathname
+const path = customPath || Astro.url.pathname
 ---
 
 <div class={cn('text-base text-sm text-muted-foreground', className)} {...props}>
-  <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_container_page_pv" style="display: inline !important; visibility: visible !important; opacity: 1 !important;">
     <span id="busuanzi_value_page_pv"></span> views
   </span>
   {
@@ -21,3 +21,52 @@ const path = Astro.url.pathname
 
 <!-- Busuanzi 统计脚本 -->
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>
+  // 强制显示不蒜子统计
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('busuanzi_container_page_pv');
+    if (container) {
+      container.style.display = 'inline';
+      container.style.visibility = 'visible';
+      container.style.opacity = '1';
+    }
+  });
+  
+  // 监听不蒜子脚本加载完成后的变化
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+        const container = document.getElementById('busuanzi_container_page_pv');
+        if (container && container.style.display === 'none') {
+          container.style.display = 'inline';
+          container.style.visibility = 'visible';
+          container.style.opacity = '1';
+        }
+      }
+    });
+  });
+  
+  // 开始观察
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('busuanzi_container_page_pv');
+    if (container) {
+      observer.observe(container, { attributes: true, attributeFilter: ['style'] });
+    }
+  });
+</script>
+
+<!-- Waline 评论数统计脚本 -->
+<script is:inline src="https://unpkg.com/@waline/client@v3/dist/comment-count.js"></script>
+<script is:inline>
+  // 初始化 Waline 评论数统计
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof window.WalineCommentCount !== 'undefined') {
+      window.WalineCommentCount({
+        serverURL: 'https://waline-iota-ecru.vercel.app/',
+        path: window.location.pathname,
+        selector: '.waline-comment-count'
+      })
+    }
+  })
+</script>
