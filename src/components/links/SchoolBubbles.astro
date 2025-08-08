@@ -38,8 +38,11 @@ const { list } = Astro.props
     // Set up dimensions - increased height for more horizontal layout
     const width = container.offsetWidth || 800;
     const height = 450; // Reduced from 600 to 450
-    const maxRadius = 45; // Increased from 35 to 45
-    const minRadius = 30; // Increased from 20 to 30
+    
+    // Responsive bubble sizes
+    const isMobile = window.innerWidth <= 768;
+    const maxRadius = isMobile ? 30 : 45; // Smaller on mobile
+    const minRadius = isMobile ? 20 : 30; // Smaller on mobile
 
     // Create SVG
     const svg = d3.select('#school-bubbles')
@@ -67,11 +70,11 @@ const { list } = Astro.props
       targetRadius: minRadius + Math.random() * (maxRadius - minRadius)
     }));
 
-    // Set up force simulation for circular layout
+    // Set up force simulation for circular layout with responsive settings
     const simulation = d3.forceSimulation(nodes)
-      .force('charge', d3.forceManyBody().strength(-300)) // Restored stronger repulsion for circular layout
+      .force('charge', d3.forceManyBody().strength(isMobile ? -200 : -300)) // Less repulsion on mobile
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius((d: any) => d.radius + 6)) // Reduced collision padding from 8 to 6
+      .force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 4 : 6))) // Smaller collision padding on mobile
       .force('x', d3.forceX(width / 2).strength(0.1)) // Restored balanced x force
       .force('y', d3.forceY(height / 2).strength(0.1)); // Restored balanced y force
 
@@ -178,7 +181,7 @@ const { list } = Astro.props
       });
 
       // Update collision force with new radii
-      simulation.force('collision', d3.forceCollide().radius((d: any) => d.radius + 6));
+      simulation.force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 4 : 6)));
 
       // Position bubbles
       bubbles.attr('transform', (d: any) => `translate(${d.x}, ${d.y})`);
@@ -205,8 +208,11 @@ const { list } = Astro.props
         const dy = d.y - mouseY;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 80 && !d.isHovered) { // Reduced repulsion range
-          const force = (80 - distance) / 80 * 1.5; // Reduced force
+        const repulsionRange = isMobile ? 60 : 80; // Smaller range on mobile
+        const repulsionForce = isMobile ? 1.0 : 1.5; // Less force on mobile
+        
+        if (distance < repulsionRange && !d.isHovered) {
+          const force = (repulsionRange - distance) / repulsionRange * repulsionForce;
           d.vx += dx / distance * force;
           d.vy += dy / distance * force;
         }
