@@ -50,5 +50,88 @@
         }
       ]
     }
+  ],
+  "schools": [
+    {
+      "id_name": "schools",
+      "desc": "Schools we are cooperating with or from",
+      "link_list": [
+        {
+          "name": "上海交通大学",
+          "link": "https://www.sjtu.edu.cn/",
+          "avatar": "https://vi.sjtu.edu.cn/img/base/Logo.png"
+        },
+        {
+          "name": "NUS",
+          "link": "https://www.nus.edu.sg/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4pd0c.jpeg"
+        },
+        {
+          "name": "香港中文大学（深圳）",
+          "link": "https://www.cuhk.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4pt26.png"
+        },
+        {
+          "name": "南京大学",
+          "link": "https://www.nju.edu.cn/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4pKXO.jpeg"
+        },
+        {
+          "name": "UCL",
+          "link": "https://www.ucl.ac.uk/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4I8Md.jpeg"
+        },
+        {
+          "name": "厦门大学",
+          "link": "https://www.xmu.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4IIJ4.png"
+        },
+        {
+          "name": "同济大学",
+          "link": "https://www.tongji.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4Gd0q.jpeg"
+        },
+        {
+          "name": "东方理工大学",
+          "link": "https://www.eitech.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4hWKQ.jpeg"
+        },
+        {
+          "name": "东北大学",
+          "link": "https://www.neu.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4GKXA.jpeg"
+        },
+        {
+          "name": "南方科技大学",
+          "link": "https://www.sustech.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4GIFN.webp"
+        },
+        {
+          "name": "香港科技大学（广州）",
+          "link": "https://www.hkust-gz.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4GhDH.jpeg"
+        },
+        {
+          "name": "哈尔滨工业大学",
+          "link": "https://www.hit.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4GGhU.jpeg"
+        },
+        {
+          "name": "北京大学",
+          "link": "https://www.pku.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4GuaX.jpeg"
+        },
+        {
+          "name": "香港大学",
+          "link": "https://www.hku.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4Gx5Q.png"
+        },
+        {
+          "name": "深圳大学",
+          "link": "https://www.szu.edu.cn",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+        }
+      ]
+    }
   ]
 }

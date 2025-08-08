@@ -1,0 +1,24 @@
+---
+interface Props {
+  imageSrc: string
+  imageAlt?: string
+  imagePosition?: 'left' | 'right'
+  class?: string
+}
+
+const { imageSrc, imageAlt = '', imagePosition = 'left', class: className = '' } = Astro.props
+---
+
+<div class={`flex flex-col md:flex-row gap-6 items-start ${imagePosition === 'right' ? 'md:flex-row-reverse' : ''} ${className}`}>
+  <div class="flex-shrink-0 md:w-1/2">
+    <img 
+      src={imageSrc} 
+      alt={imageAlt}
+      class="w-full h-auto rounded-lg shadow-lg"
+      loading="lazy"
+    />
+  </div>
+  <div class="flex-1 min-w-0">
+    <slot />
+  </div>
+</div> 
