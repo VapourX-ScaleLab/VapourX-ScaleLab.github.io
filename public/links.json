@@ -130,6 +130,36 @@
           "name": "深圳大学",
           "link": "https://www.szu.edu.cn",
           "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+        },
+        {
+          "name": "复旦大学",
+          "link": "https://www.fudan.edu.cn/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+        },
+        {
+          "name": "浙江大学",
+          "link": "https://www.zju.edu.cn/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+        },
+        {
+          "name": "山东大学",
+          "link": "https://www.sdu.edu.cn/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+        },
+        {
+          "name": "北京航空航天大学",
+          "link": "https://www.buaa.edu.cn/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+        },
+        {
+          "name": "洛桑联邦理工学院",
+          "link": "https://www.epfl.ch/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+        },
+        {
+          "name": "华东师范大学",
+          "link": "https://www.ecnu.edu.cn/",
+          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
         }
       ]
     }
