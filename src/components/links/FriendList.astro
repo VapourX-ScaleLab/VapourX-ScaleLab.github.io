@@ -4,7 +4,7 @@ import { Image } from 'astro:assets'
 interface friend {
   avatar: string
   name: string
-  intro: string
+  intro?: string
   link: string
 }
 
@@ -76,7 +76,7 @@ const { title, list: friend_list, ...props } = Astro.props
               {/* details */}
               <div class='flex flex-col gap-y-1'>
                 <p class='my-0 line-clamp-1 text-sm'>{frd.name} </p>
-                <p class='my-0 line-clamp-1 text-xs text-muted-foreground'>{frd.intro}</p>
+                {frd.intro && <p class='my-0 line-clamp-1 text-xs text-muted-foreground'>{frd.intro}</p>}
               </div>
             </div>
             {/* avatar bg */}

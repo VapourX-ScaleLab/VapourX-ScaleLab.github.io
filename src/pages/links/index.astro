@@ -6,6 +6,7 @@ import { Comment } from 'astro-pure/advanced'
 import { Collapse, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import FriendList from '@/components/links/FriendList.astro'
+import SchoolBubbles from '@/components/links/SchoolBubbles.astro'
 
 const headings = [
   { depth: 2, slug: 'common-links', text: 'Common Links' },
@@ -13,7 +14,7 @@ const headings = [
   { depth: 2, slug: 'apply-links', text: 'Apply Links' }
 ]
 
-const { orgs, friends } = links
+const { orgs, friends, schools } = links
 const linksConf = config.integ.links
 ---
 
@@ -23,5 +24,7 @@ const linksConf = config.integ.links
   <FriendList list={orgs[0]} />
   <h2 id='special-links'>合作企业</h2>
   <FriendList list={friends[0]} />
+  <h2 id='schools'>我们都来自</h2>
+  <SchoolBubbles list={schools[0]} />
   <Comment slot='bottom' />
 </PageLayout>
