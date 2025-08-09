@@ -10,13 +10,7 @@ const path = customPath || Astro.url.pathname
   <span id="busuanzi_container_page_pv" style="display: inline !important; visibility: visible !important; opacity: 1 !important;">
     <span id="busuanzi_value_page_pv"></span> views
   </span>
-  {
-    !hideComment && (
-      <a href='#waline'>
-        | <span class='waline-comment-count' data-path={path} /> comments
-      </a>
-    )
-  }
+  {/* 已按用户要求移除评论数统计显示 */}
 </div>
 
 <script>
@@ -51,19 +45,4 @@ const path = customPath || Astro.url.pathname
       observer.observe(container, { attributes: true, attributeFilter: ['style'] });
     }
   });
-</script>
-
-<!-- Waline 评论数统计脚本 -->
-<script is:inline src="https://unpkg.com/@waline/client@v3/dist/comment-count.js"></script>
-<script is:inline>
-  // 初始化 Waline 评论数统计
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof window.WalineCommentCount !== 'undefined') {
-      window.WalineCommentCount({
-        serverURL: 'https://waline-iota-ecru.vercel.app/',
-        path: window.location.pathname,
-        selector: '.waline-comment-count'
-      })
-    }
-  })
 </script>
