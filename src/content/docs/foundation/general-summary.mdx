@@ -1,8 +1,37 @@
 ---
-title: 'General Summary'
+title: 'Introduction'
 description: 'General Summary'
 order: 1
 ---
+import { Card } from 'astro-pure/user'
+import { Timeline } from 'astro-pure/user'
 
-## VapourX Paper List Usage
-在这个栏目中，有我们团队维护的具身智能各个领域以及各个领域下子领域的Paper List，方便大家快速了解各个领域以及各个领域下子领域的最新进展。
+## 具身操作基础模型
+具身操作成为了近期具身智能十分重要且热门的研究方向，从2022年开始，逐步有团队将大语言模型中已经较为成熟的基础模型的构建思路迁移到具身操作的基础模型构建当中，随后有越来越多的工作开始不断完善这个社区。
+
+在这个部分我们整理了这一阶段不同的系列的基础模型，并且简单讲述每一个架构的特点以及一个系列的演化过程。
+
+在本页，我们也会处理一些常见的FAQ，帮助大家快速引入这个领域。
+
+作为导览页面，我们也会列出一个尽可能详细的工作Timeline来梳理这个过程中各个模型的发展历程。
+
+## FQA
+
+<Card
+  as='a'
+  href='#card'
+  heading='Q1: 什么是Foundation Model？'
+  subheading='Foundation Model是近期大语言模型社区中十分热门的概念，它指的是一类在大量数据上训练的，具有很强的泛化能力的模型。'
+  date='2025-08-10'
+>
+</Card>
+
+## Timeline
+
+<Timeline events={
+  [
+    { date: 'August 2021', content: 'Hello' },
+    { date: 'August 2022', content: '<i>World!</i>' },
+  ]
+} />
+
