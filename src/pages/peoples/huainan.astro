@@ -1,12 +1,9 @@
 ---
 import { Button, Card } from 'astro-pure/user'
 import PersonLayout from '@/layouts/PersonLayout.astro'
+import Icon from '@/components/custom/Icon.astro'
 
-const headings = [
-  { depth: 2, slug: 'design-skills', text: '设计技能' },
-  { depth: 2, slug: 'portfolio', text: '作品集' },
-  { depth: 2, slug: 'awards', text: '获奖经历' }
-]
+const headings: { depth: number; slug: string; text: string }[] = []
 
 const person = {
   name: 'HuaiNan（帅哲）',
@@ -85,72 +82,145 @@ const person = {
 ---
 
 <PersonLayout title={person.name} {headings} {person}>
-  <!-- 设计技能 -->
-  <section id='design-skills' class='scroll-mt-20'>
-    <h2 class='mb-6 text-2xl font-semibold text-foreground'>设计技能</h2>
-    <div class='grid gap-4 md:grid-cols-2'>
-      {person.designSkills.map((skill) => (
-        <Card class='p-4'>
-          <h3 class='mb-2 text-lg font-semibold text-foreground'>{skill.title}</h3>
-          <p class='mb-3 text-muted-foreground'>{skill.description}</p>
-          <div class='flex flex-wrap gap-1'>
-            {skill.tools.map((tool) => (
-              <span class='inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary'>
-                {tool}
-              </span>
-            ))}
-          </div>
-        </Card>
-      ))}
-    </div>
-  </section>
-
-  <!-- 作品集 -->
-  <section id='portfolio' class='scroll-mt-20'>
-    <h2 class='mb-6 text-2xl font-semibold text-foreground'>作品集</h2>
-    <div class='space-y-4'>
-      {person.portfolio.map((work) => (
+  <div class='grid gap-6 lg:grid-cols-6'>
+    <!-- 左侧完整个人信息卡片 -->
+    <div class='lg:col-span-4'>
+      <div>
         <Card class='p-6'>
-          <div class='flex flex-col gap-4 md:flex-row md:items-start'>
-            <div class='flex-1'>
-              <div class='mb-2 flex items-center gap-2'>
-                <h3 class='text-lg font-semibold text-foreground'>{work.name}</h3>
-                <span class='text-sm text-muted-foreground'>{work.year}</span>
-              </div>
-              <p class='mb-3 text-muted-foreground'>{work.description}</p>
-              <div class='flex items-center gap-2'>
-                <span class='inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground'>
-                  {work.category}
-                </span>
+          <div class='flex flex-col items-center gap-6 md:flex-row md:items-center lg:flex-col'>
+            {/* 头像区域 */}
+            <div class='flex-shrink-0'>
+              <div class='relative'>
+                <img 
+                  src={person.avatar} 
+                  alt={person.name} 
+                  class='h-32 w-32 rounded-full border-4 border-border object-cover'
+                  width={128}
+                  height={128}
+                />
+                <div class='absolute -bottom-2 -right-2 size-6 rounded-full border-2 border-background bg-green-500'></div>
               </div>
             </div>
-            {work.link && (
-              <Button href={work.link} target='_blank' style='outline' class='flex-shrink-0'>
-                查看作品
-              </Button>
-            )}
+            
+            {/* 个人信息 */}
+            <div class='flex-1 min-w-0 text-center'>
+              <div class='mb-4'>
+                <h2 class='mb-2 text-2xl font-bold text-foreground'>{person.name}</h2>
+                <p class='text-lg text-muted-foreground'>{person.organization}</p>
+                <p class='text-lg text-primary font-semibold'>{person.role}</p>
+              </div>
+              
+              <p class='mb-4 text-lg italic text-muted-foreground'>"{person.slogan}"</p>
+              
+              <p class='mb-4 text-muted-foreground'>{person.description}</p>
+              
+              {/* 社交链接 */}
+              <div class='flex flex-wrap justify-center gap-2 pb-2'>
+                {person.github && (
+                  <Button href={person.github} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="github" class="w-4 h-4" />
+                    GitHub
+                  </Button>
+                )}
+                {person.website && (
+                  <Button href={person.website} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="earth" class="w-4 h-4" />
+                    个人网站
+                  </Button>
+                )}
+                {person.email && (
+                  <Button href={`mailto:${person.email}`} style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="email" class="w-4 h-4" />
+                    邮箱联系
+                  </Button>
+                )}
+                {person.behance && (
+                  <Button href={person.behance} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="link" class="w-4 h-4" />
+                    Behance
+                  </Button>
+                )}
+                {person.dribbble && (
+                  <Button href={person.dribbble} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="link" class="w-4 h-4" />
+                    Dribbble
+                  </Button>
+                )}
+              </div>
+            </div>
           </div>
         </Card>
-      ))}
+      </div>
     </div>
-  </section>
 
-  <!-- 获奖经历 -->
-  <section id='awards' class='scroll-mt-20'>
-    <h2 class='mb-6 text-2xl font-semibold text-foreground'>获奖经历</h2>
-    <div class='space-y-4'>
-      {person.awards.map((award) => (
-        <Card class='p-4'>
-          <div class='flex flex-col gap-2 md:flex-row md:items-start md:justify-between'>
-            <div class='flex-1'>
-              <h3 class='text-lg font-semibold text-foreground'>{award.title}</h3>
-              <p class='mt-1 text-muted-foreground'>{award.description}</p>
-              <p class='mt-1 text-sm text-muted-foreground'>{award.organization}</p>
+    <!-- 右侧内容区域 -->
+    <div class='lg:col-span-2'>
+      <!-- 设计技能卡片 -->
+      <Card class='p-6 mb-6'>
+        <h2 class='mb-1 text-lg font-semibold text-foreground flex items-center gap-2'>
+          <Icon name="skills" class="w-5 h-5 text-primary" />
+          设计技能
+        </h2>
+        <div class='space-y-4'>
+          {person.designSkills.map((skill) => (
+            <div class='pt-2 pb-3 border-b border-border last:border-b-0 last:pb-0'>
+              <h3 class='mb-2 text-sm font-semibold text-foreground'>{skill.title}</h3>
+              <div class='flex flex-wrap gap-1'>
+                {skill.tools.map((tool) => (
+                  <span class='inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary'>
+                    {tool}
+                  </span>
+                ))}
+              </div>
             </div>
-            <span class='text-sm text-muted-foreground'>{award.year}</span>
-          </div>
-        </Card>
-      ))}
+          ))}
+        </div>
+      </Card>
+
+      <!-- 作品集卡片 -->
+      <Card class='p-6 mb-6'>
+        <h2 class='mb-1 text-lg font-semibold text-foreground'>作品集</h2>
+        <div class='space-y-4'>
+          {person.portfolio.map((work) => (
+            <div class='pt-2 pb-3 border-b border-border last:border-b-0 last:pb-0'>
+              <div class='flex items-start justify-between gap-3'>
+                <div class='flex-1'>
+                  <div class='mb-1 flex items-center gap-2'>
+                    <h3 class='text-sm font-semibold text-foreground'>{work.name}</h3>
+                    <span class='text-xs text-muted-foreground'>{work.year}</span>
+                  </div>
+                  <p class='mb-2 text-sm text-muted-foreground'>{work.description}</p>
+                  <span class='inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground'>{work.category}</span>
+                </div>
+                {work.link && (
+                  <Button href={work.link} target='_blank' style='outline' class='flex-shrink-0 text-xs'>
+                    查看作品
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      <!-- 获奖经历卡片 -->
+      <Card class='p-6'>
+        <h2 class='mb-1 text-lg font-semibold text-foreground'>获奖经历</h2>
+        <div class='space-y-3'>
+          {person.awards.map((award) => (
+            <div class='pt-2 pb-3 border-b border-border last:border-b-0 last:pb-0'>
+              <div class='flex flex-col gap-1 md:flex-row md:items-start md:justify-between'>
+                <div class='flex-1'>
+                  <h3 class='text-sm font-semibold text-foreground'>{award.title}</h3>
+                  <p class='text-xs text-muted-foreground'>{award.description}</p>
+                  <p class='text-xs text-muted-foreground'>{award.organization}</p>
+                </div>
+                <span class='text-xs text-muted-foreground'>{award.year}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
     </div>
-  </section>
+  </div>
 </PersonLayout> 

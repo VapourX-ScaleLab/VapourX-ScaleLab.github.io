@@ -1,12 +1,9 @@
 ---
 import { Button, Card } from 'astro-pure/user'
 import PersonLayout from '@/layouts/PersonLayout.astro'
+import Icon from '@/components/custom/Icon.astro'
 
-const headings = [
-  { depth: 2, slug: 'management', text: '管理经验' },
-  { depth: 2, slug: 'activities', text: '活动策划' },
-  { depth: 2, slug: 'achievements', text: '成就荣誉' }
-]
+const headings: { depth: number; slug: string; text: string }[] = []
 
 const person = {
   name: 'Violet（刘伊天）',
@@ -80,67 +77,130 @@ const person = {
 ---
 
 <PersonLayout title={person.name} {headings} {person}>
-  <!-- 管理经验 -->
-  <section id='management' class='scroll-mt-20'>
-    <h2 class='mb-6 text-2xl font-semibold text-foreground'>管理经验</h2>
-    <div class='grid gap-4 md:grid-cols-2'>
-      {person.management.map((item) => (
-        <Card class='p-4'>
-          <h3 class='mb-2 text-lg font-semibold text-foreground'>{item.title}</h3>
-          <p class='mb-3 text-muted-foreground'>{item.description}</p>
-          <div class='flex flex-wrap gap-1'>
-            {item.responsibilities.map((resp) => (
-              <span class='inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary'>
-                {resp}
-              </span>
-            ))}
-          </div>
-        </Card>
-      ))}
-    </div>
-  </section>
-
-  <!-- 活动策划 -->
-  <section id='activities' class='scroll-mt-20'>
-    <h2 class='mb-6 text-2xl font-semibold text-foreground'>活动策划</h2>
-    <div class='space-y-4'>
-      {person.activities.map((activity) => (
+  <div class='grid gap-6 lg:grid-cols-6'>
+    <!-- 左侧完整个人信息卡片 -->
+    <div class='lg:col-span-4'>
+      <div>
         <Card class='p-6'>
-          <div class='flex flex-col gap-4 md:flex-row md:items-start'>
-            <div class='flex-1'>
-              <h3 class='mb-2 text-lg font-semibold text-foreground'>{activity.name}</h3>
-              <p class='mb-3 text-muted-foreground'>{activity.description}</p>
-              <div class='flex flex-wrap gap-4 text-sm text-muted-foreground'>
-                <span>参与者: {activity.participants}</span>
-                <span>频率: {activity.frequency}</span>
+          <div class='flex flex-col items-center gap-6 md:flex-row md:items-center lg:flex-col'>
+            {/* 头像区域 */}
+            <div class='flex-shrink-0'>
+              <div class='relative'>
+                <img 
+                  src={person.avatar} 
+                  alt={person.name} 
+                  class='h-32 w-32 rounded-full border-4 border-border object-cover'
+                  width={128}
+                  height={128}
+                />
+                <div class='absolute -bottom-2 -right-2 size-6 rounded-full border-2 border-background bg-green-500'></div>
               </div>
             </div>
-            {activity.link && (
-              <Button href={activity.link} target='_blank' style='outline' class='flex-shrink-0'>
-                了解更多
-              </Button>
-            )}
-          </div>
-        </Card>
-      ))}
-    </div>
-  </section>
-
-  <!-- 成就荣誉 -->
-  <section id='achievements' class='scroll-mt-20'>
-    <h2 class='mb-6 text-2xl font-semibold text-foreground'>成就荣誉</h2>
-    <div class='space-y-4'>
-      {person.achievements.map((achievement) => (
-        <Card class='p-4'>
-          <div class='flex flex-col gap-2 md:flex-row md:items-start md:justify-between'>
-            <div class='flex-1'>
-              <h3 class='text-lg font-semibold text-foreground'>{achievement.title}</h3>
-              <p class='mt-1 text-muted-foreground'>{achievement.description}</p>
+            
+            {/* 个人信息 */}
+            <div class='flex-1 min-w-0 text-center'>
+              <div class='mb-4'>
+                <h2 class='mb-2 text-2xl font-bold text-foreground'>{person.name}</h2>
+                <p class='text-lg text-muted-foreground'>{person.organization}</p>
+                <p class='text-lg text-primary font-semibold'>{person.role}</p>
+              </div>
+              
+              <p class='mb-4 text-lg italic text-muted-foreground'>"{person.slogan}"</p>
+              
+              <p class='mb-4 text-muted-foreground'>{person.description}</p>
+              
+              {/* 社交链接 */}
+              <div class='flex flex-wrap justify-center gap-2 pb-2'>
+                {person.github && (
+                  <Button href={person.github} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="github" class="w-4 h-4" />
+                    GitHub
+                  </Button>
+                )}
+                {person.email && (
+                  <Button href={`mailto:${person.email}`} style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="email" class="w-4 h-4" />
+                    邮箱联系
+                  </Button>
+                )}
+                {person.linkedin && (
+                  <Button href={person.linkedin} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                    <Icon name="link" class="w-4 h-4" />
+                    LinkedIn
+                  </Button>
+                )}
+              </div>
             </div>
-            <span class='text-sm text-muted-foreground'>{achievement.year}</span>
           </div>
         </Card>
-      ))}
+      </div>
     </div>
-  </section>
+
+    <!-- 右侧内容区域 -->
+    <div class='lg:col-span-2'>
+      <!-- 管理经验卡片 -->
+      <Card class='p-6 mb-6'>
+        <h2 class='mb-1 text-lg font-semibold text-foreground'>管理经验</h2>
+        <div class='space-y-4'>
+          {person.management.map((item) => (
+            <div class='pt-2 pb-3 border-b border-border last:border-b-0 last:pb-0'>
+              <h3 class='mb-2 text-sm font-semibold text-foreground'>{item.title}</h3>
+              <p class='mb-2 text-sm text-muted-foreground'>{item.description}</p>
+              <div class='flex flex-wrap gap-1'>
+                {item.responsibilities.map((resp) => (
+                  <span class='inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary'>
+                    {resp}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      <!-- 活动策划卡片 -->
+      <Card class='p-6 mb-6'>
+        <h2 class='mb-1 text-lg font-semibold text-foreground'>活动策划</h2>
+        <div class='space-y-4'>
+          {person.activities.map((activity) => (
+            <div class='pt-2 pb-3 border-b border-border last:border-b-0 last:pb-0'>
+              <div class='flex items-start justify-between gap-3'>
+                <div class='flex-1'>
+                  <h3 class='mb-1 text-sm font-semibold text-foreground'>{activity.name}</h3>
+                  <p class='mb-2 text-sm text-muted-foreground'>{activity.description}</p>
+                  <div class='flex flex-wrap gap-3 text-xs text-muted-foreground'>
+                    <span>参与者: {activity.participants}</span>
+                    <span>频率: {activity.frequency}</span>
+                  </div>
+                </div>
+                {activity.link && (
+                  <Button href={activity.link} target='_blank' style='outline' class='flex-shrink-0 text-xs'>
+                    了解更多
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      <!-- 成就荣誉卡片 -->
+      <Card class='p-6'>
+        <h2 class='mb-1 text-lg font-semibold text-foreground'>成就荣誉</h2>
+        <div class='space-y-3'>
+          {person.achievements.map((achievement) => (
+            <div class='pt-2 pb-3 border-b border-border last:border-b-0 last:pb-0'>
+              <div class='flex flex-col gap-1 md:flex-row md:items-start md:justify-between'>
+                <div class='flex-1'>
+                  <h3 class='text-sm font-semibold text-foreground'>{achievement.title}</h3>
+                  <p class='text-xs text-muted-foreground'>{achievement.description}</p>
+                </div>
+                <span class='text-xs text-muted-foreground'>{achievement.year}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  </div>
 </PersonLayout> 

@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets'
 import { Button, Card } from 'astro-pure/user'
-import PageLayout from '@/layouts/CommonPage.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import type { SiteMeta } from 'astro-pure/types'
 
 interface Props {
   title: string
@@ -12,7 +13,7 @@ interface Props {
     organization: string
     role: string
     slogan: string
-    tags: string[]
+    tags?: string[]
     description: string
     github?: string
     website?: string
@@ -89,99 +90,24 @@ interface Props {
 }
 
 const { title, headings, person } = Astro.props
+
+const meta: SiteMeta = {
+  title,
+  description: person.description,
+  articleDate: undefined,
+  ogImage: undefined
+}
 ---
 
-<PageLayout {title} {headings} info='/peoples'>
-  <Button title='Back To All Members' href='/peoples' style='back' />
-  <br />
-  <br />
-  <div class='mx-auto max-w-4xl'>
-    <!-- 个人信息卡片 -->
-    <Card class='mb-8 p-6'>
-      <div class='flex flex-col gap-6 md:flex-row md:items-start'>
-        {/* 头像区域 */}
-        <div class='flex-shrink-0'>
-          <div class='relative'>
-            <img 
-              src={person.avatar} 
-              alt={person.name} 
-              class='h-32 w-32 rounded-full border-4 border-border object-cover'
-              width={128}
-              height={128}
-            />
-            <div class='absolute -bottom-2 -right-2 size-6 rounded-full border-2 border-background bg-green-500'></div>
-          </div>
-        </div>
-        
-        {/* 个人信息 */}
-        <div class='flex-1 min-w-0'>
-          <div class='mb-4'>
-            <h1 class='mb-2 text-3xl font-bold text-foreground'>{person.name}</h1>
-            <p class='text-lg text-muted-foreground'>{person.organization}</p>
-            <p class='text-lg text-primary font-semibold'>{person.role}</p>
-          </div>
-          
-          <p class='mb-4 text-lg italic text-muted-foreground'>"{person.slogan}"</p>
-          
-          <p class='mb-4 text-muted-foreground'>{person.description}</p>
-          
-          {/* 研究方向标签 */}
-          <div class='mb-4 flex flex-wrap gap-2'>
-            {person.tags.map((tag) => (
-              <a 
-                href={`/peoples/tags/${tag}`}
-                class='inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-white'
-              >
-                {tag}
-              </a>
-            ))}
-          </div>
-          
-          {/* 社交链接 */}
-          <div class='flex flex-wrap gap-2'>
-            {person.github && (
-              <Button href={person.github} target='_blank' style='outline' class='text-sm'>
-                GitHub
-              </Button>
-            )}
-            {person.website && (
-              <Button href={person.website} target='_blank' style='outline' class='text-sm'>
-                个人网站
-              </Button>
-            )}
-            {person.email && (
-              <Button href={`mailto:${person.email}`} style='outline' class='text-sm'>
-                邮箱联系
-              </Button>
-            )}
-            {person.linkedin && (
-              <Button href={person.linkedin} target='_blank' style='outline' class='text-sm'>
-                LinkedIn
-              </Button>
-            )}
-            {person.twitter && (
-              <Button href={person.twitter} target='_blank' style='outline' class='text-sm'>
-                Twitter
-              </Button>
-            )}
-            {person.behance && (
-              <Button href={person.behance} target='_blank' style='outline' class='text-sm'>
-                Behance
-              </Button>
-            )}
-            {person.dribbble && (
-              <Button href={person.dribbble} target='_blank' style='outline' class='text-sm'>
-                Dribbble
-              </Button>
-            )}
-          </div>
-        </div>
-      </div>
-    </Card>
+<BaseLayout meta={meta}>
+  <div class='mx-auto max-w-4xl py-8'>
+    <Button title='返回所有成员' href='/peoples' style='back' />
+    <br />
+    <br />
 
     <!-- 内容区域 -->
     <div class='space-y-8'>
       <slot />
     </div>
   </div>
-</PageLayout> 
+</BaseLayout> 
