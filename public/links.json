@@ -62,7 +62,7 @@
           "avatar": "https://vi.sjtu.edu.cn/img/base/Logo.png"
         },
         {
-          "name": "NUS",
+          "name": "National University of Singapore",
           "link": "https://www.nus.edu.sg/",
           "avatar": "https://i.imgs.ovh/2025/08/08/4pd0c.jpeg"
         },
@@ -77,7 +77,7 @@
           "avatar": "https://i.imgs.ovh/2025/08/08/4pKXO.jpeg"
         },
         {
-          "name": "UCL",
+          "name": "University College London",
           "link": "https://www.ucl.ac.uk/",
           "avatar": "https://i.imgs.ovh/2025/08/08/4I8Md.jpeg"
         },
@@ -134,32 +134,47 @@
         {
           "name": "复旦大学",
           "link": "https://www.fudan.edu.cn/",
-          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811163523967.webp"
         },
         {
           "name": "浙江大学",
           "link": "https://www.zju.edu.cn/",
-          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811163555290.webp"
         },
         {
           "name": "山东大学",
           "link": "https://www.sdu.edu.cn/",
-          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811163634589.jpg"
         },
         {
           "name": "北京航空航天大学",
           "link": "https://www.buaa.edu.cn/",
-          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811163732274.png"
         },
         {
-          "name": "洛桑联邦理工学院",
+          "name": "École Polytechnique Fédérale de Lausanne",
           "link": "https://www.epfl.ch/",
-          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811163859274.png"
         },
         {
           "name": "华东师范大学",
           "link": "https://www.ecnu.edu.cn/",
-          "avatar": "https://i.imgs.ovh/2025/08/08/4G3Hc.jpeg"
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811164003341.png"
+        },
+        {
+          "name": "华中科技大学",
+          "link": "https://www.hust.edu.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811164323198.png"
+        },
+        {
+          "name": "上海大学",
+          "link": "https://www.shu.edu.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811164443564.png"
+        },
+        {
+          "name": "Northwestern University",
+          "link": "https://www.northwestern.edu/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811164624654.png"
         }
       ]
     }
