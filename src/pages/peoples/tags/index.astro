@@ -7,38 +7,17 @@ const headings = [
   { depth: 2, slug: 'all-tags', text: '所有标签' }
 ]
 
+import { getAllMembers, getTagCounts } from '@/utils/members'
+
 // 定义所有成员的标签数据
-const membersData = [
-  {
-    name: 'ACondawayUNo（徐聪晟）',
-    href: '/peoples/acondaway',
-    tags: ['具身智能', '人机交互', '计算机视觉', '深度学习', '机器人学']
-  },
-  {
-    name: 'Andreo（杨锦畅）',
-    href: '/peoples/andreo',
-    tags: ['前端开发', 'UI/UX设计', 'Web技术', '用户体验', '响应式设计']
-  },
-  {
-    name: 'Violet（刘伊天）',
-    href: '/peoples/violet',
-    tags: ['社区运营', '项目管理', '团队协作', '活动策划', '内容运营']
-  },
-  {
-    name: 'HuaiNan（帅哲）',
-    href: '/peoples/huainan',
-    tags: ['视觉设计', '品牌设计', 'UI设计', '创意设计', '插画设计']
-  }
-]
+const membersData = getAllMembers().map(member => ({
+  name: member.name,
+  href: `/peoples/${member.id}`,
+  tags: member.tags
+}))
 
 // 统计所有标签及其出现次数
-const tagCounts = new Map<string, number>()
-membersData.forEach(member => {
-  member.tags.forEach(tag => {
-    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)
-  })
-})
-
+const tagCounts = getTagCounts()
 const allTags = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1])
 
 const meta = {

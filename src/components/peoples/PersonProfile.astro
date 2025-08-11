@@ -1,0 +1,164 @@
+---
+import { Button, Card } from 'astro-pure/user'
+import PersonLayout from '@/layouts/PersonLayout.astro'
+import Icon from '@/components/custom/Icon.astro'
+
+export interface Person {
+  id: string
+  name: string
+  avatar: string
+  organization: string
+  role: string
+  slogan: string
+  description: string
+  github?: string
+  website?: string
+  email?: string
+  linkedin?: string
+  bilibili?: string
+  behance?: string
+  dribbble?: string
+  xiaohongshu?: string
+  x?: string
+  instagram?: string
+  tags: string[]
+  research: {
+    title: string
+    description: string
+    link: string
+  }[]
+}
+
+interface Props {
+  person: Person
+}
+
+const { person } = Astro.props
+const headings: { depth: number; slug: string; text: string }[] = []
+---
+
+<PersonLayout title={person.name} headings={headings} person={person}>
+  <div class='grid gap-6 lg:grid-cols-6 lg:items-start'>
+    <!-- 左侧完整个人信息卡片 -->
+    <div class='lg:col-span-4'>
+      <Card class='p-6 h-full'>
+        <div class='flex flex-col items-center gap-6 md:flex-row md:items-center lg:flex-col'>
+          {/* 头像区域 */}
+          <div class='flex-shrink-0'>
+            <div class='relative'>
+              <img 
+                src={person.avatar} 
+                alt={person.name} 
+                class='h-32 w-32 rounded-full border-4 border-border object-cover'
+                width={128}
+                height={128}
+              />
+              <div class='absolute -bottom-2 -right-2 size-6 rounded-full border-2 border-background bg-green-500'></div>
+            </div>
+          </div>
+          
+          {/* 个人信息 */}
+          <div class='flex-1 min-w-0 text-center'>
+            <div class='mb-4'>
+              <h2 class='mb-2 text-2xl font-bold text-foreground'>{person.name}</h2>
+              <p class='text-lg text-muted-foreground'>{person.organization}</p>
+              <p class='text-lg text-primary font-semibold'>{person.role}</p>
+            </div>
+            
+            <p class='mb-4 text-lg italic text-muted-foreground'>"{person.slogan}"</p>
+            
+            <p class='mb-4 text-muted-foreground'>{person.description}</p>
+            
+            {/* 社交链接 */}
+            <div class='flex flex-wrap justify-center gap-2 pb-2'>
+              {person.github && (
+                <Button href={person.github} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="github" class="w-4 h-4" />
+                  GitHub
+                </Button>
+              )}
+              {person.website && (
+                <Button href={person.website} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="earth" class="w-4 h-4" />
+                  个人网站
+                </Button>
+              )}
+              {person.email && (
+                <Button href={`mailto:${person.email}`} style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="email" class="w-4 h-4" />
+                  邮箱联系
+                </Button>
+              )}
+              {person.bilibili && (
+                <Button href={person.bilibili} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="bilibili" class="w-4 h-4" />
+                  Bilibili
+                </Button>
+              )}
+              {person.linkedin && (
+                <Button href={person.linkedin} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="link" class="w-4 h-4" />
+                  LinkedIn
+                </Button>
+              )}
+              {person.behance && (
+                <Button href={person.behance} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="link" class="w-4 h-4" />
+                  Behance
+                </Button>
+              )}
+              {person.dribbble && (
+                <Button href={person.dribbble} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="link" class="w-4 h-4" />
+                  Dribbble
+                </Button>
+              )}
+              {person.xiaohongshu && (
+                <Button href={person.xiaohongshu} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="link" class="w-4 h-4" />
+                  小红书
+                </Button>
+              )}
+              {person.x && (
+                <Button href={person.x} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="x" class="w-4 h-4" />
+                  X
+                </Button>
+              )}
+              {person.instagram && (
+                <Button href={person.instagram} target='_blank' style='outline' class='inline-flex items-center gap-1 text-sm'>
+                  <Icon name="link" class="w-4 h-4" />
+                  Instagram
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+
+    <!-- 右侧简化内容区域 -->
+    <div class='lg:col-span-2'>
+      <!-- 研究兴趣卡片 -->
+      <Card class='p-6 h-full'>
+        <h2 class='mb-4 text-lg font-semibold text-foreground flex items-center gap-2'>
+          <Icon name="research" class="w-5 h-5 text-primary" />
+          研究兴趣
+        </h2>
+        <div class='space-y-3'>
+          {person.tags.slice(0, 4).map((tag) => (
+            <a href={`/peoples/tags/${tag}`} class='block p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 hover:border-primary/30 transition-all cursor-pointer'>
+              <div class='mb-2'>
+                <h3 class='text-sm font-semibold text-foreground'>{tag}</h3>
+              </div>
+              <p class='text-xs text-muted-foreground leading-relaxed'>
+                {person.research.find(item => item.title === tag)?.description || 
+                 `专注于${tag}相关的研究和工作，在该领域具有丰富的经验和专业知识。`}
+              </p>
+            </a>
+          ))}
+        </div>
+      </Card>
+    </div>
+  </div>
+</PersonLayout> 
