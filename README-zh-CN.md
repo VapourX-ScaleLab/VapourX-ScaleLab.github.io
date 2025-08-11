@@ -1,6 +1,6 @@
 <div align="center">
 
-# VapourX Open Forum
+# VapourX 开放论坛
 
 </div>
 
@@ -13,7 +13,7 @@
 <div align="center">
   <img src=".github/assets/vapourx-clean.jpg" alt="VapourX Logo" width="200" height="auto">
 
-  <p><strong>"In unity of man and machine, the tangible is transmuted into the abstract."</strong></p>
+  <p><strong>人机合一，化具象为抽象</strong></p>
 
   <p>
     <a href="https://github.com/vapourx-scalelab/vapourx-scalelab.github.io/stargazers">
@@ -25,28 +25,28 @@
 
 
 
-## 🚀 What We Are Doing
+## 🚀 我们正在做的
 
-VapourX is bringing together a group of enthusiasts, professionals, and researchers passionate about embodied intelligence, dedicated to promoting natural interaction between humans, digital humans, and robots, driving embodied intelligence from research to reality, achieving seamless evolution and profound impact in industry and innovation.
+VapourX 正在汇聚一群对具身智能充满热情的爱好者、专业人士和研究人员，致力于推动人类、数字人和机器人之间的自然交互，促使具身智能从研究走向现实，在产业与创新中实现无缝演进与深远影响。
 
-## 🪐 What You Can Get
+## 🪐 你可以得到的
 
-- Highlighted paper categorization and organization
-- Blogs from each of our community co-builders
-- Future possible activities (Online Coffee Chat, Paper-reading Open Meeting, etc.)
+- 高光论文分类整理
+- 来自我们每一位社区共建者的博客
+- 未来可能的活动（在线咖啡聊天、论文阅读开放会议等）
 
-## 🌐 Website
+## 🌐 网站
 
-Visit our website: [VapourX Open Forum](https://vapour-x.cn)
+访问我们的网站：[VapourX 开放论坛](https://vapour-x.cn)
 
-## 🏋️ Welcome to Join the Construction
+## 🏋️ 欢迎加入建设
 
-Contact us to join the co-building team, we pursue all partners who love embodied intelligence!
+联系我们来加入共建团队，我们追求所有热爱具身智能的伙伴！
 
-## 👥 Community Contributors
+## 👥 社区贡献者
 
 <div align="center">
-  <h3>Our Team Members</h3>
+  <h3>小伙伴们</h3>
 
   <table>
     <tr>
@@ -54,37 +54,37 @@ Contact us to join the co-building team, we pursue all partners who love embodie
         <a href="https://github.com/ACondaway">
           <img src="https://avatars.githubusercontent.com/u/115391544?v=4" width="100px;" alt="ACondaway"/>
           <br />
-          <sub><b>ACondaway (Xu Congsheng)</b></sub>
+          <sub><b>ACondaway（徐聪晟）</b></sub>
         </a>
         <br />
-        <sub>Community Founder/SJTU</sub>
+        <sub>社区创始人/上海交通大学</sub>
       </td>
       <td align="center">
         <a href="https://github.com/hzyangjc">
           <img src="https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250804004505453.jpg" width="100px;" alt="Andreo Y."/>
           <br />
-          <sub><b>Andreo Y. (Yang Jinchang)</b></sub>
+          <sub><b>Andreo Y.（杨锦畅）</b></sub>
         </a>
         <br />
-        <sub>Website Maintainer/SJTU</sub>
+        <sub>社区网站运维/上海交通大学</sub>
       </td>
       <td align="center">
         <a href="https://github.com/HuaiNanPro">
           <img src="https://avatars.githubusercontent.com/u/165187020?v=4&size=64" width="100px;" alt="Meteorshn"/>
           <br />
-          <sub><b>Meteorshn (Shuai Zhe)</b></sub>
+          <sub><b>帅哲</b></sub>
         </a>
         <br />
-        <sub>Community Founder/SJTU</sub>
+        <sub>社区创始人/上海交通大学</sub>
       </td>
       <td align="center">
         <a href="https://github.com/byml-c">
           <img src="https://avatars.githubusercontent.com/u/57425001?v=4" width="100px;" alt="Byml"/>
           <br />
-          <sub><b>Byml (Chen Baijun)</b></sub>
+          <sub><b>Byml（陈柏均）</b></sub>
         </a>
         <br />
-        <sub>Core Member/NJU</sub>
+        <sub>核心成员/南京大学</sub>
       </td>
     </tr>
     <tr>
@@ -92,58 +92,56 @@ Contact us to join the co-building team, we pursue all partners who love embodie
         <a href="https://github.com/BorisGuo6">
           <img src="https://youke1.picui.cn/s1/2025/08/11/689a01a8f0fda.jpg" width="100px;" alt="Boris Guo"/>
           <br />
-          <sub><b>Boris Guo (Guo Jingxiang)</b></sub>
+          <sub><b>Boris（郭京翔）</b></sub>
         </a>
         <br />
-        <sub>Blog Writer/NUS</sub>
+        <sub>博客作者/新加坡国立大学</sub>
       </td>
       <td align="center">
         <a href="https://github.com/YuzhangLi2281">
           <img src="https://avatars.githubusercontent.com/u/217298943?s=400&u=63f06b4e33c059baf0e3c57088cc6c849aac36b0&v=4" width="100px;" alt="Jared Li"/>
           <br />
-          <sub><b>Jared Li (Li Yuzhang)</b></sub>
+          <sub><b>Jared（李玉章）</b></sub>
         </a>
         <br />
-        <sub>Blog Writer/SJTU</sub>
+        <sub>博客作者/上海交通大学</sub>
       </td>
       <td align="center">
         <a href="https://github.com/VioletEvar">
           <img src="https://avatars.githubusercontent.com/u/113980234?s=400&u=94b16ebe4a25261b0378f45773aa87fd180b4e71&v=4" width="100px;" alt="Violet"/>
           <br />
-          <sub><b>Violet (Liu Yitian)</b></sub>
+          <sub><b>Violet（刘伊天）</b></sub>
         </a>
         <br />
-        <sub>Community Operator/SJTU</sub>
+        <sub>社区运营参与者/上海交通大学</sub>
       </td>
       <td align="center">
         <a href="https://github.com/KolaKivy">
           <img src="https://avatars.githubusercontent.com/u/139439134?s=400&u=fced5ffd656a0fbf77c1f1c7054e4e3cfbaf33c5&v=4" width="100px;" alt="Kivy"/>
           <br />
-          <sub><b>Kivy (Liang Qiwei)</b></sub>
+          <sub><b>Kivy（梁棋炜）</b></sub>
         </a>
         <br />
-        <sub>Blog Writer/HKUST(GZ)</sub>
+        <sub>博客作者/香港科技大学（广州）</sub>
       </td>
     </tr>
   </table>
 
-  <h3>Contributor Statistics</h3>
-  <img src="https://contrib.rocks/image?repo=vapourx-scalelab/vapourx-scalelab.github.io" alt="Contributors" />
+  <h3>贡献者统计</h3>
+  <img src="https://contrib.rocks/image?repo=vapourx-scalelab/vapourx-scalelab.github.io" alt="贡献者" />
 
-  <p><em>Want to become a contributor? Please contact us!</em></p>
+  <p><em>想要成为贡献者？请联系我们！</em></p>
 
   <div style="margin-top: 20px;">
-    <p><strong>Contact Information:</strong></p>
+    <p><strong>联系方式：</strong></p>
     <p>
-      📧 <strong>Email:</strong> <a href="mailto:acondaway@sjtu.edu.cn">vpx-mail</a>
+      📧 <strong>邮箱：</strong> <a href="mailto:acondaway@sjtu.edu.cn">vpx-mail</a>
     </p>
   </div>
 </div>
 
-## 📊 GitHub Star History
+## 📊 GitHub 星标历史
 
 <div align="center">
-  <img src="https://api.star-history.com/svg?repos=vapourx-scalelab/vapourx-scalelab.github.io&type=Date" alt="GitHub Star History Chart" width="300" height="auto" style="max-width: 100%; height: auto;">
+  <img src="https://api.star-history.com/svg?repos=vapourx-scalelab/vapourx-scalelab.github.io&type=Date" alt="GitHub 星标历史图表" width="300" height="auto" style="max-width: 100%; height: auto;">
 </div>
-
-
