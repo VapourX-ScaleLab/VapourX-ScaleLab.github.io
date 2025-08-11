@@ -92,41 +92,16 @@ const headings = [
 
   <WhoWeAre
     class='mb-5'
-    title='团队成员'
-    members={[
-      {
-        name: 'ACondawayUNo（徐聪晟）',
-        avatar: 'https://avatars.githubusercontent.com/u/115391544?v=4',
-        organization: 'SJTU ScaleLab',
-        role: '社区创始人',
-        slogan: '人机合一，化具象为抽象。',
-        href: '/peoples/acondaway'
-      },
-      {
-        name: 'Andreo（杨锦畅）',
-        avatar: 'https://avatars.githubusercontent.com/u/33977087?v=4',
-        organization: 'SJTU',
-        role: '社区网页设计师',
-        slogan: '我不是关羽',
-        href: '/peoples/andreo'
-      },
-      {
-        name: 'Violet（刘伊天）',
-        avatar: 'https://avatars.githubusercontent.com/u/113980234?v=4',
-        organization: 'SJTU ScaleLab',
-        role: '社区运营团队负责人',
-        slogan: '我也是个人',
-        href: '/peoples/violet'
-      },
-      {
-        name: 'HuaiNan（帅哲）',
-        avatar: 'https://avatars.githubusercontent.com/u/165187020?v=4',
-        organization: 'SJTU DS',
-        role: '社区视觉传达总设计师',
-        slogan: '我也是个人',
-        href: '/peoples/huainan'
-      }
-    ]}
+    title='核心团队成员'
+    showAll={true}
+    filterByRole={['社区创始人', '社区网站运维', '社区运营参与者']}
+  />
+
+  <WhoWeAre
+    class='mb-5'
+    title='其余团队成员'
+    showAll={true}
+    filterByRole={['Blog Writer', "核心成员"]}
   />
 
 
