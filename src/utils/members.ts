@@ -22,7 +22,7 @@ export interface Person {
   research: {
     title: string
     description: string
-    link: string
+    link?: string
   }[]
 }
 
