@@ -1,0 +1,461 @@
+---
+import { Comment } from 'astro-pure/advanced'
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/CommonPage.astro'
+import avatar from '@/assets/vapourx-clean.jpg'
+import { Image } from 'astro:assets'
+
+const headings = [
+  { depth: 2, slug: 'form-intro', text: '表单说明' },
+  { depth: 2, slug: 'member-form', text: '成员信息表单' },
+  { depth: 2, slug: 'preview', text: '预览' }
+]
+---
+
+
+
+<PageLayout title='' {headings} info='/member-form'>
+    <div class="flex justify-center mb-8">
+        <Image 
+          src={avatar} 
+          alt="VapourX Logo" 
+          class="w-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" 
+          width={256} 
+        />
+      </div>
+      <p class="text-center text-lg font-bold">VapourX, Wait for Everyone Who Wants to Make a Great Difference.</p>
+  <h2 id='form-intro'>表单说明</h2>
+  <p>
+    请填写以下表单来创建您的成员信息。填写完成后，您可以下载对应的JSON文件。
+    所有带 <span class="text-red-500">*</span> 的字段为必填项。
+  </p>
+  
+
+  <h2 id='member-form'>成员信息表单</h2>
+  
+  <form id="memberForm" class="space-y-6">
+    <!-- 基本信息 -->
+    <div class="bg-gray-0 p-6 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4 text-center text-black-700">基本信息</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="id" class="block text-sm font-medium text-black-700 mb-2">
+            ID <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="id"
+            name="id"
+            type="text"
+            placeholder="例如: acondaway"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="name" class="block text-sm font-medium text-black-700 mb-2">
+            姓名 <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="例如: ACondawayUNo（徐聪晟）"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="avatar" class="block text-sm font-medium text-black-700 mb-2">
+            头像URL <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="avatar"
+            name="avatar"
+            type="url"
+            placeholder="例如: https://avatars.githubusercontent.com/u/115391544?v=4"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gradient-to-r from-purple-50 to-green-50 hover:from-purple-100 hover:to-green-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="organization" class="block text-sm font-medium text-black-700 mb-2">
+            组织/机构 <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="organization"
+            name="organization"
+            type="text"
+            placeholder="例如: SJTU ScaleLab"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="role" class="block text-sm font-medium text-black-700 mb-2">
+            角色 <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="role"
+            name="role"
+            type="text"
+            placeholder="例如: 社区创始人"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gradient-to-r from-green-50 to-purple-50 hover:from-green-100 hover:to-purple-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="slogan" class="block text-sm font-medium text-black-700 mb-2">
+            个人标语 <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="slogan"
+            name="slogan"
+            type="text"
+            placeholder="例如: 人机合一，化具象为抽象。"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-blue-50 to-green-50 hover:from-blue-100 hover:to-green-100 transition-all duration-300"
+          />
+        </div>
+      </div>
+      
+      <div class="mt-4">
+        <label for="description" class="block text-sm font-medium text-black-700 mb-2">
+          个人描述 <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          placeholder="请详细描述您的背景、专长和贡献..."
+          required
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gradient-to-r from-purple-50 via-green-50 to-blue-50 hover:from-purple-100 hover:via-green-100 hover:to-blue-100 transition-all duration-300"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- 联系方式 -->
+    <div class="bg-gray-0 p-6 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4 text-center text-black-700">联系方式</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="email" class="block text-sm font-medium text-black-700 mb-2">
+            邮箱
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="例如: example@sjtu.edu.cn"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="github" class="block text-sm font-medium text-black-700 mb-2">
+            GitHub
+          </label>
+          <input
+            id="github"
+            name="github"
+            type="url"
+            placeholder="例如: https://github.com/username"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gradient-to-r from-purple-50 to-green-50 hover:from-purple-100 hover:to-green-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="website" class="block text-sm font-medium text-black-700 mb-2">
+            个人网站
+          </label>
+          <input
+            id="website"
+            name="website"
+            type="url"
+            placeholder="例如: https://example.com"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="linkedin" class="block text-sm font-medium text-black-700 mb-2">
+            LinkedIn
+          </label>
+          <input
+            id="linkedin"
+            name="linkedin"
+            type="url"
+            placeholder="例如: https://linkedin.com/in/username"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="bilibili" class="block text-sm font-medium text-black-700 mb-2">
+            Bilibili
+          </label>
+          <input
+            id="bilibili"
+            name="bilibili"
+            type="url"
+            placeholder="例如: https://space.bilibili.com/123456"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="behance" class="block text-sm font-medium text-black-700 mb-2">
+            Behance
+          </label>
+          <input
+            id="behance"
+            name="behance"
+            type="url"
+            placeholder="例如: https://www.behance.net/username"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gradient-to-r from-green-50 to-purple-50 hover:from-green-100 hover:to-purple-100 transition-all duration-300"
+          />
+        </div>
+        
+        <div>
+          <label for="dribbble" class="block text-sm font-medium text-black-700 mb-2">
+            Dribbble
+          </label>
+          <input
+            id="dribbble"
+            name="dribbble"
+            type="url"
+            placeholder="例如: https://dribbble.com/username"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-blue-50 to-green-50 hover:from-blue-100 hover:to-green-100 transition-all duration-300"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- 标签 -->
+    <div class="bg-gray-0 p-6 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4 text-center text-black-700">专业标签</h3>
+      
+      <div>
+        <label for="tags" class="block text-sm font-medium text-black-700 mb-2">
+          标签 <span class="text-red-500">*</span>
+        </label>
+        <textarea
+          id="tags"
+          name="tags"
+          rows="3"
+          placeholder="请输入标签，用逗号分隔。例如: 具身智能, 人机交互, 计算机视觉, 深度学习"
+          required
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gradient-to-r from-purple-50 via-green-50 to-blue-50 hover:from-purple-100 hover:via-green-100 hover:to-blue-100 transition-all duration-300"
+        ></textarea>
+        <p class="text-sm text-black-500 mt-1">请用逗号分隔多个标签</p>
+      </div>
+    </div>
+
+    <!-- 研究方向 -->
+    <div class="bg-gray-0 p-6 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4 text-center text-black-700">研究方向</h3>
+      
+      <div id="researchContainer">
+        <div class="research-item border p-4 rounded mb-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-sm font-medium text-black-700 mb-2">
+                研究方向标题
+              </label>
+              <input
+                name="research_title_0"
+                type="text"
+                placeholder="例如: 具身智能感知与交互"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition-all duration-300"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-black-700 mb-2">
+              研究方向描述
+            </label>
+            <textarea
+              name="research_description_0"
+              rows="3"
+              placeholder="请详细描述这个研究方向..."
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-blue-50 via-purple-50 to-green-50 hover:from-blue-100 hover:via-purple-100 hover:to-green-100 transition-all duration-300"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <Button
+        type="button"
+        id="addResearch"
+        class="bg-blue-500 hover:bg-blue-600 text-white"
+      >
+        添加研究方向
+      </Button>
+    </div>
+
+    <!-- 提交按钮 -->
+    <div class="flex gap-4">
+      <Button
+        type="button"
+        id="previewBtn"
+        class="bg-green-500 hover:bg-green-600 text-white"
+      >
+        预览JSON
+      </Button>
+      <Button
+        type="button"
+        id="downloadBtn"
+        class="bg-purple-500 hover:bg-purple-600 text-white"
+      >
+        下载JSON文件
+      </Button>
+    </div>
+  </form>
+
+  <!-- 预览区域 -->
+  <h2 id='preview'>预览</h2>
+  <div class="bg-gray-100 p-4 rounded-lg">
+    <pre id="jsonPreview" class="text-sm overflow-auto max-h-96"></pre>
+  </div>
+
+  <Comment slot='bottom' />
+</PageLayout>
+
+<script>
+  let researchCount = 1;
+
+  // 添加研究方向
+  document.getElementById('addResearch')?.addEventListener('click', function() {
+    const container = document.getElementById('researchContainer');
+    if (!container) return;
+    
+    const newItem = document.createElement('div');
+    newItem.className = 'research-item border p-4 rounded mb-4';
+    newItem.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium text-black-700 mb-2">
+            研究方向标题
+          </label>
+          <input
+            name="research_title_${researchCount}"
+            type="text"
+            placeholder="例如: 具身智能感知与交互"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition-all duration-300"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-black-700 mb-2">
+            相关链接
+          </label>
+          <input
+            name="research_link_${researchCount}"
+            type="url"
+            placeholder="例如: https://example.com"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gradient-to-r from-purple-50 to-green-50 hover:from-purple-100 hover:to-green-100 transition-all duration-300"
+          />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-black-700 mb-2">
+          研究方向描述
+        </label>
+        <textarea
+          name="research_description_${researchCount}"
+          rows="3"
+          placeholder="请详细描述这个研究方向..."
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-blue-50 via-purple-50 to-green-50 hover:from-blue-100 hover:via-purple-100 hover:to-green-100 transition-all duration-300"
+        ></textarea>
+      </div>
+      <button
+        type="button"
+        class="remove-research bg-red-500 hover:bg-red-600 text-white mt-2 px-4 py-2 rounded"
+        onclick="this.parentElement.remove()"
+      >
+        删除此研究方向
+      </button>
+    `;
+    container.appendChild(newItem);
+    researchCount++;
+  });
+
+  // 收集表单数据
+  function collectFormData() {
+    const form = document.getElementById('memberForm') as HTMLFormElement;
+    if (!form) return null;
+    
+    const formData = new FormData(form);
+    
+    // 基本信息
+    const member: any = {
+      id: formData.get('id'),
+      name: formData.get('name'),
+      avatar: formData.get('avatar'),
+      organization: formData.get('organization'),
+      role: formData.get('role'),
+      slogan: formData.get('slogan'),
+      description: formData.get('description'),
+      tags: formData.get('tags')?.toString().split(',').map(tag => tag.trim()).filter(tag => tag) || [],
+      research: []
+    };
+
+    // 联系方式
+    const contactFields = ['email', 'github', 'website', 'linkedin', 'bilibili', 'behance', 'dribbble'];
+    contactFields.forEach(field => {
+      const value = formData.get(field);
+      if (value) {
+        member[field] = value;
+      }
+    });
+
+    // 研究方向
+    const researchItems = document.querySelectorAll('.research-item');
+    researchItems.forEach((item) => {
+      const titleInput = item.querySelector('[name^="research_title_"]') as HTMLInputElement;
+      const descriptionInput = item.querySelector('[name^="research_description_"]') as HTMLTextAreaElement;
+      
+      if (titleInput?.value && descriptionInput?.value) {
+        member.research.push({
+          title: titleInput.value,
+          description: descriptionInput.value,
+        });
+      }
+    });
+
+    return member;
+  }
+
+  // 预览JSON
+  document.getElementById('previewBtn')?.addEventListener('click', function() {
+    const member = collectFormData();
+    const jsonPreview = document.getElementById('jsonPreview');
+    if (member && jsonPreview) {
+      jsonPreview.textContent = JSON.stringify(member, null, 2);
+    }
+  });
+
+  // 下载JSON文件
+  document.getElementById('downloadBtn')?.addEventListener('click', function() {
+    const member = collectFormData();
+    if (!member) return;
+    
+    const jsonString = JSON.stringify(member, null, 2);
+    
+    // 创建下载链接
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${member.id || 'member'}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+</script> 
