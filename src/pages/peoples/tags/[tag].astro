@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allTags = getAllTags()
   
   return allTags.map(tag => ({
-    params: { tag },
+    params: { tag: encodeURIComponent(tag) },
     props: { tag }
   }))
 }
@@ -49,7 +49,7 @@ const meta = {
 }
 ---
 
-<PageLayout title={meta.title} info={`/peoples/tags/${tag}`}>
+<PageLayout title={meta.title} info={`/peoples/tags/${encodeURIComponent(tag)}`}>
   <Button title='Back To All Tags' href='/peoples/tags' style='back' />
   <div class='mx-auto max-w-4xl'>
     <!-- 页面标题 -->
@@ -127,7 +127,7 @@ const meta = {
               return count > 0 ? (
                                  <li>
                    <Button
-                     href={`/peoples/tags/${relatedTag}`}
+                     href={`/peoples/tags/${encodeURIComponent(relatedTag)}`}
                      style='pill'
                      class='items-start gap-x-1'
                    >

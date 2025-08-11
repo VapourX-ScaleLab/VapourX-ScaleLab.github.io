@@ -147,7 +147,7 @@ const headings: { depth: number; slug: string; text: string }[] = []
         </h2>
         <div class='space-y-3'>
           {person.tags.slice(0, 4).map((tag) => (
-            <a href={`/peoples/tags/${tag}`} class='block p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 hover:border-primary/30 transition-all cursor-pointer'>
+            <a href={`/peoples/tags/${encodeURIComponent(tag)}`} class='block p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 hover:border-primary/30 transition-all cursor-pointer'>
               <div class='mb-2'>
                 <h3 class='text-sm font-semibold text-foreground'>{tag}</h3>
               </div>

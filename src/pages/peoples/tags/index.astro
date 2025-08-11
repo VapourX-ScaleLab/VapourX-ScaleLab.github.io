@@ -46,7 +46,7 @@ const meta = {
             {allTags.map(([tag, count]) => (
               <li>
                 <Button
-                  href={`/peoples/tags/${tag}`}
+                  href={`/peoples/tags/${encodeURIComponent(tag)}`}
                   style='pill'
                   class={cn(
                     'items-start gap-x-1',
