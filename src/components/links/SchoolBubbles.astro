@@ -37,7 +37,7 @@ const { list } = Astro.props
     
     // Set up dimensions - increased height for more horizontal layout
     const width = container.offsetWidth || 800;
-    const height = 450; // Reduced from 600 to 450
+    const height = 600; // Increased height for more bubbles visible
     
     // Responsive bubble sizes
     const isMobile = window.innerWidth <= 768;
@@ -228,7 +228,7 @@ const { list } = Astro.props
 <style>
   .school-bubbles-container {
     width: 100%;
-    height: 450px; /* Reduced from 600px to 450px */
+    height: 600px; /* Increased from 450px to 900px */
     margin: 2rem 0;
     overflow: hidden;
   }
@@ -253,7 +253,7 @@ const { list } = Astro.props
   /* Responsive design */
   @media (max-width: 768px) {
     .school-bubbles-container {
-      height: 350px; /* Reduced from 500px to 350px for mobile */
+      height: 500px; /* Increased from 350px to 600px for mobile */
     }
   }
 </style> 
