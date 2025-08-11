@@ -48,7 +48,7 @@ const members = getAllMembers().map(member => ({
     <section id='core-members' class='mb-12 scroll-mt-20'>
       <h2 class='mb-6 text-2xl font-semibold text-foreground'>核心成员</h2>
       <div class='grid gap-6 md:grid-cols-2'>
-        {members.slice(0, 4).map((member) => (
+        {members.map((member) => (
           <div class='group rounded-lg border p-6 transition-all hover:shadow-lg'>
             <div class='flex items-start gap-4'>
               {/* 头像 */}
@@ -75,71 +75,7 @@ const members = getAllMembers().map(member => ({
                 
                 <p class='mb-3 text-sm text-muted-foreground italic'>"{member.slogan}"</p>
                 
-                <p class='mb-3 text-sm text-muted-foreground'>{member.description}</p>
 
-                {/* 社交链接 */}
-                <div class='mb-4 flex flex-wrap gap-2'>
-                  {member.github && (
-                    <Button href={member.github} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="github" class="w-4 h-4" />
-                      GitHub
-                    </Button>
-                  )}
-                  {member.website && (
-                    <Button href={member.website} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="earth" class="w-4 h-4" />
-                      个人网站
-                    </Button>
-                  )}
-                  {member.email && (
-                    <Button href={`mailto:${member.email}`} style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="email" class="w-4 h-4" />
-                      邮箱
-                    </Button>
-                  )}
-                  {member.bilibili && (
-                    <Button href={member.bilibili} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="bilibili" class="w-4 h-4" />
-                      Bilibili
-                    </Button>
-                  )}
-                  {member.linkedin && (
-                    <Button href={member.linkedin} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="link" class="w-4 h-4" />
-                      LinkedIn
-                    </Button>
-                  )}
-                  {member.dribbble && (
-                    <Button href={member.dribbble} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="link" class="w-4 h-4" />
-                      Dribbble
-                    </Button>
-                  )}
-                  {member.behance && (
-                    <Button href={member.behance} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="link" class="w-4 h-4" />
-                      Behance
-                    </Button>
-                  )}
-                  {member.xiaohongshu && (
-                    <Button href={member.xiaohongshu} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="link" class="w-4 h-4" />
-                      小红书
-                    </Button>
-                  )}
-                  {member.x && (
-                    <Button href={member.x} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="x" class="w-4 h-4" />
-                      X
-                    </Button>
-                  )}
-                  {member.instagram && (
-                    <Button href={member.instagram} target='_blank' style='outline' class='inline-flex items-center gap-1 text-xs'>
-                      <Icon name="link" class="w-4 h-4" />
-                      Instagram
-                    </Button>
-                  )}
-                </div>
                 
                 <Button href={member.href} style='primary' class='text-sm'>
                   查看个人主页
@@ -157,15 +93,15 @@ const members = getAllMembers().map(member => ({
       <div class='rounded-lg border bg-muted p-6'>
         <div class='grid gap-4 md:grid-cols-3'>
           <div class='text-center'>
-            <div class='text-2xl font-bold text-primary'>4</div>
+            <div class='text-2xl font-bold text-primary'>6</div>
             <div class='text-sm text-muted-foreground'>核心成员</div>
           </div>
           <div class='text-center'>
-            <div class='text-2xl font-bold text-primary'>12+</div>
+            <div class='text-2xl font-bold text-primary'>15+</div>
             <div class='text-sm text-muted-foreground'>活跃贡献者</div>
           </div>
           <div class='text-center'>
-            <div class='text-2xl font-bold text-primary'>50+</div>
+            <div class='text-2xl font-bold text-primary'>200+</div>
             <div class='text-sm text-muted-foreground'>社区成员</div>
           </div>
         </div>

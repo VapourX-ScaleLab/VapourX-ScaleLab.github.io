@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allTags = getAllTags()
   
   return allTags.map(tag => ({
-    params: { tag: encodeURIComponent(tag) },
+    params: { tag },
     props: { tag }
   }))
 }
@@ -21,6 +21,8 @@ interface Props {
 }
 
 const { tag } = Astro.props
+// 确保标签名称正确解码
+const decodedTag = decodeURIComponent(tag)
 
 // 获取所有成员数据
 const membersData = getAllMembers().map(member => ({
@@ -36,7 +38,7 @@ const membersData = getAllMembers().map(member => ({
 const allTags = getAllTags()
 
 // 筛选具有该标签的成员
-const filteredMembers = membersData.filter(member => member.tags.includes(tag))
+const filteredMembers = membersData.filter(member => member.tags.includes(decodedTag))
 
 const headings = [
   { depth: 2, slug: 'members', text: '相关成员' },
@@ -44,17 +46,17 @@ const headings = [
 ]
 
 const meta = {
-  description: `查看具有 "${tag}" 标签的社区成员`,
-  title: `标签: ${tag}`
+  description: `查看具有 "${decodedTag}" 标签的社区成员`,
+  title: `标签: ${decodedTag}`
 }
 ---
 
-<PageLayout title={meta.title} info={`/peoples/tags/${encodeURIComponent(tag)}`}>
+<PageLayout title={meta.title} info={`/peoples/tags/${decodedTag}`}>
   <Button title='Back To All Tags' href='/peoples/tags' style='back' />
   <div class='mx-auto max-w-4xl'>
     <!-- 页面标题 -->
     <div class='mb-8 text-center'>
-      <h1 class='mb-4 text-4xl font-bold text-foreground'>标签: {tag}</h1>
+      <h1 class='mb-4 text-4xl font-bold text-foreground'>标签: {decodedTag}</h1>
       <p class='text-lg text-muted-foreground'>
         找到 {filteredMembers.length} 位具有此标签的社区成员
       </p>
@@ -93,7 +95,7 @@ const meta = {
                 <div class='mb-3 flex flex-wrap gap-1'>
                   {member.tags.map((memberTag) => (
                     <span class={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
-                      memberTag === tag 
+                      memberTag === decodedTag 
                         ? 'bg-primary text-white' 
                         : 'bg-primary/10 text-primary'
                     }`}>
@@ -118,10 +120,10 @@ const meta = {
       <div class='mb-8'>
         <ul class='flex flex-wrap gap-4'>
           {allTags
-            .filter(t => t !== tag)
+            .filter(t => t !== decodedTag)
             .map((relatedTag) => {
               const count = membersData.filter(member => 
-                member.tags.includes(tag) && member.tags.includes(relatedTag)
+                member.tags.includes(decodedTag) && member.tags.includes(relatedTag)
               ).length
               
               return count > 0 ? (
