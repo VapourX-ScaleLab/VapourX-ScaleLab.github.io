@@ -8,25 +8,30 @@
       "role": "社区创始人",
       "slogan": "人机合一，化具象为抽象。",
       "description": "来自上交ScaleLab，致力于让具身智能能够与人类无缝交流，寻找人类、数字人以及机器人的紧密耦合，最终实现具身智能进入到每家每户。",
-      "github": "https://github.com/ACondawayUNo",
+      "github": "https://github.com/ACondaway",
       "website": "https://acondaway.github.io/",
       "email": "acondaway@sjtu.edu.cn",
-      "linkedin": "https://www.linkedin.com/in/acondaway",
-      "tags": ["人机交互", "计算机视觉", "深度学习", "机器人学", "社区建设"],
+      "linkedin": "https://www.linkedin.com/in/congsheng-xu-85944036b/",
+      "tags": ["人机交互", "视触觉", "具身智能", "世界模型"],
       "research": [
         {
-          "title": "具身智能感知与交互",
-          "description": "研究机器人在复杂环境中的感知能力，包括视觉、触觉等多模态信息的融合处理。通过多传感器融合技术，实现机器人对环境的全面感知和理解，为后续的决策和行动提供可靠的信息基础。",
+          "title": "人机交互",
+          "description": "追求人类和机器人的富语义、自然、无缝交互，打造下一代人机交互系统。",
           "link": "#"
         },
         {
-          "title": "人机协作系统",
-          "description": "探索人类与机器人协作的新模式，提高协作效率和安全性。研究人机交互的自然性、安全性和效率性，开发智能协作算法和系统架构。",
+          "title": "视触觉",
+          "description": "探索视触觉驱动下的具身操作以及相关的基准搭建",
           "link": "#"
         },
         {
-          "title": "计算机视觉算法",
-          "description": "开发高效的计算机视觉算法，用于目标检测、跟踪和场景理解。结合深度学习技术，提升视觉系统的准确性和实时性。",
+          "title": "具身智能",
+          "description": "探索具身智能的通用智能体框架，并结合具身智能的特性，开发出具有通用智能体的具身智能框架。",
+          "link": "#"
+        },
+        {
+          "title": "世界模型",
+          "description": "探索世界模型的构建，并结合具身智能的特性，寻找最合理的具身世界模型构型。",
           "link": "#"
         }
       ]
@@ -59,36 +64,24 @@
       "bilibili": "https://space.bilibili.com/390331430"
     },
     {
-      "id": "huainan",
-      "name": "HuaiNan（帅哲）",
-      "avatar": "https://avatars.githubusercontent.com/u/165187020?v=4",
-      "organization": "SJTU DS",
-      "role": "社区视觉传达总设计师",
-      "slogan": "我也是个人",
-      "description": "专注于视觉传达设计，负责社区品牌形象和视觉设计工作。擅长将抽象概念转化为直观的视觉表达，为社区打造独特的视觉识别系统。",
-      "github": "https://github.com/HuaiNanPror",
-      "website": "https://huainan.design",
-      "email": "huainan@sjtu.edu.cn",
-      "behance": "https://www.behance.net/huainan",
-      "dribbble": "https://dribbble.com/huainan",
-      "tags": ["视觉设计", "品牌设计", "UI设计", "创意设计", "插画设计", "用户体验"],
+      "id": "meteorshn",
+      "name": "帅哲",
+      "avatar": "https://avatars.githubusercontent.com/u/165187020?v=4&size=64",
+      "organization": "SJTU School Of Design",
+      "role": "社区创始人",
+      "slogan": "因为相信，所以看见",
+      "description": "BArch+CS Minor背景的MHCI申请者，以人为本的人机交互未来是我的北极星。VapourX LOGO和VIS的Designer，社区共创者",
+      "tags": [
+        "人机交互"
+      ],
       "research": [
         {
-          "title": "品牌设计",
-          "description": "擅长品牌视觉识别系统设计，包括 Logo 设计、VI 手册、品牌应用等。通过系统化的品牌策略，为社区建立独特的视觉识别系统，提升品牌价值和影响力。",
-          "link": "#"
-        },
-        {
-          "title": "UI/UX 设计",
-          "description": "专注于用户界面和用户体验设计，注重可用性和美观性的平衡。运用用户中心的设计方法，创造直观易用的数字产品界面。",
-          "link": "#"
-        },
-        {
-          "title": "插画设计",
-          "description": "具备独特的插画风格，能够为项目增添艺术感和个性化表达。通过创意插画设计，为技术内容提供生动的视觉解释和艺术表达。",
-          "link": "#"
+          "title": "人机交互",
+          "description": "Critical Design、Affective Computing、Tangible HCI、Soft Materials、AI Device"
         }
-      ]
+      ],
+      "email": "shuaizhe0052@gmail.com",
+      "github": "https://github.com/HuaiNanPro"
     },
     {
       "id": "byml",
@@ -118,7 +111,7 @@
       "name": "郭京翔",
       "avatar": "https://youke1.picui.cn/s1/2025/08/11/689a01a8f0fda.jpg",
       "organization": "NUS CLeAR Lab",
-      "role": "blog writer",
+      "role": "Blog Writer",
       "slogan": "Align Human-Robot Perception&Intuition",
       "description": "I am a Master of Computing (Artificial Intelligence) student at the National University of Singapore advised by Prof. Harold Soh. Currently, I have research collaborations with SJTU ScaleLab (advised by Prof. Yao Mu), NUS LinS Lab (advised by Prof. Lin Shao), and HITsz RLGroup (advised by Prof. Yanjie Li).",
       "tags": [
@@ -185,17 +178,29 @@
       "id": "kivy",
       "name": "Kivy（梁棋炜）",
       "avatar": "https://avatars.githubusercontent.com/u/139439134?s=400&u=fced5ffd656a0fbf77c1f1c7054e4e3cfbaf33c5&v=4",
-      "organization": "HKUST(GZ) HCL ",
+      "organization": "HKUST(GZ) HCL Lab",
       "role": "Blog Writer",
       "slogan": "探索智慧最优解",
-      "description": "Kivy，深大 26Fall 港科广直博，专注于机器人领域，曾获物联网竞赛全国总冠军，目前聚焦于具身操作与强化学习，曾研究Reward Generation & Whole-Body Control",
+      "description": "来自港科广 HCL Lab，专注于机器人领域，曾获物联网竞赛全国总冠军，为机器人行业挥洒青春，致力于探索智慧最优解，将具身智能送给老百姓",
       "tags": [
+        "具身智能",
         "机器人",
-        "计算机视觉",
-        "自监督学习",
-        "对比学习"
+        "世界模型"
       ],
-      "research": [],
+      "research": [
+        {
+          "title": "具身智能",
+          "description": "从模仿人类到超越人类，正在探索一种青出于蓝而胜于蓝的智慧"
+        },
+        {
+          "title": "机器人",
+          "description": "从基座出发，地基必不可少"
+        },
+        {
+          "title": "世界模型",
+          "description": "期待实现另一个地球online的一天"
+        }
+      ],
       "email": "kola337599@gmail.com",
       "github": "https://github.com/KolaKivy",
       "website": "https://kolakivy.github.io/"
