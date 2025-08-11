@@ -2,32 +2,7 @@
 import { Button, Card } from 'astro-pure/user'
 import PersonLayout from '@/layouts/PersonLayout.astro'
 import Icon from '@/components/custom/Icon.astro'
-
-export interface Person {
-  id: string
-  name: string
-  avatar: string
-  organization: string
-  role: string
-  slogan: string
-  description: string
-  github?: string
-  website?: string
-  email?: string
-  linkedin?: string
-  bilibili?: string
-  behance?: string
-  dribbble?: string
-  xiaohongshu?: string
-  x?: string
-  instagram?: string
-  tags: string[]
-  research: {
-    title: string
-    description: string
-    link: string
-  }[]
-}
+import type { Person } from '@/utils/members'
 
 interface Props {
   person: Person
