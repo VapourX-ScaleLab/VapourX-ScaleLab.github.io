@@ -41,7 +41,7 @@
       "name": "Andreo Y. (杨锦畅)",
       "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250804004505453.jpg",
       "organization": "SJTU",
-      "role": ["社区网站运维"],
+      "role": ["社区运营维护"],
       "slogan": "无事澄然，有事斩然。",
       "description": "专注于前端开发和用户体验设计，致力于创造美观且实用的Web界面，管理后端数据库。对深度强化学习、世界模型等具身相关领域有浓厚兴趣。曾在SJTU ScaleLab实习，目前在北京元域无界科技有限公司part-time，随邹应天老师做可交互视频生成相关研究。",
       "tags": [
@@ -155,7 +155,7 @@
       "name": "Yitian Liu（刘伊天）",
       "avatar": "https://avatars.githubusercontent.com/u/113980234?s=400&u=94b16ebe4a25261b0378f45773aa87fd180b4e71&v=4",
       "organization": "SJTU Scalelab",
-      "role": ["社区运营参与者"],
+      "role": ["社区运营维护"],
       "slogan": "你将不再是道具，而是成为人如其名的人。",
       "description": "热衷具身智能研究，聚焦于提升具身策略在多样场景、多种任务下的泛化性，希望能推动具身智能在家庭生活中的应用以改善人们的生活。",
       "tags": [
@@ -217,7 +217,7 @@
       "name": "Yibin Liu",
       "avatar": "https://10-oasis-01.github.io/images/my.jpg",
       "organization": "Northeastern University (CN)",
-      "role": ["社区协创"],
+      "role": ["核心成员"],
       "slogan": "对未来的真正慷慨，是把一切献给现在",
       "description": "他从事具身智能、空间认知与机器人方向的研究。研究方向聚焦于语言语义锚定于空间理解与机器人操作、多模态与具身智能系统的推理与规划，以及混合现实环境中的人机协作等领域。长期目标是构建能够从真实交互中持续学习、具备因果推理与高级决策能力，并能够普适、安全地服务于大众的具身智能体，让人工智能的进步真正惠及每一个人。",
       "tags": [],
@@ -226,6 +226,60 @@
       "github": "https://github.com/10-OASIS-01",
       "website": "https://10-oasis-01.github.io",
       "linkedin": "https://www.linkedin.com/in/yibin-leon-liu"
+    },
+    {
+      "id": "qiwang",
+      "name": "王琦",
+      "avatar": "https://avatars.githubusercontent.com/u/22296010?s=400&u=302232952eb70cbe247d8e033b2f5532be2c6ba7&v=4",
+      "organization": "SJTU",
+      "role": [
+        "内容创作者"
+      ],
+      "slogan": "Think Different",
+      "description": "上交计算机博士在读，研究方向是强化学习与世界模型",
+      "tags": [
+        "强化学习"
+      ],
+      "research": [
+        {
+          "title": "强化学习",
+          "description": "model-based RL、offline RL"
+        }
+      ],
+      "email": "qiwang067@163.com",
+      "github": "https://github.com/qiwang067",
+      "website": "https://qiwang067.github.io/",
+      "linkedin": "https://www.linkedin.com/in/qi-chris-wang-7a6670361/",
+      "bilibili": "https://space.bilibili.com/18335481"
+    },
+    {
+      "id": "yuhao",
+      "name": "张钰浩",
+      "avatar": "",
+      "organization": "SJTU ScaleLab",
+      "role": [
+        "社区运营维护"
+      ],
+      "slogan": "想要work life balance",
+      "description": "ScaleLab小透明",
+      "tags": [],
+      "research": [],
+      "email": "yuhao_zh@sjtu.edu.cn",
+      "github": "https://github.com/dazazh"
+    },
+    {
+      "id": "machao",
+      "name": "StevenSun（孙瑜泽）",
+      "avatar": "https://avatars.githubusercontent.com/u/175963788?s=400&u=10d028a96036f3dd615017126246c65edb9c527d&v=4",
+      "organization": "SJTU",
+      "role": [
+        "核心成员"
+      ],
+      "slogan": "时间不会太远",
+      "description": "上海交通大学22级信息工程专业，致力于研究Agent和AI4Science方向",
+      "tags": [],
+      "research": [],
+      "email": "StevenSun@sjtu.edu.cn"
     }
   ]
 } 
