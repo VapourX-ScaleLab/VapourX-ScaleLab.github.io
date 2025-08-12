@@ -58,50 +58,22 @@ const headings = [
   </ul>
 
   {/* team members */}
-  <h2 id='team'>核心团队</h2>
+  <h2 id='team'>社区小伙伴</h2>
   <p>欢迎所有有志于投身社区建设的朋友们！</p>
   
-  {/* 社区统计 */}
-  <CommunityStats
-    class='mb-5'
-    title='社区统计'
-    stats={[
-      {
-        label: '核心成员',
-        value: '3',
-        icon: 'github',
-        description: '核心团队成员',
-        link: 'https://github.com/VapourX-ScaleLab'
-      },
-      {
-        label: 'GitHub 关注者',
-        value: '动态统计',
-        icon: 'github',
-        description: 'GitHub Org 关注者',
-        link: 'https://github.com/VapourX-ScaleLab'
-      },
-      {
-        label: '社区活跃度',
-        value: '高',
-        icon: 'github',
-        description: '基于贡献和互动',
-        color: '#10B981'
-      }
-    ]}
-  />
 
   <WhoWeAre
     class='mb-5'
     title='核心团队成员'
     showAll={true}
-    filterByRole={['社区创始人', '社区网站运维', '社区运营参与者']}
+    filterByRole={['社区创始人', '核心成员', '社区网站运维', '社区运营参与者']}
   />
 
   <WhoWeAre
     class='mb-5'
-    title='其余团队成员'
+    title='内容创作者'
     showAll={true}
-    filterByRole={['Blog Writer', "核心成员"]}
+    filterByRole={['Blog Writer', '内容创作者']}
   />
 
 

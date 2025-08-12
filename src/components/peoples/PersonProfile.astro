@@ -37,7 +37,7 @@ const headings: { depth: number; slug: string; text: string }[] = []
             <div class='mb-4'>
               <h2 class='mb-2 text-2xl font-bold text-foreground'>{person.name}</h2>
               <p class='text-lg text-muted-foreground'>{person.organization}</p>
-              <p class='text-lg text-primary font-semibold'>{person.role}</p>
+              <p class='text-lg text-primary font-semibold'>{Array.isArray(person.role) ? person.role.join('/') : person.role}</p>
             </div>
             
             <p class='mb-4 text-lg italic text-muted-foreground'>"{person.slogan}"</p>

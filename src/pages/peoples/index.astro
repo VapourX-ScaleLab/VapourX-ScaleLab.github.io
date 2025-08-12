@@ -70,7 +70,7 @@ const members = getAllMembers().map(member => ({
                 <div class='mb-2'>
                   <h3 class='text-lg font-semibold text-foreground md:-mt-[0.5px]'>{member.name}</h3>
                   <p class='text-sm text-muted-foreground'>{member.organization}</p>
-                  <p class='text-sm text-primary font-medium'>{member.role}</p>
+                  <p class='text-sm text-primary font-medium'>{Array.isArray(member.role) ? member.role.join(', ') : member.role}</p>
                 </div>
                 
                 <p class='mb-3 text-sm text-muted-foreground italic'>"{member.slogan}"</p>

@@ -5,7 +5,7 @@ export interface Person {
   name: string
   avatar: string
   organization: string
-  role: string
+  role: string | string[]
   slogan: string
   description: string
   github?: string

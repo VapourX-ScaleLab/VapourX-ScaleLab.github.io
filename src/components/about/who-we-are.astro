@@ -10,7 +10,7 @@ interface Props {
     name: string
     avatar: string | ImageMetadata
     organization: string
-    role: string
+    role: string | string[]
     slogan: string
     href?: string
   }[]
@@ -36,8 +36,12 @@ if (!customMembers) {
     .filter(member => {
       // 如果指定了角色过滤
       if (filterByRole && filterByRole.length > 0) {
-        if (!filterByRole.includes(member.role)) {
-          return false
+        // member.role 现在是一个数组，直接检查是否有匹配的角色
+        const hasMatchingRole = filterByRole.some(filterRole => 
+          member.role.includes(filterRole)
+        );
+        if (!hasMatchingRole) {
+          return false;
         }
       }
       
@@ -107,7 +111,7 @@ if (!showAll && !customMembers) {
               <div class='z-20 flex flex-col items-center text-center'>
                 <div class='font-semibold text-foreground'>{member.name}</div>
                 <div class='text-xs text-muted-foreground'>{member.organization}</div>
-                <div class='text-xs text-primary font-medium'>{member.role}</div>
+                <div class='text-xs text-primary font-medium'>{Array.isArray(member.role) ? member.role.join('/') : member.role}</div>
                 <div class='mt-2 text-xs italic text-muted-foreground leading-relaxed'>
                   "{member.slogan}"
                 </div>
