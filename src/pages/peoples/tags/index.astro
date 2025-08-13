@@ -28,34 +28,35 @@ const meta = {
           allTags.length > 0 ? (
             <Fragment>
               <div class='mb-6'>
-                <div id='people-tags-cloud' class='mx-auto' style='width:100%;max-width:40rem;height:400px;'></div>
+                <div id='people-tags-cloud' class='mx-auto relative bg-gradient-to-br from-background to-muted/10 rounded-xl p-8' style='width:100%;max-width:80rem;min-height:300px;max-height:400px;overflow:hidden;'></div>
               </div>
 
               {/* 无脚本环境回退渲染 */}
               <noscript>
-                <ul class='flex flex-wrap gap-4 list-none pl-0'>
+                <div class='flex flex-wrap gap-3 justify-center'>
                   {allTags.map(([tag, count]) => (
-                    <li>
-                      <Button
-                        href={`/peoples/tags/${encodeURIComponent(tag)}`}
-                        style='pill'
-                        class={cn(
-                          'items-start gap-x-1',
-                          count > 2 ? 'rounded-xl px-3 py-1 text-xl' : count > 1 && 'text-lg'
-                        )}
-                      >
-                        {tag}
-                        <span class={count > 2 ? 'text-base' : 'text-xs'}>{count}</span>
-                      </Button>
-                    </li>
+                    <Button
+                      href={`/peoples/tags/${encodeURIComponent(tag)}`}
+                      style='pill'
+                      class={cn(
+                        'items-center gap-x-2 border-0',
+                        count > 3 ? 'text-xl px-6 py-3' : 
+                        count > 2 ? 'text-lg px-4 py-2' : 
+                        count > 1 ? 'text-base px-3 py-2' : 'text-sm px-3 py-1'
+                      )}
+                    >
+                      {tag}
+                      <span class='text-xs opacity-70 bg-white/20 px-2 py-0.5 rounded-full'>{count}</span>
+                    </Button>
                   ))}
-                </ul>
+                </div>
               </noscript>
 
-              <script src='https://cdn.jsdelivr.net/gh/gokayfem/Awesome-tags-cloud@main/dist/tagscloud.min.js'></script>
               <script is:inline define:vars={{ allTags }}>
-                // 初始化 TagsCloud
+                // 蓝紫红渐变螺旋式标签云实现
                 (function() {
+                  console.log('开始初始化蓝紫红渐变标签云，数据:', allTags)
+                  
                   function isDarkMode() {
                     try {
                       if (document.documentElement.classList.contains('dark')) return true
@@ -63,107 +64,390 @@ const meta = {
                     } catch (_) { return false }
                   }
 
-                  function initTagsCloud() {
+                  // 检测碰撞的函数
+                  function isColliding(rect1, rect2, margin) {
+                    margin = margin || 6
+                    return !(rect1.right + margin < rect2.left || 
+                            rect2.right + margin < rect1.left || 
+                            rect1.bottom + margin < rect2.top || 
+                            rect2.bottom + margin < rect1.top)
+                  }
+
+                  // 横向展开的椭圆形布局
+                  function findPosition(element, container, placedElements, weight) {
+                    var containerRect = container.getBoundingClientRect()
+                    var elementRect = element.getBoundingClientRect()
+                    var centerX = containerRect.width / 2
+                    var centerY = containerRect.height / 2
+                    
+                    // 对于高权重标签，优先放在中心区域（更横向）
+                    if (weight > 0.7) {
+                      // 中心区域尝试，更偏向横向分布
+                      var positions = [
+                        { x: centerX - elementRect.width / 2, y: centerY - elementRect.height / 2 },
+                        { x: centerX - elementRect.width / 2 - 60, y: centerY - elementRect.height / 2 },
+                        { x: centerX - elementRect.width / 2 + 60, y: centerY - elementRect.height / 2 },
+                        { x: centerX - elementRect.width / 2 - 40, y: centerY - elementRect.height / 2 - 15 },
+                        { x: centerX - elementRect.width / 2 + 40, y: centerY - elementRect.height / 2 - 15 },
+                        { x: centerX - elementRect.width / 2 - 40, y: centerY - elementRect.height / 2 + 15 },
+                        { x: centerX - elementRect.width / 2 + 40, y: centerY - elementRect.height / 2 + 15 },
+                        { x: centerX - elementRect.width / 2 - 80, y: centerY - elementRect.height / 2 },
+                        { x: centerX - elementRect.width / 2 + 80, y: centerY - elementRect.height / 2 }
+                      ]
+                      
+                      for (var i = 0; i < positions.length; i++) {
+                        var pos = positions[i]
+                        if (pos.x >= 8 && pos.y >= 8 && 
+                            pos.x + elementRect.width <= containerRect.width - 8 && 
+                            pos.y + elementRect.height <= containerRect.height - 8) {
+                          var testRect = {
+                            left: pos.x, top: pos.y,
+                            right: pos.x + elementRect.width,
+                            bottom: pos.y + elementRect.height
+                          }
+                          var collision = false
+                          for (var j = 0; j < placedElements.length; j++) {
+                            if (isColliding(testRect, placedElements[j])) {
+                              collision = true
+                              break
+                            }
+                          }
+                          if (!collision) return pos
+                        }
+                      }
+                    }
+                    
+                    // 椭圆形横向扩展布局
+                    var angle = Math.random() * Math.PI * 2 // 随机起始角度
+                    var radiusX = weight > 0.5 ? 30 : 50 // 横向半径
+                    var radiusY = weight > 0.5 ? 15 : 25 // 纵向半径（较小，形成椭圆）
+                    var angleStep = 0.2 + Math.random() * 0.3 // 更小的角度步进
+                    var radiusStepX = 8 + Math.random() * 4 // 横向半径步进
+                    var radiusStepY = 4 + Math.random() * 2 // 纵向半径步进（较小）
+                    
+                    var maxRadiusX = containerRect.width / 2 - 20
+                    var maxRadiusY = containerRect.height / 2 - 20
+                    
+                    while (radiusX < maxRadiusX && radiusY < maxRadiusY) {
+                      // 椭圆形布局：横向拉伸，纵向压缩
+                      var x = centerX + radiusX * Math.cos(angle) - elementRect.width / 2
+                      var y = centerY + radiusY * Math.sin(angle) - elementRect.height / 2
+                      
+                      // 确保在容器内
+                      x = Math.max(8, Math.min(x, containerRect.width - elementRect.width - 8))
+                      y = Math.max(8, Math.min(y, containerRect.height - elementRect.height - 8))
+                      
+                      var testRect = {
+                        left: x, top: y,
+                        right: x + elementRect.width,
+                        bottom: y + elementRect.height
+                      }
+                      
+                      var collision = false
+                      for (var k = 0; k < placedElements.length; k++) {
+                        if (isColliding(testRect, placedElements[k])) {
+                          collision = true
+                          break
+                        }
+                      }
+                      
+                      if (!collision) {
+                        return { x: x, y: y }
+                      }
+                      
+                      angle += angleStep
+                      if (angle > Math.PI * 4) { // 减少螺旋圈数
+                        angle = Math.random() * Math.PI * 2 // 重新随机角度
+                        radiusX += radiusStepX
+                        radiusY += radiusStepY
+                      }
+                    }
+                    
+                    // 如果找不到位置，在横向区域随机放置
+                    return {
+                      x: Math.random() * (containerRect.width - elementRect.width - 16) + 8,
+                      y: Math.random() * (containerRect.height - elementRect.height - 16) + 8
+                    }
+                  }
+
+                  function createTagCloud() {
                     var container = document.getElementById('people-tags-cloud')
-                    if (!container || !window.TagsCloud) return
+                    if (!container) {
+                      console.error('容器未找到')
+                      return
+                    }
 
                     // 清空容器
                     container.innerHTML = ''
-
+                    
                     var dark = isDarkMode()
+                    console.log('深色模式:', dark)
                     
-                    // 计算最大值用于权重
+                    // 计算权重
                     var maxCount = Math.max.apply(Math, allTags.map(function(t) { return t[1] }))
+                    var minCount = Math.min.apply(Math, allTags.map(function(t) { return t[1] }))
+                    console.log('权重范围:', minCount, '-', maxCount)
                     
-                    // 构建标签数据
-                    var tags = allTags.map(function(tagData) {
-                      var tag = tagData[0]
-                      var count = tagData[1]
-                      var weight = maxCount > 1 ? (count / maxCount) : 1
+                    var containerWidth = container.offsetWidth || 1280
+                    var containerHeight = container.offsetHeight || 350
+                    
+                    // 蓝紫红渐变彩色文字方案生成器
+                    function getCleanColorStyle(weight, index, count) {
+                      var fontSize = Math.round(15 + weight * 16) // 15px - 31px，稍小一些
+                      
+                      // 定义以蓝紫红为主的颜色调色板，浅色模式使用深色，确保高对比度
+                      var baseColors = [
+                        // 蓝色系 - 极深色系列，确保在浅色背景下清晰可见
+                        { vibrant: '#0F172A', muted: '#1E3A8A' }, // 极深蓝
+                        { vibrant: '#1E3A8A', muted: '#1D4ED8' }, // 深蓝色
+                        { vibrant: '#075985', muted: '#0369A1' }, // 深天蓝
+                        { vibrant: '#164E63', muted: '#155E75' }, // 深青蓝
+                        { vibrant: '#134E4A', muted: '#0F766E' }, // 深青绿
+                        
+                        // 紫色系 - 极深色系列，进一步加深
+                        { vibrant: '#2D1B69', muted: '#4A044E' }, // 超深紫
+                        { vibrant: '#4A044E', muted: '#581C87' }, // 极深紫
+                        { vibrant: '#1E1B4B', muted: '#312E81' }, // 极深靛紫
+                        { vibrant: '#312E81', muted: '#3730A3' }, // 深靛紫
+                        { vibrant: '#581C87', muted: '#6B21A8' }, // 深紫色
+                        
+                        // 红色系 - 极深色系列，特别加深
+                        { vibrant: '#450A0A', muted: '#7F1D1D' }, // 极深红
+                        { vibrant: '#7F1D1D', muted: '#991B1B' }, // 深红色
+                        { vibrant: '#4C0519', muted: '#881337' }, // 极深玫红
+                        { vibrant: '#881337', muted: '#9F1239' }, // 深玫红
+                        { vibrant: '#78350F', muted: '#92400E' }, // 深棕红
+                      ]
+                      
+                      // 深色模式调色板
+                      if (dark) {
+                        baseColors = [
+                          // 蓝色系 - 明亮到更亮
+                          { vibrant: '#60A5FA', muted: '#93C5FD' },
+                          { vibrant: '#3B82F6', muted: '#DBEAFE' },
+                          { vibrant: '#1D4ED8', muted: '#BFDBFE' },
+                          { vibrant: '#2563EB', muted: '#93C5FD' },
+                          { vibrant: '#0EA5E9', muted: '#7DD3FC' },
+                          
+                          // 紫色系 - 明亮到更亮
+                          { vibrant: '#8B5CF6', muted: '#C7D2FE' },
+                          { vibrant: '#A855F7', muted: '#DDD6FE' },
+                          { vibrant: '#7C3AED', muted: '#C4B5FD' },
+                          { vibrant: '#9333EA', muted: '#A78BFA' },
+                          { vibrant: '#6366F1', muted: '#A5B4FC' },
+                          
+                          // 红色系 - 明亮到更亮
+                          { vibrant: '#DC2626', muted: '#FCA5A5' },
+                          { vibrant: '#EF4444', muted: '#FECACA' },
+                          { vibrant: '#B91C1C', muted: '#F87171' },
+                          { vibrant: '#F43F5E', muted: '#FB7185' },
+                          { vibrant: '#EC4899', muted: '#F9A8D4' },
+                        ]
+                      }
+                      
+                      // 根据权重计算颜色：所有标签都使用深色，确保低权重标签也清晰可见
+                      var colorScheme = baseColors[index % baseColors.length]
+                      var color
+                      
+                      if (weight > 0.6) {
+                        // 高权重：使用最深色鲜艳颜色
+                        color = colorScheme.vibrant
+                      } else if (weight > 0.3) {
+                        // 中权重：使用深色
+                        color = colorScheme.vibrant
+                      } else {
+                        // 低权重（包括单人标签）：使用稍浅的深色，但仍然很深
+                        var ratio = 0.7 // 让低权重标签使用70%的深度，确保可见性
+                        color = interpolateColor(colorScheme.vibrant, colorScheme.muted, ratio)
+                      }
+                      
+                      // 根据权重调整样式，更紧凑
+                      var padding = weight > 0.7 ? '6px 10px' : weight > 0.4 ? '4px 8px' : '3px 6px'
+                      var borderRadius = weight > 0.6 ? '14px' : '10px'
+                      var fontWeight = weight > 0.6 ? '700' : weight > 0.3 ? '600' : '500'
                       
                       return {
-                        text: tag,
-                        weight: weight,
-                        link: '/peoples/tags/' + encodeURIComponent(tag)
+                        fontSize: fontSize,
+                        fontWeight: fontWeight,
+                        color: color,
+                        background: 'transparent',
+                        padding: padding,
+                        borderRadius: borderRadius,
+                        border: 'none',
+                        opacity: 0.95
                       }
+                    }
+                    
+                    // 颜色插值函数
+                    function interpolateColor(color1, color2, ratio) {
+                      // 简单的十六进制颜色插值
+                      var hex1 = color1.replace('#', '')
+                      var hex2 = color2.replace('#', '')
+                      
+                      var r1 = parseInt(hex1.substr(0, 2), 16)
+                      var g1 = parseInt(hex1.substr(2, 2), 16)
+                      var b1 = parseInt(hex1.substr(4, 2), 16)
+                      
+                      var r2 = parseInt(hex2.substr(0, 2), 16)
+                      var g2 = parseInt(hex2.substr(2, 2), 16)
+                      var b2 = parseInt(hex2.substr(4, 2), 16)
+                      
+                      var r = Math.round(r1 + (r2 - r1) * ratio)
+                      var g = Math.round(g1 + (g2 - g1) * ratio)
+                      var b = Math.round(b1 + (b2 - b1) * ratio)
+                      
+                      return '#' + 
+                        (r < 16 ? '0' : '') + r.toString(16) +
+                        (g < 16 ? '0' : '') + g.toString(16) +
+                        (b < 16 ? '0' : '') + b.toString(16)
+                    }
+                    
+                    var placedElements = []
+                    var elements = []
+                    
+                    // 创建标签元素
+                    allTags.forEach(function(tagData, index) {
+                      var tag = tagData[0]
+                      var count = tagData[1]
+                      
+                      // 计算权重
+                      var weight = maxCount > minCount ? (count - minCount) / (maxCount - minCount) : 0.5
+                      var style = getCleanColorStyle(weight, index, count)
+                      
+                      // 创建链接元素
+                      var link = document.createElement('a')
+                      link.href = '/peoples/tags/' + encodeURIComponent(tag)
+                      link.setAttribute('data-weight', count)
+                      link.setAttribute('data-tag', tag)
+                      
+                      // 创建标签内容
+                      var tagSpan = document.createElement('span')
+                      tagSpan.textContent = tag
+                      
+                      var countSpan = document.createElement('span')
+                      countSpan.textContent = count
+                      countSpan.style.cssText = [
+                        'margin-left: 6px',
+                        'font-size: ' + Math.max(10, style.fontSize - 4) + 'px',
+                        'background: ' + style.color,
+                        'color: #fff',
+                        'padding: 2px 6px',
+                        'border-radius: 10px',
+                        'font-weight: 600'
+                      ].join(';')
+                      
+                      link.appendChild(tagSpan)
+                      link.appendChild(countSpan)
+                      
+                      link.style.cssText = [
+                        'position: absolute',
+                        'text-decoration: none',
+                        'font-weight: ' + style.fontWeight,
+                        'padding: ' + style.padding,
+                        'border-radius: ' + style.borderRadius,
+                        'transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        'cursor: pointer',
+                        'white-space: nowrap',
+                        'font-size: ' + style.fontSize + 'px',
+                        'color: ' + style.color,
+                        'background: ' + style.background,
+                        'border: ' + style.border,
+                        'opacity: 0',
+                        'transform: scale(0.9) translateY(10px)',
+                        'display: flex',
+                        'align-items: center',
+                        'z-index: ' + (10 + Math.floor(weight * 10))
+                      ].join(';')
+                      
+                      // 悬浮效果
+                      link.addEventListener('mouseenter', function() {
+                        this.style.transform = 'scale(1.15) translateY(-3px)'
+                        this.style.background = style.color
+                        this.style.color = '#fff'
+                        this.style.zIndex = '100'
+                        this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.3)'
+                      })
+                      
+                      link.addEventListener('mouseleave', function() {
+                        this.style.transform = 'scale(1) translateY(0)'
+                        this.style.background = style.background
+                        this.style.color = style.color
+                        this.style.zIndex = 10 + Math.floor(weight * 10)
+                        this.style.boxShadow = 'none'
+                      })
+                      
+                      // 临时添加到容器以测量尺寸
+                      container.appendChild(link)
+                      elements.push({ element: link, weight: weight })
                     })
-
-                    // 颜色配置
-                    var colors = dark 
-                      ? ['#f5f5f5', '#e0e0e0', '#cccccc', '#b8b8b8', '#a5a5a5', '#929292']
-                      : ['#333333', '#555555', '#777777', '#999999', '#bbbbbb', '#dddddd']
-
-                    // 创建标签云
-                    var cloud = new TagsCloud({
-                      selector: '#people-tags-cloud',
-                      fontsize: 16,
-                      radius: 180,
-                      speed: 'normal',
-                      keep: false,
-                      tags: tags
+                    
+                    // 按权重排序，重要的标签优先放置
+                    elements.sort(function(a, b) { return b.weight - a.weight })
+                    
+                    // 重新排列元素位置
+                    elements.forEach(function(item, index) {
+                      var element = item.element
+                      var rect = element.getBoundingClientRect()
+                      var containerRect = container.getBoundingClientRect()
+                      
+                      // 调整测量的矩形位置为相对于容器
+                      var elementRect = {
+                        width: rect.width,
+                        height: rect.height
+                      }
+                      
+                      var position = findPosition(element, container, placedElements, item.weight)
+                      
+                      element.style.left = position.x + 'px'
+                      element.style.top = position.y + 'px'
+                      
+                      // 记录已放置的元素位置
+                      placedElements.push({
+                        left: position.x,
+                        top: position.y,
+                        right: position.x + elementRect.width,
+                        bottom: position.y + elementRect.height
+                      })
+                      
+                      // 添加入场动画
+                      setTimeout(function() {
+                        element.style.opacity = '1'
+                        element.style.transform = 'scale(1) translateY(0)'
+                      }, index * 50 + Math.random() * 100)
                     })
-
-                    // 设置自定义样式
-                    var style = document.createElement('style')
-                    style.textContent = `
-                      #people-tags-cloud {
-                        font-family: inherit;
-                        background: transparent;
-                      }
-                      #people-tags-cloud a {
-                        color: ${dark ? '#f5f5f5' : '#333333'} !important;
-                        text-decoration: none !important;
-                        font-weight: 500 !important;
-                        transition: all 0.3s ease !important;
-                        padding: 4px 8px !important;
-                        border-radius: 6px !important;
-                      }
-                      #people-tags-cloud a:hover {
-                        color: ${dark ? '#ffffff' : '#000000'} !important;
-                        background: ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'} !important;
-                        transform: scale(1.1) !important;
-                      }
-                    `
-                    document.head.appendChild(style)
-
-                    return cloud
+                    
+                    console.log('蓝紫红渐变标签云创建完成，共', allTags.length, '个标签')
                   }
 
-                  var cloudInstance
-                  
+                  // 初始化
                   if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                    cloudInstance = initTagsCloud()
+                    setTimeout(createTagCloud, 150)
                   } else {
                     document.addEventListener('DOMContentLoaded', function() {
-                      cloudInstance = initTagsCloud()
+                      setTimeout(createTagCloud, 150)
                     })
                   }
 
-                  // 窗口尺寸变化时重新初始化
+                  // 窗口尺寸变化时重新创建
                   var resizeTimer
                   window.addEventListener('resize', function() {
                     clearTimeout(resizeTimer)
-                    resizeTimer = setTimeout(function() {
-                      if (cloudInstance && cloudInstance.destroy) {
-                        cloudInstance.destroy()
-                      }
-                      cloudInstance = initTagsCloud()
-                    }, 200)
+                    resizeTimer = setTimeout(createTagCloud, 400)
                   })
 
                   // 监听深浅色模式切换
-                  var obs = new MutationObserver(function() {
-                    if (cloudInstance && cloudInstance.destroy) {
-                      cloudInstance.destroy()
-                    }
-                    cloudInstance = initTagsCloud()
+                  var themeObserver = new MutationObserver(function() {
+                    setTimeout(createTagCloud, 200)
                   })
-                  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+                  themeObserver.observe(document.documentElement, { 
+                    attributes: true, 
+                    attributeFilter: ['class'] 
+                  })
                 })()
               </script>
             </Fragment>
           ) : (
-            <p class='text-muted-foreground'>暂无标签。</p>
+            <p class='text-muted-foreground text-center py-12'>暂无标签。</p>
           )}
       </div>
     </div>
