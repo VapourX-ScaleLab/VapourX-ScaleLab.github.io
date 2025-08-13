@@ -26,23 +26,142 @@ const meta = {
       <div id='content' class='animate'>
         {
           allTags.length > 0 ? (
-            <ul class='flex flex-wrap gap-4 list-none pl-0'>
-              {allTags.map(([tag, count]) => (
-                <li>
-                  <Button
-                    href={`/peoples/tags/${encodeURIComponent(tag)}`}
-                    style='pill'
-                    class={cn(
-                      'items-start gap-x-1',
-                      count > 2 ? 'rounded-xl px-3 py-1 text-xl' : count > 1 && 'text-lg'
-                    )}
-                  >
-                    {tag}
-                    <span class={count > 2 ? 'text-base' : 'text-xs'}>{count}</span>
-                  </Button>
-                </li>
-              ))}
-            </ul>
+            <Fragment>
+              <div class='mb-6'>
+                <div id='people-tags-cloud' class='mx-auto' style='width:100%;max-width:40rem;height:400px;'></div>
+              </div>
+
+              {/* 无脚本环境回退渲染 */}
+              <noscript>
+                <ul class='flex flex-wrap gap-4 list-none pl-0'>
+                  {allTags.map(([tag, count]) => (
+                    <li>
+                      <Button
+                        href={`/peoples/tags/${encodeURIComponent(tag)}`}
+                        style='pill'
+                        class={cn(
+                          'items-start gap-x-1',
+                          count > 2 ? 'rounded-xl px-3 py-1 text-xl' : count > 1 && 'text-lg'
+                        )}
+                      >
+                        {tag}
+                        <span class={count > 2 ? 'text-base' : 'text-xs'}>{count}</span>
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              </noscript>
+
+              <script src='https://cdn.jsdelivr.net/gh/gokayfem/Awesome-tags-cloud@main/dist/tagscloud.min.js'></script>
+              <script is:inline define:vars={{ allTags }}>
+                // 初始化 TagsCloud
+                (function() {
+                  function isDarkMode() {
+                    try {
+                      if (document.documentElement.classList.contains('dark')) return true
+                      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                    } catch (_) { return false }
+                  }
+
+                  function initTagsCloud() {
+                    var container = document.getElementById('people-tags-cloud')
+                    if (!container || !window.TagsCloud) return
+
+                    // 清空容器
+                    container.innerHTML = ''
+
+                    var dark = isDarkMode()
+                    
+                    // 计算最大值用于权重
+                    var maxCount = Math.max.apply(Math, allTags.map(function(t) { return t[1] }))
+                    
+                    // 构建标签数据
+                    var tags = allTags.map(function(tagData) {
+                      var tag = tagData[0]
+                      var count = tagData[1]
+                      var weight = maxCount > 1 ? (count / maxCount) : 1
+                      
+                      return {
+                        text: tag,
+                        weight: weight,
+                        link: '/peoples/tags/' + encodeURIComponent(tag)
+                      }
+                    })
+
+                    // 颜色配置
+                    var colors = dark 
+                      ? ['#f5f5f5', '#e0e0e0', '#cccccc', '#b8b8b8', '#a5a5a5', '#929292']
+                      : ['#333333', '#555555', '#777777', '#999999', '#bbbbbb', '#dddddd']
+
+                    // 创建标签云
+                    var cloud = new TagsCloud({
+                      selector: '#people-tags-cloud',
+                      fontsize: 16,
+                      radius: 180,
+                      speed: 'normal',
+                      keep: false,
+                      tags: tags
+                    })
+
+                    // 设置自定义样式
+                    var style = document.createElement('style')
+                    style.textContent = `
+                      #people-tags-cloud {
+                        font-family: inherit;
+                        background: transparent;
+                      }
+                      #people-tags-cloud a {
+                        color: ${dark ? '#f5f5f5' : '#333333'} !important;
+                        text-decoration: none !important;
+                        font-weight: 500 !important;
+                        transition: all 0.3s ease !important;
+                        padding: 4px 8px !important;
+                        border-radius: 6px !important;
+                      }
+                      #people-tags-cloud a:hover {
+                        color: ${dark ? '#ffffff' : '#000000'} !important;
+                        background: ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'} !important;
+                        transform: scale(1.1) !important;
+                      }
+                    `
+                    document.head.appendChild(style)
+
+                    return cloud
+                  }
+
+                  var cloudInstance
+                  
+                  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    cloudInstance = initTagsCloud()
+                  } else {
+                    document.addEventListener('DOMContentLoaded', function() {
+                      cloudInstance = initTagsCloud()
+                    })
+                  }
+
+                  // 窗口尺寸变化时重新初始化
+                  var resizeTimer
+                  window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer)
+                    resizeTimer = setTimeout(function() {
+                      if (cloudInstance && cloudInstance.destroy) {
+                        cloudInstance.destroy()
+                      }
+                      cloudInstance = initTagsCloud()
+                    }, 200)
+                  })
+
+                  // 监听深浅色模式切换
+                  var obs = new MutationObserver(function() {
+                    if (cloudInstance && cloudInstance.destroy) {
+                      cloudInstance.destroy()
+                    }
+                    cloudInstance = initTagsCloud()
+                  })
+                  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+                })()
+              </script>
+            </Fragment>
           ) : (
             <p class='text-muted-foreground'>暂无标签。</p>
           )}
