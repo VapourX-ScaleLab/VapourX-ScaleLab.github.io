@@ -10,7 +10,7 @@ const headings = [
   { depth: 2, slug: 'community-members', text: '社区成员' }
 ]
 
-import { getAllMembers } from '@/utils/members'
+import { getAllMembers, getAllTags } from '@/utils/members'
 
 const members = getAllMembers().map(member => ({
   id: member.id,
@@ -32,9 +32,33 @@ const members = getAllMembers().map(member => ({
   x: member.x,
   instagram: member.instagram
 }))
+
+const allTags = getAllTags()
 ---
 
 <PageLayout title='社区成员' {headings} info='/peoples'>
+  <Fragment slot='sidebar'>
+    {!!allTags.length && (
+      <div class='mb-8'>
+        <h2 class='mb-4 flex items-center text-lg font-semibold'>
+          <Icon name='tag-2' class='me-2' />
+          研究兴趣
+        </h2>
+        <ul class='text-bgColor flex flex-wrap gap-2'>
+          {allTags.map((tag) => (
+            <li>
+              <Button title={tag} href={`/peoples/tags/${encodeURIComponent(tag)}`} style='pill' />
+            </li>
+          ))}
+        </ul>
+        <span class='mt-4 block sm:text-end'>
+          <a aria-label='查看全部标签' href='/peoples/tags' data-astro-prefetch>
+            查看全部 →
+          </a>
+        </span>
+      </div>
+    )}
+  </Fragment>
   <div class='mx-auto max-w-4xl'>
     <!-- 页面标题 -->
     <div class='mb-8 text-center'>

@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro'
 import { Button, Card } from 'astro-pure/user'
-import PageLayout from '@/layouts/CommonPage.astro'
+import PageLayout from '@/layouts/BaseLayout.astro'
 import { getAllMembers, getAllTags } from '@/utils/members'
 
 export const prerender = true
@@ -40,116 +40,102 @@ const allTags = getAllTags()
 // 筛选具有该标签的成员
 const filteredMembers = membersData.filter(member => member.tags.includes(decodedTag))
 
-const headings = [
-  { depth: 2, slug: 'members', text: '相关成员' },
-  { depth: 2, slug: 'related-tags', text: '相关标签' }
-]
-
 const meta = {
   description: `查看具有 "${decodedTag}" 标签的社区成员`,
   title: `标签: ${decodedTag}`
 }
 ---
 
-<PageLayout title={meta.title} info={`/peoples/tags/${decodedTag}`}>
+<PageLayout {meta}>
   <Button title='Back To All Tags' href='/peoples/tags' style='back' />
-  <div class='mx-auto max-w-4xl'>
-    <!-- 页面标题 -->
-    <div class='mb-8 text-center'>
-      <h1 class='mb-4 text-4xl font-bold text-foreground'>标签: {decodedTag}</h1>
-      <p class='text-lg text-muted-foreground'>
-        找到 {filteredMembers.length} 位具有此标签的社区成员
-      </p>
-    </div>
+  <main class='mt-6 lg:mt-10'>
+    <div class='mx-auto max-w-4xl'>
+      <!-- 页面标题 -->
+      <div id='content-header' class='animate'>
+        <h1 class='mb-2 flex items-end gap-x-2 text-3xl font-medium'>
+          标签:
+          <span class='text-2xl'>#{decodedTag}</span>
+        </h1>
+        <p class='mb-6 text-sm text-muted-foreground'>
+          找到 {filteredMembers.length} 位具有此标签的社区成员
+        </p>
+      </div>
 
-    <!-- 相关成员 -->
-    <section id='members' class='mb-12 scroll-mt-20'>
-      <h2 class='mb-6 text-2xl font-semibold text-foreground'>相关成员</h2>
-      <div class='grid gap-6 md:grid-cols-2'>
-        {filteredMembers.map((member) => (
-          <Card class='group p-6 transition-all hover:shadow-lg'>
-            <div class='flex items-start gap-4'>
-              {/* 头像 */}
-              <div class='flex-shrink-0'>
-                <div class='relative'>
-                  <img 
-                    src={member.avatar} 
-                    alt={member.name} 
-                    class='h-16 w-16 rounded-full border-2 border-border object-cover'
-                    width={64}
-                    height={64}
-                  />
-                  <div class='absolute -bottom-1 -right-1 size-4 rounded-full border-2 border-background bg-green-500'></div>
+      <!-- 相关成员 -->
+      <section id='content' class='animate' aria-label='相关成员'>
+        <div class='grid gap-8 md:grid-cols-2 mb-12'>
+          {filteredMembers.map((member) => (
+            <Card class='group p-6 transition-all hover:shadow-lg'>
+              <div class='flex items-start gap-5'>
+                <div class='flex-shrink-0'>
+                  <div class='relative'>
+                    <img 
+                      src={member.avatar} 
+                      alt={member.name} 
+                      class='h-16 w-16 rounded-full border-2 border-border object-cover'
+                      width={64}
+                      height={64}
+                    />
+                    <div class='absolute -bottom-1 -right-1 size-4 rounded-full border-2 border-background bg-green-500'></div>
+                  </div>
+                </div>
+                <div class='flex-1 min-w-0'>
+                  <div class='mb-2'>
+                    <h3 class='text-lg font-semibold text-foreground'>{member.name}</h3>
+                    <p class='text-sm text-muted-foreground'>{member.organization}</p>
+                    <p class='text-sm text-primary font-medium'>{Array.isArray(member.role) ? member.role.join(', ') : member.role}</p>
+                  </div>
+                  <div class='mb-3 flex flex-wrap gap-1'>
+                    {member.tags.map((memberTag) => (
+                      <span class={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
+                        memberTag === decodedTag 
+                          ? 'bg-primary text-white' 
+                          : 'bg-primary/10 text-primary'
+                      }`}>
+                        {memberTag}
+                      </span>
+                    ))}
+                  </div>
+                  <Button href={member.href} style='primary' class='text-sm'>
+                    查看个人主页
+                  </Button>
                 </div>
               </div>
-              
-              {/* 成员信息 */}
-              <div class='flex-1 min-w-0'>
-                <div class='mb-2'>
-                  <h3 class='text-lg font-semibold text-foreground'>{member.name}</h3>
-                  <p class='text-sm text-muted-foreground'>{member.organization}</p>
-                  <p class='text-sm text-primary font-medium'>{Array.isArray(member.role) ? member.role.join(', ') : member.role}</p>
-                </div>
-                
-                {/* 标签 */}
-                <div class='mb-3 flex flex-wrap gap-1'>
-                  {member.tags.map((memberTag) => (
-                    <span class={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
-                      memberTag === decodedTag 
-                        ? 'bg-primary text-white' 
-                        : 'bg-primary/10 text-primary'
-                    }`}>
-                      {memberTag}
-                    </span>
-                  ))}
-                </div>
-                
-                <Button href={member.href} style='primary' class='text-sm'>
-                  查看个人主页
-                </Button>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </section>
+            </Card>
+          ))}
+        </div>
+      </section>
 
-    <!-- 相关标签 -->
-    <section id='related-tags' class='scroll-mt-20'>
-      <h2 class='mb-6 text-2xl font-semibold text-foreground'>相关标签</h2>
-      <div class='mb-8'>
-        <ul class='flex flex-wrap gap-4'>
-          {allTags
-            .filter(t => t !== decodedTag)
-            .map((relatedTag) => {
-              const count = membersData.filter(member => 
-                member.tags.includes(decodedTag) && member.tags.includes(relatedTag)
-              ).length
-              
-              return count > 0 ? (
-                                 <li>
-                   <Button
-                     href={`/peoples/tags/${encodeURIComponent(relatedTag)}`}
-                     style='pill'
-                     class='items-start gap-x-1'
-                   >
-                     {relatedTag}
-                     <span class='text-xs'>{count}</span>
-                   </Button>
-                 </li>
-              ) : null
-            })
-            .filter(Boolean)
-          }
-        </ul>
-      </div>
-    </section>
-
-    <!-- 返回按钮 -->
-    <div class='mt-8 text-center'>
-      <Button href='/peoples/tags' style='outline'>
-        返回标签列表
-      </Button>
+      <!-- 相关标签 -->
+      <section id='related-tags' class='mt-12'>
+        <h2 class='mb-4 text-lg font-semibold'>相关标签</h2>
+        <div class='mb-8'>
+          <ul class='flex flex-wrap gap-4 list-none pl-0'>
+            {allTags
+              .filter(t => t !== decodedTag)
+              .map((relatedTag) => {
+                const count = membersData.filter(member => 
+                  member.tags.includes(decodedTag) && member.tags.includes(relatedTag)
+                ).length
+                
+                return count > 0 ? (
+                                   <li>
+                    <Button
+                      href={`/peoples/tags/${encodeURIComponent(relatedTag)}`}
+                      style='pill'
+                      class='items-start gap-x-1'
+                    >
+                      {relatedTag}
+                      <span class='text-xs'>{count}</span>
+                    </Button>
+                  </li>
+                ) : null
+              })
+              .filter(Boolean)
+            }
+          </ul>
+        </div>
+      </section>
     </div>
-  </div>
+  </main>
 </PageLayout> 

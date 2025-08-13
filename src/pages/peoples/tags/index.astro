@@ -1,20 +1,9 @@
 ---
 import { Button } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
-import PageLayout from '@/layouts/CommonPage.astro'
+import PageLayout from '@/layouts/BaseLayout.astro'
 
-const headings = [
-  { depth: 2, slug: 'all-tags', text: '所有标签' }
-]
-
-import { getAllMembers, getTagCounts } from '@/utils/members'
-
-// 定义所有成员的标签数据
-const membersData = getAllMembers().map(member => ({
-  name: member.name,
-  href: `/peoples/${member.id}`,
-  tags: member.tags
-}))
+import { getTagCounts } from '@/utils/members'
 
 // 统计所有标签及其出现次数
 const tagCounts = getTagCounts()
@@ -26,64 +15,38 @@ const meta = {
 }
 ---
 
-<PageLayout title='人员标签' {headings} info='/peoples/tags'>
+<PageLayout {meta}>
   <Button title='Back' href='/peoples' style='back' />
-  <div class='mx-auto max-w-4xl'>
-    <!-- 页面标题 -->
-    <div class='mb-8 text-center'>
-      <h1 class='mb-4 text-4xl font-bold text-foreground'>人员标签</h1>
-      <p class='text-lg text-muted-foreground'>
-        通过专业领域和技能标签发现志同道合的社区成员
-      </p>
+  <main class='mt-6 lg:mt-10'>
+    <div class='mx-auto max-w-4xl'>
+      <div id='content-header' class='animate'>
+        <h1 class='mb-6 text-3xl font-medium'>人员标签</h1>
+      </div>
+
+      <div id='content' class='animate'>
+        {
+          allTags.length > 0 ? (
+            <ul class='flex flex-wrap gap-4 list-none pl-0'>
+              {allTags.map(([tag, count]) => (
+                <li>
+                  <Button
+                    href={`/peoples/tags/${encodeURIComponent(tag)}`}
+                    style='pill'
+                    class={cn(
+                      'items-start gap-x-1',
+                      count > 2 ? 'rounded-xl px-3 py-1 text-xl' : count > 1 && 'text-lg'
+                    )}
+                  >
+                    {tag}
+                    <span class={count > 2 ? 'text-base' : 'text-xs'}>{count}</span>
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class='text-muted-foreground'>暂无标签。</p>
+          )}
+      </div>
     </div>
-
-    <!-- 所有标签 -->
-    <section id='all-tags' class='scroll-mt-20'>
-      <h2 class='mb-6 text-2xl font-semibold text-foreground'>所有标签</h2>
-      <div class='mb-8'>
-        {allTags.length > 0 ? (
-          <ul class='flex flex-wrap gap-4'>
-            {allTags.map(([tag, count]) => (
-              <li>
-                <Button
-                  href={`/peoples/tags/${encodeURIComponent(tag)}`}
-                  style='pill'
-                  class={cn(
-                    'items-start gap-x-1',
-                    count > 2 ? 'rounded-xl px-3 py-1 text-xl' : count > 1 && 'text-lg'
-                  )}
-                >
-                  {tag}
-                  <span class={count > 2 ? 'text-base' : 'text-xs'}>{count}</span>
-                </Button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class='text-muted-foreground'>暂无标签。</p>
-        )}
-      </div>
-
-      <!-- 标签统计 -->
-      <div class='rounded-lg border bg-muted p-6'>
-        <h3 class='mb-4 text-lg font-semibold text-foreground'>标签统计</h3>
-        <div class='grid gap-4 md:grid-cols-3'>
-          <div class='text-center'>
-            <div class='text-2xl font-bold text-primary'>{allTags.length}</div>
-            <div class='text-sm text-muted-foreground'>总标签数</div>
-          </div>
-          <div class='text-center'>
-            <div class='text-2xl font-bold text-primary'>{membersData.length}</div>
-            <div class='text-sm text-muted-foreground'>社区成员</div>
-          </div>
-          <div class='text-center'>
-            <div class='text-2xl font-bold text-primary'>
-              {Math.round(allTags.reduce((sum, [_, count]) => sum + count, 0) / membersData.length)}
-            </div>
-            <div class='text-sm text-muted-foreground'>平均标签数</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+  </main>
 </PageLayout> 

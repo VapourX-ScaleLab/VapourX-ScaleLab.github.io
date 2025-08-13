@@ -59,18 +59,20 @@ const paginationProps = {
 <PageLayout {meta}>
   <Button title='Back' href='/blog' style='back' />
   <main class='mt-6 lg:mt-10'>
-    <div id='content-header' class='animate'>
-      <h1 class='mb-6 flex items-end gap-x-2 text-3xl font-medium'>
-        Authors:
-        <span class='text-2xl'>@{author}</span>
-      </h1>
-    </div>
+    <div class='mx-auto max-w-4xl'>
+      <div id='content-header' class='animate'>
+        <h1 class='mb-6 flex items-end gap-x-2 text-3xl font-medium'>
+          Authors:
+          <span class='text-2xl'>@{author}</span>
+        </h1>
+      </div>
 
-    <section id='content' class='animate' aria-label='Blog post list'>
-      <ul class='flex flex-col gap-y-3 text-start'>
-        {page.data.map((post) => <PostPreview as='h2' {post} detailed />)}
-      </ul>
-      <Paginator {...paginationProps} />
-    </section>
+      <section id='content' class='animate' aria-label='Blog post list'>
+        <ul class='flex flex-col gap-y-3 text-start list-none pl-0'>
+          {page.data.map((post) => <PostPreview as='h2' {post} detailed />)}
+        </ul>
+        <Paginator {...paginationProps} />
+      </section>
+    </div>
   </main>
 </PageLayout> 
