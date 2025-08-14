@@ -397,6 +397,27 @@
       "github": "https://github.com/IranQin",
       "website": "https://iranqin.github.io/",
       "linkedin": "https://www.linkedin.com/in/yiran-qin-b508871b2/"
+    },
+    {
+      "id": "snail",
+      "name": "Snail（占羽轩）",
+      "avatar": "https://c-ssl.duitang.com/uploads/item/201707/03/20170703123818_TKhWa.jpeg",
+      "organization": "SJTU OMNILab",
+      "role": [
+        "内容创作者"
+      ],
+      "slogan": "让算法破解科学难题",
+      "description": "自动化本科->计算机博士，具身->AI4Sci\n立志将工程系统思维与科学探索意志结合\n让算法破解科学难题",
+      "tags": [
+        "AI4Science"
+      ],
+      "research": [
+        {
+          "title": "AI4Science",
+          "description": "环肽设计"
+        }
+      ],
+      "email": "nczyx123@sjtu.edu.cn"
     }
   ]
 } 

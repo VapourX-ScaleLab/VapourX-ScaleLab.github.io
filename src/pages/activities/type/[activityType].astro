@@ -11,7 +11,8 @@ export const prerender = true
 
 export async function getStaticPaths() {
   const allActivities = await getCollection('activities')
-  const uniqueActivityTypes = getUniqueActivityTypes(allActivities)
+  const nonDraftActivities = allActivities.filter(activity => !activity.data.draft)
+  const uniqueActivityTypes = getUniqueActivityTypes(nonDraftActivities)
   
   return uniqueActivityTypes.map((activityType) => ({
     params: { activityType },
@@ -21,9 +22,10 @@ export async function getStaticPaths() {
 
 const { activityType } = Astro.props
 
-// Get all activities
+// Get all activities (excluding drafts)
 const allActivities = await getCollection('activities') as CollectionEntry<'activities'>[]
-const sortedActivities = sortMDByDate(allActivities) as CollectionEntry<'activities'>[]
+const nonDraftActivities = allActivities.filter(activity => !activity.data.draft)
+const sortedActivities = sortMDByDate(nonDraftActivities) as CollectionEntry<'activities'>[]
 const filteredActivities = getActivitiesByType(sortedActivities, activityType)
 const uniqueActivityTypes = getUniqueActivityTypes(sortedActivities)
 

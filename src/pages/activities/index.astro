@@ -9,9 +9,10 @@ import { getUniqueActivityTypes, getActivityTypeDisplayName } from '@/utils/acti
 
 export const prerender = true
 
-// Get all activities
+// Get all activities (excluding drafts)
 const allActivities = await getCollection('activities') as CollectionEntry<'activities'>[]
-const sortedActivities = sortMDByDate(allActivities) as CollectionEntry<'activities'>[]
+const nonDraftActivities = allActivities.filter(activity => !activity.data.draft)
+const sortedActivities = sortMDByDate(nonDraftActivities) as CollectionEntry<'activities'>[]
 const uniqueActivityTypes = getUniqueActivityTypes(sortedActivities)
 
 const meta = {
