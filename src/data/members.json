@@ -115,9 +115,9 @@
       "slogan": "Align Human-Robot Perception&Intuition",
       "description": "I am a Master of Computing (Artificial Intelligence) student at the National University of Singapore advised by Prof. Harold Soh. Currently, I have research collaborations with SJTU ScaleLab (advised by Prof. Yao Mu), NUS LinS Lab (advised by Prof. Lin Shao), and HITsz RLGroup (advised by Prof. Yanjie Li).",
       "tags": [
-        "robot learning",
-        "dexterous manipulation",
-        "human-robot interaction"
+        "具身智能",
+        "灵巧手",
+        "人机交互"
       ],
       "research": [
         {
@@ -134,21 +134,25 @@
       "dribbble": "https://dribbble.com/BorisGuo"
     },
     {
-      "id": "jaredli",
+      "id": "jared-li",
       "name": "李玉章",
-      "avatar": "https://avatars.githubusercontent.com/u/217298943?s=400&u=63f06b4e33c059baf0e3c57088cc6c849aac36b0&v=4",
+      "avatar": "https://avatars.githubusercontent.com/u/217298943?v=4&size=64",
       "organization": "SJTU Scalelab",
-      "role": ["Blog Writer"],
-      "slogan": "谦虚，成长",
-      "description": "",
-      "tags": [
-        "生物信息学",
-        "具身智能",
-        "强化学习"
+      "role": [
+        "内容创作者"
       ],
-      "research": [],
-      "email": "YuzhangLi2281@gmail.com",
-      "github": "https://github.com/YuzhangLi2281"
+      "slogan": "谦逊，成长",
+      "description": "进步不能停",
+      "tags": [
+        "生物信息学"
+      ],
+      "research": [
+        {
+          "title": "生物信息学",
+          "description": "本专业生物信息学，现在在做视触觉，vla，强化学习，未来想dive in world model"
+        }
+      ],
+      "email": "YuzhangLi2281@gmail.com"
     },
     {
       "id": "violet",
@@ -220,8 +224,21 @@
       "role": ["核心成员"],
       "slogan": "对未来的真正慷慨，是把一切献给现在",
       "description": "他从事具身智能、空间认知与机器人方向的研究。研究方向聚焦于语言语义锚定于空间理解与机器人操作、多模态与具身智能系统的推理与规划，以及混合现实环境中的人机协作等领域。长期目标是构建能够从真实交互中持续学习、具备因果推理与高级决策能力，并能够普适、安全地服务于大众的具身智能体，让人工智能的进步真正惠及每一个人。",
-      "tags": [],
-      "research": [],
+      "tags": ["具身智能", "空间认知", "人机交互"],
+      "research": [
+        {
+          "title": "具身智能",
+          "description": "研究语言语义锚定于空间理解与机器人操作，构建具备因果推理与高级决策能力的具身智能体"
+        },
+        {
+          "title": "空间认知",
+          "description": "探索机器人的空间理解能力，实现智能体对环境的认知和导航"
+        },
+        {
+          "title": "人机交互",
+          "description": "研究混合现实环境中的人机协作，推动人工智能在实际应用中的普及"
+        }
+      ],
       "email": "liuyibin@stumail.neu.edu.cn",
       "github": "https://github.com/10-OASIS-01",
       "website": "https://10-oasis-01.github.io",
@@ -289,8 +306,17 @@
       ],
       "slogan": "时间不会太远",
       "description": "上海交通大学22级信息工程专业，致力于研究Agent和AI4Science方向",
-      "tags": [],
-      "research": [],
+      "tags": ["智能体", "AI4Science"],
+      "research": [
+        {
+          "title": "智能体",
+          "description": "研究自主智能体的决策机制、学习算法和行为规划，探索如何构建具有自适应能力的智能系统"
+        },
+        {
+          "title": "AI4Science",
+          "description": "将人工智能技术应用于科学研究领域，利用机器学习和数据挖掘技术加速科学发现过程"
+        }
+      ],
       "email": "StevenSun@sjtu.edu.cn"
     },
     {
@@ -306,7 +332,6 @@
       "description": "专注于具身智能，探索感知与行动如何赋予机器智慧，连接现实与未来。",
       "tags": [
         "具身智能",
-        "robot learning",
         "强化学习"
       ],
       "research": [
@@ -315,8 +340,8 @@
           "description": "我专注于具身智能在机器人操作中的应用，研究基于 Visuomotor 和 VLA 模型的算法，通过感知与学习优化机械臂的抓取与精细操作。"
         },
         {
-          "title": "robot learning",
-          "description": "我专注于robot learning，通过强化学习和模仿学习，使机器人学习复杂任务，优化任务规划与动作生成，应用于智能操作。"
+          "title": "强化学习",
+          "description": "我专注于强化学习在机器人领域的应用，通过强化学习和模仿学习，使机器人学习复杂任务，优化任务规划与动作生成，应用于智能操作。"
         }
       ],
       "email": "12210432@mail.sustech.edu.cn",

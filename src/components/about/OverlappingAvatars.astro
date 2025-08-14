@@ -1,0 +1,130 @@
+---
+import { Image } from 'astro:assets'
+import { cn } from 'astro-pure/utils'
+import { getAllMembers } from '@/utils/members'
+
+interface Props {
+  class?: string
+  title: string
+  members?: {
+    name: string
+    avatar: string | ImageMetadata
+    href?: string
+  }[]
+  // 按角色过滤
+  filterByRole?: string[]
+  // 按标签过滤
+  filterByTags?: string[]
+  // 最大显示数量
+  maxDisplay?: number
+}
+
+const { 
+  class: className, 
+  title, 
+  members: customMembers, 
+  filterByRole, 
+  filterByTags,
+  maxDisplay = 8,
+  ...props 
+} = Astro.props
+
+// 获取所有成员数据
+const allMembers = getAllMembers()
+
+// 处理成员数据
+let displayMembers = customMembers || []
+
+if (!customMembers) {
+  // 如果没有提供自定义成员数据，则从 members.json 中获取
+  displayMembers = allMembers
+    .filter(member => {
+      // 如果指定了角色过滤
+      if (filterByRole && filterByRole.length > 0) {
+        const hasMatchingRole = filterByRole.some(filterRole => 
+          member.role.includes(filterRole)
+        );
+        if (!hasMatchingRole) {
+          return false;
+        }
+      }
+      
+      // 如果指定了标签过滤
+      if (filterByTags && filterByTags.length > 0) {
+        const hasMatchingTag = filterByTags.some(tag => member.tags.includes(tag))
+        if (!hasMatchingTag) {
+          return false
+        }
+      }
+      
+      return true
+    })
+    .map(member => ({
+      name: member.name,
+      avatar: member.avatar,
+      href: `/peoples/${member.id}`
+    }))
+}
+
+// 限制显示数量
+displayMembers = displayMembers.slice(0, maxDisplay)
+---
+
+<div
+  class={cn('not-prose flex flex-col gap-y-4', className)}
+  {...props}
+>
+  <div class='text-lg font-medium'>{title}</div>
+  
+  <div class='relative'>
+    {/* 头像容器 */}
+    <div class='flex items-center'>
+      {
+        displayMembers.map((member, index) => {
+          const content = (
+            <div 
+              class='relative flex-shrink-0 transition-transform duration-200 hover:scale-110 hover:z-10'
+              style={`margin-left: ${index > 0 ? '-16px' : '0'}; z-index: ${displayMembers.length - index};`}
+              title={member.name}
+            >
+                             <div class='size-16 overflow-hidden rounded-full border-3 border-background bg-muted shadow-lg'>
+                {typeof member.avatar === 'string' ? (
+                  <img 
+                    src={member.avatar} 
+                    alt={member.name} 
+                    class='h-full w-full object-cover'
+                    width={64}
+                    height={64}
+                  />
+                ) : (
+                  <Image 
+                    src={member.avatar} 
+                    alt={member.name} 
+                    class='h-full w-full object-cover'
+                    width={64}
+                    height={64}
+                  />
+                )}
+              </div>
+            </div>
+          )
+
+          return member.href ? (
+            <a 
+              href={member.href} 
+              target={member.href.startsWith('http') ? '_blank' : '_self'} 
+              rel={member.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            >
+              {content}
+            </a>
+          ) : (
+            content
+          )
+        })
+      }
+    </div>
+    
+    {/* 右侧淡出效果 */}
+    <div class='absolute top-0 right-0 h-16 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none'></div>
+  </div>
+</div> 

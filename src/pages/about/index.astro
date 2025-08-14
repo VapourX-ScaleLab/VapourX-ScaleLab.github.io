@@ -5,7 +5,7 @@ import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
-import WhoWeAre from '@/components/about/who-we-are.astro'
+import OverlappingAvatars from '@/components/about/OverlappingAvatars.astro'
 import CommunityStats from '@/components/about/CommunityStats.astro'
 import Sponsors from '@/components/sponsorship/Sponsors.astro'
 import Sponsorship from '@/components/sponsorship/Sponsorship.astro'
@@ -62,20 +62,24 @@ const headings = [
   <p>欢迎所有有志于投身社区建设的朋友们！</p>
   
 
-  <WhoWeAre
+  <OverlappingAvatars
     class='mb-5'
     title='核心团队成员'
-    showAll={true}
     filterByRole={['社区创始人', '核心成员', '社区运营维护']}
+    maxDisplay={10}
   />
 
-  <WhoWeAre
+  <OverlappingAvatars
     class='mb-5'
     title='内容创作者'
-    showAll={true}
     filterByRole={['Blog Writer', '内容创作者']}
+    maxDisplay={10}
   />
 
+  <div class='mt-6 flex flex-wrap gap-3'>
+    <Button title='查看所有成员' href='/peoples' style='ahead' class='w-fit' />
+    <Button title='查看所有成员标签' href='/peoples/tags' style='ahead' class='w-fit' />
+  </div>
 
   {/* about-blog */}
   <h2 id='about-blog'>大事记</h2>

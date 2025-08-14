@@ -35,12 +35,12 @@ const { list } = Astro.props
     // Get school data from the component
     const schoolsData = JSON.parse(document.querySelector('[data-schools]')?.textContent || '[]');
     
-    // Set up dimensions - increased height for more horizontal layout
-    const width = container.offsetWidth || 800;
-    const height = 600; // Increased height for more bubbles visible
-    
     // Responsive bubble sizes
     const isMobile = window.innerWidth <= 768;
+    
+    // Set up dimensions - increased height for more horizontal layout
+    const width = container.offsetWidth || 800;
+    const height = isMobile ? 700 : 600; // Increased height for mobile to prevent overflow
     const maxRadius = isMobile ? 30 : 45; // Smaller on mobile
     const minRadius = isMobile ? 20 : 30; // Smaller on mobile
 
@@ -72,9 +72,9 @@ const { list } = Astro.props
 
     // Set up force simulation for circular layout with responsive settings
     const simulation = d3.forceSimulation(nodes)
-      .force('charge', d3.forceManyBody().strength(isMobile ? -200 : -300)) // Less repulsion on mobile
+      .force('charge', d3.forceManyBody().strength(isMobile ? -150 : -300)) // Reduced repulsion on mobile for tighter spacing
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 4 : 6))) // Smaller collision padding on mobile
+      .force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 2 : 6))) // Smaller collision padding on mobile for tighter spacing
       .force('x', d3.forceX(width / 2).strength(0.1)) // Restored balanced x force
       .force('y', d3.forceY(height / 2).strength(0.1)); // Restored balanced y force
 
@@ -181,7 +181,7 @@ const { list } = Astro.props
       });
 
       // Update collision force with new radii
-      simulation.force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 4 : 6)));
+      simulation.force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 2 : 6)));
 
       // Position bubbles
       bubbles.attr('transform', (d: any) => `translate(${d.x}, ${d.y})`);
@@ -253,7 +253,7 @@ const { list } = Astro.props
   /* Responsive design */
   @media (max-width: 768px) {
     .school-bubbles-container {
-      height: 500px; /* Increased from 350px to 600px for mobile */
+      height: 700px; /* Increased height for mobile to prevent overflow */
     }
   }
 </style> 

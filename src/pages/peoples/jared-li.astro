@@ -2,7 +2,7 @@
 import PersonProfile from '@/components/peoples/PersonProfile.astro'
 import { getMemberById } from '@/utils/members'
 
-const person = getMemberById('jaredli')
+const person = getMemberById('jared-li')
 
 if (!person) {
   return Astro.redirect('/404')

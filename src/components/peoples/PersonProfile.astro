@@ -121,17 +121,21 @@ const headings: { depth: number; slug: string; text: string }[] = []
           研究兴趣
         </h2>
         <div class='space-y-3'>
-          {person.tags.slice(0, 4).map((tag) => (
+          {person.tags && person.tags.length > 0 ? person.tags.slice(0, 4).map((tag) => (
             <a href={`/peoples/tags/${encodeURIComponent(tag)}`} class='block p-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 hover:border-primary/30 transition-all cursor-pointer'>
               <div class='mb-2'>
                 <h3 class='text-sm font-semibold text-foreground'>{tag}</h3>
               </div>
               <p class='text-xs text-muted-foreground leading-relaxed'>
-                {person.research.find(item => item.title === tag)?.description || 
+                {person.research && person.research.find(item => item.title === tag)?.description || 
                  `专注于${tag}相关的研究和工作，在该领域具有丰富的经验和专业知识。`}
               </p>
             </a>
-          ))}
+          )) : (
+            <div class='p-3 text-center text-muted-foreground'>
+              暂无研究兴趣标签
+            </div>
+          )}
         </div>
       </Card>
     </div>
