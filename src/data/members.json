@@ -88,7 +88,7 @@
       "name": "Byml（陈柏均）",
       "avatar": "https://avatars.githubusercontent.com/u/57425001?v=4",
       "organization": "Nanjing University",
-      "role": ["核心成员"],
+      "role": ["内容创作者"],
       "slogan": "我也是个人",
       "description": "南京大学23级本科生，对大语言模型应用、计算机图形学、机器人仿真有所研究。有较丰富的 Linux 服务器、HPC 使用经验。目前主要研究方向为具身智能。",
       "tags": [
@@ -302,7 +302,7 @@
       "avatar": "https://avatars.githubusercontent.com/u/175963788?s=400&u=10d028a96036f3dd615017126246c65edb9c527d&v=4",
       "organization": "SJTU",
       "role": [
-        "核心成员"
+        "社区运营维护"
       ],
       "slogan": "时间不会太远",
       "description": "上海交通大学22级信息工程专业，致力于研究Agent和AI4Science方向",
@@ -346,6 +346,57 @@
       ],
       "email": "12210432@mail.sustech.edu.cn",
       "github": "https://github.com/Victor0700"
+    },
+    {
+      "id": "dehuiwang",
+      "name": "Dehui Wang",
+      "avatar": "https://avatars.githubusercontent.com/u/141940219?s=96&v=4",
+      "organization": "SJTU ScaleLab",
+      "role": [
+        "核心成员"
+      ],
+      "slogan": "Think Twice",
+      "description": "上海交通大学23级本科生，对图形学、模型压缩、计算机视觉、自然语言处理、强化学习都有研究。研究方向是具身智能。",
+      "tags": [
+        "计算机图形学",
+        "强化学习",
+        "模型压缩"
+      ],
+      "research": []
+    },
+    {
+      "id": "ethanqin",
+      "name": "EthanQin（秦逸然）",
+      "avatar": "https://avatars.githubusercontent.com/u/49646214?v=4",
+      "organization": "CUHK(SZ)/Oxford TVG",
+      "role": [
+        "核心成员"
+      ],
+      "slogan": "通专融合，虚实贯通",
+      "description": "I'm Yiran, a forth-year Ph.D. student at The Chinese University of Hong Kong, Shenzhen, advised by Prof. Ruimao Zhang. Currently, I am a visiting Ph.D. student at TVG in Oxford University, advised by Prof. Philip Torr. I also work as a research intern at Shanghai AI Laboratory, advised Prof. Lei Bai. I am honored to collaborate with Prof. Xihui Liu, Dr. Xintao Wang and my friend Jiwen Yu.",
+      "tags": [
+        "世界模型",
+        "人机交互",
+        "具身智能"
+      ],
+      "research": [
+        {
+          "title": "世界模型",
+          "description": "Video generation models as World Simulators (Physics-compliance, Memory Consistency)"
+        },
+        {
+          "title": "人机交互",
+          "description": "Building Real-World Embodied Society with Agents (Spatio-temporal Intelligence, Robotic Planning)"
+        },
+        {
+          "title": "具身智能",
+          "description": "Robot Manipulation, Navigation and Collaborative Simulation (Imitation Learning, Reinforcement Learning)"
+        }
+      ],
+      "email": "yiranqin@link.cuhk.edu.cn",
+      "github": "https://github.com/IranQin",
+      "website": "https://iranqin.github.io/",
+      "linkedin": "https://www.linkedin.com/in/yiran-qin-b508871b2/"
     }
   ]
 } 
