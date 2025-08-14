@@ -63,6 +63,9 @@ const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1) || []
             • Total visits <span id="busuanzi_container_site_pv" style="display: inline !important; visibility: visible !important; opacity: 1 !important;">
               <span id="busuanzi_value_site_pv"></span>
             </span>
+             | visitors <span id="busuanzi_container_site_uv" style="display: inline !important; visibility: visible !important; opacity: 1 !important;">
+              <span id="busuanzi_value_site_uv"></span>
+            </span>
           </span>
         </div>
         {
@@ -106,11 +109,19 @@ const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1) || []
 <script>
   // 强制显示页脚不蒜子统计
   document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('busuanzi_container_site_pv');
-    if (container) {
-      container.style.display = 'inline';
-      container.style.visibility = 'visible';
-      container.style.opacity = '1';
+    const containerPv = document.getElementById('busuanzi_container_site_pv');
+    const containerUv = document.getElementById('busuanzi_container_site_uv');
+    
+    if (containerPv) {
+      containerPv.style.display = 'inline';
+      containerPv.style.visibility = 'visible';
+      containerPv.style.opacity = '1';
+    }
+    
+    if (containerUv) {
+      containerUv.style.display = 'inline';
+      containerUv.style.visibility = 'visible';
+      containerUv.style.opacity = '1';
     }
   });
   
@@ -118,11 +129,19 @@ const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1) || []
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-        const container = document.getElementById('busuanzi_container_site_pv');
-        if (container && container.style.display === 'none') {
-          container.style.display = 'inline';
-          container.style.visibility = 'visible';
-          container.style.opacity = '1';
+        const containerPv = document.getElementById('busuanzi_container_site_pv');
+        const containerUv = document.getElementById('busuanzi_container_site_uv');
+        
+        if (containerPv && containerPv.style.display === 'none') {
+          containerPv.style.display = 'inline';
+          containerPv.style.visibility = 'visible';
+          containerPv.style.opacity = '1';
+        }
+        
+        if (containerUv && containerUv.style.display === 'none') {
+          containerUv.style.display = 'inline';
+          containerUv.style.visibility = 'visible';
+          containerUv.style.opacity = '1';
         }
       }
     });
@@ -130,9 +149,15 @@ const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1) || []
   
   // 开始观察页脚
   document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('busuanzi_container_site_pv');
-    if (container) {
-      observer.observe(container, { attributes: true, attributeFilter: ['style'] });
+    const containerPv = document.getElementById('busuanzi_container_site_pv');
+    const containerUv = document.getElementById('busuanzi_container_site_uv');
+    
+    if (containerPv) {
+      observer.observe(containerPv, { attributes: true, attributeFilter: ['style'] });
+    }
+    
+    if (containerUv) {
+      observer.observe(containerUv, { attributes: true, attributeFilter: ['style'] });
     }
   });
 </script> 
