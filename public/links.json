@@ -175,6 +175,16 @@
           "name": "Northwestern University",
           "link": "https://www.northwestern.edu/",
           "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250811164624654.png"
+        },
+        {
+          "name": "清华大学",
+          "link": "https://www.tsinghua.edu.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250814182850925.png"
+        },
+        {
+          "name": "University of Oxford",
+          "link": "https://www.ox.ac.uk/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250814182930310.png"
         }
       ]
     }
