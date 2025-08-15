@@ -418,6 +418,286 @@
         }
       ],
       "email": "nczyx123@sjtu.edu.cn"
+    },
+    {
+      "id": "tenseconds",
+      "name": "Zhimiao Shi",
+      "avatar": "https://youke1.picui.cn/s1/2025/08/15/689e9eaf8f362.jpg",
+      "organization": "NUDT",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "在绝对的执行力面前，战略不值一提",
+      "description": "研究方向为自驾场景模态转换与生成",
+      "tags": [
+        "空间认知"
+      ],
+      "research": [
+        {
+          "title": "空间认知",
+          "description": "目前在做自驾场景模态转换与生成,但对世界模型和空间认知也充满兴趣"
+        }
+      ],
+      "email": "zhimiao_shi@163.com"
+    },
+    {
+      "id": "jcenaa",
+      "name": "岑俊",
+      "avatar": "https://github.com/Jun-CEN/Jun-CEN.github.io/blob/master/images/myself.jpg",
+      "organization": "Alibaba DAMO Academy",
+      "role": [
+        "核心成员"
+      ],
+      "slogan": "Towards Physical AI",
+      "description": "香港科技大学PhD毕业，目前在阿里巴巴达摩院做具身智能VLA工作，工作有WorldVLA/RynnVLA-001等",
+      "tags": [],
+      "research": [],
+      "email": "jcenaa@connect.ust.hk",
+      "github": "https://github.com/Jun-CEN",
+      "website": "https://cen-jun.com/",
+      "linkedin": "https://www.linkedin.com/in/jun-cen-45b995219/"
+    },
+    {
+      "id": "dingxiangluo",
+      "name": "骆顶翔",
+      "avatar": "https://avatars.githubusercontent.com/u/188998087?v=4&size=64",
+      "organization": "SJTU ScaleLab",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "功不唐捐",
+      "description": "上海交通大学23级本科生，热衷于研究具身智能",
+      "tags": [
+        "VLA",
+        "强化学习"
+      ],
+      "research": [
+        {
+          "title": "VLA",
+          "description": "专注于VLA的研究和工作，在该领域有丰富的经验和专业知识"
+        },
+        {
+          "title": "强化学习",
+          "description": "专注于强化学习offline的探索"
+        }
+      ],
+      "email": "rathus137@gmail.com"
+    },
+    {
+      "id": "yeezie",
+      "name": "王艺清",
+      "avatar": "https://avatars.githubusercontent.com/u/175714297?v=4",
+      "organization": "HIT CMLR",
+      "role": [
+        "内容创作者",
+        "活跃成员"
+      ],
+      "slogan": "yeezie加油",
+      "description": "我叫王艺清，是哈尔滨工业大学2022级未来技术学院人工智能专业的本科生，是哈工大机器学习研究中心的一员，受左旺孟教授指导，在做基于铰接物体的单目视频人手操作4D重建相关工作，曾获国家奖学金、宋庆龄未来助学金。我的研究兴趣包括3d vision，现在我正在探索Embodied AI，特别是手物交互(HOI)方向。",
+      "tags": [
+        "3D重建",
+        "具身智能"
+      ],
+      "research": [
+        {
+          "title": "3D重建",
+          "description": "进一步优化铰接物体的重建效果，目前对数据的要求还是太高了，感觉什么时候可以把youtube上爬下来的视频也重建好，才算是做的差不多了"
+        },
+        {
+          "title": "具身智能",
+          "description": "刚开始接触，希望后面会有一些好的想法"
+        }
+      ],
+      "email": "yeezie66@gmail.com",
+      "github": "https://github.com/Yeezie6",
+      "website": "https://yeezie6.github.io/"
+    },
+    {
+      "id": "minstrelsyxia",
+      "name": "CharlotteXia(夏欣媛)",
+      "avatar": "https://avatars.githubusercontent.com/u/129087396?v=4",
+      "organization": "SJTU",
+      "role": [
+        "内容创作者"
+      ],
+      "slogan": "解放生产，实现共产",
+      "description": "real-to-sim-to-real",
+      "tags": [],
+      "research": [],
+      "email": "char-lotte@sjtu.edu.cn",
+      "github": "https://github.com/MinstrelsyXia",
+      "website": "https://minstrelsyxia.github.io/",
+      "linkedin": "https://www.linkedin.com/in/xinyuan-xia-10016434b/",
+      "bilibili": "https://space.bilibili.com/3461577913141990"
+    },
+    {
+      "id": "sanquine",
+      "name": "SanQuine (Yifan Wang)",
+      "avatar": "https://avatars.githubusercontent.com/anlorla",
+      "organization": "",
+      "role": [
+        "内容创作者",
+        "活跃成员"
+      ],
+      "slogan": "悲观者正确，乐观者前行。",
+      "description": "Incoming Mphil @HKUST(GZ)\nInterest: EAI,Robotics\nMBTI: INTJ\nPlease sit with flowers for a while.",
+      "tags": [
+        "具身智能"
+      ],
+      "research": [
+        {
+          "title": "具身智能",
+          "description": "传统CS转EAI中...\n打算在这个领域深耕下去，并将其作为自己热爱的事业。"
+        }
+      ],
+      "email": "1502848981@qq.com",
+      "github": "https://github.com/anlorla"
+    },
+    {
+      "id": "vegecream",
+      "name": "Vegecream",
+      "avatar": "https://avatars.githubusercontent.com/u/149027210?s=400",
+      "organization": "SJTU 感知与导航研究所",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "夹爪好难调……",
+      "description": "SJTU大二\n对领域十分感兴趣，目前主要关心一些pose estimation工作",
+      "tags": [
+        "灵巧手",
+        "3D重建"
+      ],
+      "research": [
+        {
+          "title": "灵巧手",
+          "description": "已经让leap hand动起来了! 让我看看你的极限!"
+        },
+        {
+          "title": "3D重建",
+          "description": "投影好容易写错……"
+        }
+      ],
+      "email": "ni_yuhui@sjtu.edu.cn",
+      "github": "https://github.com/vegecream"
+    },
+    {
+      "id": "noweat",
+      "name": "高睿涵Gary",
+      "avatar": "https://avatars.githubusercontent.com/u/190497243?v=4",
+      "organization": "UW RSE-Lab, intern@Galaxea Dynamics",
+      "role": [
+        "社区版主",
+        "内容创作者"
+      ],
+      "slogan": "人生海海，山山而川",
+      "description": "I'm a bachelor's student at the University of Washington. My research interests lie in robot design and robot learning.\nPreviously, I was fortunate to work as a research assistant at the Institute for AI Industry Research, Tsinghua University advised by Prof.Guyue Zhou.\nAlso, I was honored to be a research intern at Galaxea Dynamics.",
+      "tags": [
+        "灵巧手"
+      ],
+      "research": [
+        {
+          "title": "灵巧手",
+          "description": "My research focuses on dexterous hands and their data acquisition devices. My goal is to improve the quantity and quality of dexterous manipulation datasets to train more advanced dexterous manipulation models."
+        }
+      ],
+      "email": "ruihangao10@gmail.com",
+      "github": "https://github.com/Gary-Ham/",
+      "website": "https://gary-ham.github.io/RuihanGao.github.io/",
+      "linkedin": "https://www.linkedin.com/in/ryan-gao-81b4b9362/"
+    },
+    {
+      "id": "jsun",
+      "name": "孙佳",
+      "avatar": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.duitang.com%2Fblog%2F%3Fid%3D1485428346&psig=AOvVaw0qUtcjX7D7eAx2uFqD2sa8&ust=1755276708350000&source=images&cd=vfe&opi=89978449&ved=2ahUKEwio1d624YqPAxUGIzQIHb1ZO6gQjRx6BAgAEBo",
+      "organization": "无",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "做能干活的机器人",
+      "description": "隐士，圈中小透明。",
+      "tags": [
+        "机器人"
+      ],
+      "research": [
+        {
+          "title": "机器人",
+          "description": "多臂运动规划，机械臂操作工具"
+        }
+      ],
+      "email": "JiaSUN95@outlook.com"
+    },
+    {
+      "id": "weijie",
+      "name": "沈炜杰",
+      "avatar": "https://avatars.githubusercontent.com/u/122192341?s=400&u=b3e9ccc266fe439cb47e725f3632a01330076850&v=4",
+      "organization": "SJTU ScaleLab",
+      "role": [
+        "核心成员"
+      ],
+      "slogan": "真正的大师往往怀着一颗学徒的心",
+      "description": "专注于具身智能，希望将AI打造成真正理解世界，作用世界的闭环控制系统",
+      "tags": [
+        "VLA"
+      ],
+      "research": [
+        {
+          "title": "VLA",
+          "description": "我的研究兴趣集中在 Vision-Language-Action（VLA）领域，关注视觉感知、语言理解与动作决策的融合方法。希望探索如何通过多模态信息的协同提升智能体在真实环境中的感知、推理与执行能力，为机器人实现更高水平的自主性与适应性提供支持。"
+        }
+      ]
+    },
+    {
+      "id": "jeffyaoliang",
+      "name": "卞耀亮",
+      "avatar": "https://raw.githubusercontent.com/Jeffyaoliang/jeffyaoliang.github.io/main/files/avatar/me.png",
+      "organization": "USTC/NUS",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "work hard,play hard",
+      "description": "我是卞耀亮，目前就读中国科学技术大学微电子本科三年级，计划申请计算机视觉与机器人方向的研究型硕士，并希望未来继续攻读博士。我有跨领域的科研和实践经验，嵌入式系统和硬件设计。我曾参与 Nordic 芯片低功耗通信项目，并在2023年中科大Robogame中和队友合作从零构建了一个机器人，使用纯视觉方案完成爬坡，避障，识别矿石并运输，在39支竞技组队伍中获得二等奖，目前在NUS刘星昱老师课题组暑研。我擅长将理论与实践结合，具备独立科研能力和团队协作经验。",
+      "tags": [
+        "灵巧手"
+      ],
+      "research": [
+        {
+          "title": "灵巧手",
+          "description": "一些灵巧操作"
+        }
+      ],
+      "email": "bianyaoliang@mail.ustc.edu.cn",
+      "github": "https://github.com/jeffyaoliang",
+      "website": "https://jeffyaoliang.github.io/",
+      "linkedin": "https://www.linkedin.com/in/yaoliang-bian-5963852b4/",
+      "bilibili": "https://space.bilibili.com/1945170421"
+    },
+    {
+      "id": "xiaowei",
+      "name": "肖巍",
+      "avatar": "https://xiaowei-i.github.io/images/head.jpg",
+      "organization": "SJTU Scalelab",
+      "role": [
+        "内容创作者"
+      ],
+      "slogan": "Slow Science",
+      "description": "Robotic Learning & Reinforcement Learning (RL^2)",
+      "tags": [
+        "强化学习",
+        "世界模型"
+      ],
+      "research": [
+        {
+          "title": "强化学习",
+          "description": "RL is all you need when expert data run out"
+        },
+        {
+          "title": "世界模型",
+          "description": "World Model is easier to Scaling than VLA"
+        }
+      ],
+      "email": "xiaowei2002103@foxmail.com",
+      "github": "https://github.com/XiaoWei-i",
+      "website": "https://xiaowei-i.github.io/"
     }
   ]
 } 
