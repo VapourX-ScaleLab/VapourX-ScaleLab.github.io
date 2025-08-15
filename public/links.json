@@ -185,6 +185,26 @@
           "name": "University of Oxford",
           "link": "https://www.ox.ac.uk/",
           "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250814182930310.png"
+        },
+        {
+          "name": "中国科学技术大学",
+          "link": "https://www.ustc.edu.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250815163643312.png"
+        },
+        {
+          "name": "国防科技大学",
+          "link": "https://www.nudt.edu.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250815163811316.png"
+        },
+        {
+          "name": "阿里达摩院",
+          "link": "https://damo.alibaba.com/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250815163922320.png"
+        },
+        {
+          "name": "University of Washington",
+          "link": "https://www.washington.edu/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250815164003262.png"
         }
       ]
     }
