@@ -698,6 +698,61 @@
       "email": "xiaowei2002103@foxmail.com",
       "github": "https://github.com/XiaoWei-i",
       "website": "https://xiaowei-i.github.io/"
+    },
+    {
+      "id": "zeery",
+      "name": "Zirui Song",
+      "avatar": "https://ziruisongbest.github.io/images/profile.jpg",
+      "organization": "MBZUAI",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "Make Global Change",
+      "description": "MBZUAI PhD student, NLPer in Robotic and Multimodal.",
+      "tags": [
+        "VLA",
+        "具身智能"
+      ],
+      "research": [
+        {
+          "title": "VLA",
+          "description": "UAV 不只是 VLN"
+        },
+        {
+          "title": "具身智能",
+          "description": "搭建下一代仿生人形智能体"
+        }
+      ],
+      "email": "zirui.song@mbzuai.ac.ae",
+      "website": "https://ziruisongbest.github.io/"
+    },
+    {
+      "id": "mirage",
+      "name": "mirage yinsu（郭文涛）",
+      "avatar": "https://avatars.githubusercontent.com/u/110731560?v=4",
+      "organization": "X-Institute / Beijing Institute of Technology",
+      "role": [
+        "内容创作者",
+        "活跃成员"
+      ],
+      "slogan": "感于触，行于智",
+      "description": "来自北京理工大学计算机学院徐特立英才班的大三本科生，聚焦于具身智能、机器人策略与机构设计等交叉领域，兼具算法与硬件背景。\n研究方面，我主持并完成了多个机器人手项目，例如\"基于霍肯连杆的环境约束自适应夹取机器人手（Hockens-A Hand）\"，该设计结合双平行四边形与四连杆机构，通过机械智能实现三种抓取模式，接收于IROS 2025。\n在竞赛与应用层面，我带领团队参与全国级人工智能与机器人赛事，作为队长取得三项国家级一等奖，也参与过如LLM微调，agent应用等赛事并取得国家级奖项。\n希望未来能在具身智能的真实环境适应与泛化问题上深耕，结合硬件结构创新与高效数据利用方法，推动机器人在复杂现实场景中的可用性与可靠性提升。",
+      "tags": [
+        "机器人",
+        "强化学习"
+      ],
+      "research": [
+        {
+          "title": "机器人",
+          "description": "专注于机器人末端执行器的设计与优化，包括机械结构、驱动与传感技术。\n关注机器人在工业与服务场景中的灵巧操作与人机协作能力提升。"
+        },
+        {
+          "title": "强化学习",
+          "description": "关注利用强化学习方法优化机器人操作策略，实现高效抓取与灵活操控。"
+        }
+      ],
+      "email": "2840369457@qq.com",
+      "github": "https://github.com/yinsumirage"
     }
   ]
 } 

@@ -92,6 +92,7 @@ if (!showAll && !customMembers) {
                       class='h-full w-full object-cover'
                       width={64}
                       height={64}
+                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                     />
                   ) : (
                     <Image 
@@ -102,6 +103,17 @@ if (!showAll && !customMembers) {
                       height={64}
                     />
                   )}
+                  <div 
+                    class="size-16 flex items-center justify-center text-white text-lg font-bold"
+                    style={`display: none; background: ${
+                      member.name.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
+                      member.name.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
+                      member.name.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
+                      'linear-gradient(135deg, #ec4899, #f43f5e)'
+                    }`}
+                  >
+                    {member.name.charAt(0).toUpperCase()}
+                  </div>
                 </div>
                 {/* 可选的在线状态指示器 */}
                 <div class='absolute -bottom-1 -right-1 size-4 rounded-full border-2 border-background bg-green-500'></div>

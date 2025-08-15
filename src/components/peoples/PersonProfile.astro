@@ -27,7 +27,19 @@ const headings: { depth: number; slug: string; text: string }[] = []
                 class='h-32 w-32 rounded-full border-4 border-border object-cover'
                 width={128}
                 height={128}
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               />
+              <div 
+                class="h-32 w-32 rounded-full border-4 border-border flex items-center justify-center text-white text-4xl font-bold"
+                style={`display: none; background: ${
+                  person.name.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
+                  person.name.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
+                  person.name.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
+                  'linear-gradient(135deg, #ec4899, #f43f5e)'
+                }`}
+              >
+                {person.name.charAt(0).toUpperCase()}
+              </div>
               <div class='absolute -bottom-2 -right-2 size-6 rounded-full border-2 border-background bg-green-500'></div>
             </div>
           </div>

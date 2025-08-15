@@ -25,7 +25,7 @@ const {
   members: customMembers, 
   filterByRole, 
   filterByTags,
-  maxDisplay = 8,
+  maxDisplay = 6,
   ...props 
 } = Astro.props
 
@@ -76,9 +76,9 @@ displayMembers = displayMembers.slice(0, maxDisplay)
 >
   <div class='text-lg font-medium'>{title}</div>
   
-  <div class='relative'>
+  <div class='relative overflow-hidden'>
     {/* 头像容器 */}
-    <div class='flex items-center'>
+    <div class='flex items-center max-w-full'>
       {
         displayMembers.map((member, index) => {
           const content = (
@@ -87,7 +87,7 @@ displayMembers = displayMembers.slice(0, maxDisplay)
               style={`margin-left: ${index > 0 ? '-16px' : '0'}; z-index: ${displayMembers.length - index};`}
               title={member.name}
             >
-                             <div class='size-16 overflow-hidden rounded-full border-3 border-background bg-muted shadow-lg'>
+              <div class='size-16 overflow-hidden rounded-full border-3 border-background bg-muted shadow-lg relative'>
                 {typeof member.avatar === 'string' ? (
                   <img 
                     src={member.avatar} 
@@ -95,6 +95,7 @@ displayMembers = displayMembers.slice(0, maxDisplay)
                     class='h-full w-full object-cover'
                     width={64}
                     height={64}
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                   />
                 ) : (
                   <Image 
@@ -105,6 +106,17 @@ displayMembers = displayMembers.slice(0, maxDisplay)
                     height={64}
                   />
                 )}
+                <div 
+                  class="size-16 flex items-center justify-center text-white text-lg font-bold leading-none select-none"
+                  style={`display: none; background: ${
+                    member.name.length % 4 === 0 ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' :
+                    member.name.length % 4 === 1 ? 'linear-gradient(135deg, #10b981, #14b8a6)' :
+                    member.name.length % 4 === 2 ? 'linear-gradient(135deg, #f97316, #ef4444)' :
+                    'linear-gradient(135deg, #ec4899, #f43f5e)'
+                  }`}
+                >
+                  <span class="absolute inset-0 flex items-center justify-center">{member.name.charAt(0).toUpperCase()}</span>
+                </div>
               </div>
             </div>
           )
@@ -122,9 +134,135 @@ displayMembers = displayMembers.slice(0, maxDisplay)
           )
         })
       }
+      
+      {/* 省略号直接跟在最后一个头像后面 */}
+      {displayMembers.length > 2 && (
+        <div class='flex items-center gap-1 ml-2 ellipsis-indicator'>
+          <div class='w-2 h-2 rounded-full bg-muted-foreground/40'></div>
+          <div class='w-2 h-2 rounded-full bg-muted-foreground/40'></div>
+          <div class='w-2 h-2 rounded-full bg-muted-foreground/40'></div>
+        </div>
+      )}
     </div>
-    
-    {/* 右侧淡出效果 */}
-    <div class='absolute top-0 right-0 h-16 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none'></div>
   </div>
-</div> 
+</div>
+
+<style>
+  /* 优化随机头像字母的居中显示 */
+  .size-16 .absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* 确保字母在圆形头像中完全居中，考虑重叠效果 */
+  .size-16 .text-lg {
+    line-height: 1;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+  
+  /* 针对重叠头像的特殊居中处理 */
+  .size-16.overflow-hidden {
+    position: relative;
+  }
+  
+  /* 小屏幕设备响应式处理 - 平板 */
+  @media (max-width: 1024px) {
+    .size-16 {
+      width: 3rem;
+      height: 3rem;
+    }
+    
+    .flex.items-center > div:not(:first-child) {
+      margin-left: -12px !important;
+    }
+    
+    /* 平板隐藏超过5个的头像 */
+    .flex.items-center > div:nth-child(n+6) {
+      display: none;
+    }
+  }
+
+  /* 窄屏响应式处理 - 手机横屏和小平板 */
+  @media (max-width: 768px) {
+    .size-16 {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    
+    .flex.items-center > div:not(:first-child) {
+      margin-left: -10px !important;
+    }
+    
+    /* 窄屏隐藏超过4个的头像 */
+    .flex.items-center > div:nth-child(n+5) {
+      display: none;
+    }
+
+    .flex.items-center .gap-1 {
+      margin-left: 0.5rem !important;
+    }
+
+    .flex.items-center .w-2 {
+      width: 0.375rem;
+      height: 0.375rem;
+    }
+  }
+
+  /* 超窄屏响应式处理 - 手机竖屏 */
+  @media (max-width: 480px) {
+    .size-16 {
+      width: 2rem;
+      height: 2rem;
+    }
+    
+    .flex.items-center > div:not(:first-child) {
+      margin-left: -8px !important;
+    }
+    
+    /* 超窄屏只显示3个头像 */
+    .flex.items-center > div:nth-child(n+4) {
+      display: none;
+    }
+
+    .flex.items-center .gap-1 {
+      margin-left: 0.25rem !important;
+    }
+
+    .flex.items-center .w-2 {
+      width: 0.25rem;
+      height: 0.25rem;
+    }
+  }
+
+  /* 极窄屏响应式处理 - 小手机 */
+  @media (max-width: 360px) {
+    .size-16 {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+    
+    .flex.items-center > div:not(:first-child) {
+      margin-left: -6px !important;
+    }
+    
+    /* 极窄屏只显示2个头像加省略号 */
+    .flex.items-center > div:nth-child(n+3) {
+      display: none;
+    }
+  }
+
+  /* 确保省略号在各种屏幕尺寸下都能正常显示 */
+  .ellipsis-indicator {
+    flex-shrink: 0;
+  }
+</style> 
