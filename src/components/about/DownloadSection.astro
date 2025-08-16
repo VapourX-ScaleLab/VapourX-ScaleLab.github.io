@@ -1,0 +1,74 @@
+---
+import { Button } from 'astro-pure/user'
+
+interface DownloadFile {
+  name: string
+  description: string
+  filename: string
+  filepath: string
+  icon?: string
+  size?: string
+}
+
+interface Props {
+  title?: string
+  description?: string
+  files: DownloadFile[]
+  class?: string
+}
+
+const { title = "下载模板", description = "点击以下链接下载相应的模板文件", files, class: className } = Astro.props
+---
+
+<div class={`download-section ${className || ''}`}>
+  {title && <h3 class="text-xl font-semibold mb-4">{title}</h3>}
+  {description && <p class="text-muted-foreground mb-6">{description}</p>}
+  
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {files.map((file) => (
+      <div class="download-card border border-border rounded-lg p-4 hover:border-primary/50 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center gap-2">
+            {file.icon && (
+              <span class="text-lg">{file.icon}</span>
+            )}
+            <h4 class="font-medium text-foreground">{file.name}</h4>
+          </div>
+          {file.size && (
+            <span class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+              {file.size}
+            </span>
+          )}
+        </div>
+        
+        <p class="text-sm text-muted-foreground mb-4 line-clamp-2">
+          {file.description}
+        </p>
+        
+        <Button 
+          title="下载文件" 
+          href={file.filepath}
+          download={file.filename}
+          style="ahead"
+          class="w-full"
+        >
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            下载 {file.filename}
+          </span>
+        </Button>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

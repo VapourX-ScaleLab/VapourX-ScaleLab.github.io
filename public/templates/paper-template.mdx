@@ -1,0 +1,69 @@
+---
+title: 'Paper Title'
+description: 'A comprehensive paper description that explains the main contributions and significance of the research'
+order: 1
+updatedDate: 2025-01-01
+author: "Your Name"
+authorAvatar: "https://avatars.githubusercontent.com/u/your-username"
+---
+import { Card } from 'astro-pure/user'
+import { Timeline } from 'astro-pure/user'
+import { Aside } from 'astro-pure/user'
+
+<Aside type="tip">
+点击card可以导航到对应的paper页面。
+</Aside>
+
+请将相关的图片都加入到一个目录当中，然后将这个图片目录和mdx文件一起打包发送邮箱！！！另外，如果你想要写一个general summary，请另外写一个mdx文件。
+
+### 同一系列工作
+
+<Card
+  as='a'
+  href='https://arxiv.org/pdf/xxxx.xxxxx'
+  heading='Related Paper 1'
+  subheading='同一系列的相关工作'
+  date='2024-01'
+>
+![Related Paper 1](./papers/related_paper1.png)
+</Card>
+<br />
+
+<Card
+  as='a'
+  href='https://arxiv.org/pdf/xxxx.xxxxx'
+  heading='Related Paper 2'
+  subheading='同一系列的相关工作'
+  date='2024-02'
+>
+![Related Paper 2](./papers/related_paper2.png)
+</Card>
+<br />
+
+### 相关工作
+
+<Card
+  as='a'
+  href='https://arxiv.org/pdf/xxxx.xxxxx'
+  heading='Competing Work 1'
+  subheading='竞争或相关的工作'
+  date='2023-12'
+>
+![Competing Work 1](./papers/competing_work1.png)
+</Card>
+<br />
+
+<Card
+  as='a'
+  href='https://arxiv.org/pdf/xxxx.xxxxx'
+  heading='Competing Work 2'
+  subheading='竞争或相关的工作'
+  date='2023-11'
+>
+![Competing Work 2](./papers/competing_work2.png)
+</Card>
+
+
+---
+
+*Last updated: Jan.01 2025*

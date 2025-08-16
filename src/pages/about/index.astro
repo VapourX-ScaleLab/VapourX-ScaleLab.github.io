@@ -9,6 +9,7 @@ import OverlappingAvatars from '@/components/about/OverlappingAvatars.astro'
 import CommunityStats from '@/components/about/CommunityStats.astro'
 import Sponsors from '@/components/sponsorship/Sponsors.astro'
 import Sponsorship from '@/components/sponsorship/Sponsorship.astro'
+import DownloadSection from '@/components/about/DownloadSection.astro'
 import alipay from '@/assets/alipay-qrcode.jpg'
 import wechat from '@/assets/wechat-qrcode.jpg'
 import avatar from '@/assets/vapourx-clean.jpg'
@@ -56,6 +57,29 @@ const headings = [
     <li>邮箱：<a href='mailto:vapourx-open-forum@outlook.com'>vapourx-open-forum@outlook.com</a></li>
     <li>成员信息表单：<a href='/member-form'>填写成员信息表单</a> - 填写完成后可下载对应的JSON文件，将该文件附在邮件中发送给我们</li>
   </ul>
+  <p>如果你想成为社区的博客贡献者和Paper List贡献者，下载以下模板进行编辑，并且将编辑后的文件发送到我们的邮箱当中，我们会尽快审核联系！</p>
+  <DownloadSection
+    title="贡献模板下载"
+    description="下载以下模板文件，按照模板格式编写您的内容，然后发送到我们的邮箱进行审核。"
+    files={[
+      {
+        name: "Blog模板",
+        description: "用于编写博客文章的Markdown模板，包含完整的frontmatter配置和内容结构示例。",
+        filename: "blog-template.mdx",
+        filepath: "/templates/blog-template.mdx",
+        icon: "📝",
+        size: "2.1 KB"
+      },
+      {
+        name: "PaperList模板", 
+        description: "用于编写PaperList的.mdx模板文件，包含完整的frontmatter配置和内容结构示例。",
+        filename: "paper-template.mdx",
+        filepath: "/templates/paper-template.mdx",
+        icon: "📄",
+        size: "3.2 KB"
+      }
+    ]}
+  />
 
   {/* team members */}
   <h2 id='team'>社区小伙伴</h2>

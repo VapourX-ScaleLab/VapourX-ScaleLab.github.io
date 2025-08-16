@@ -1,0 +1,210 @@
+---
+title: 'Your Blog Title Here'
+publishDate: 2025-01-01
+updatedDate: 2025-01-01
+description: 'A brief description of your blog post that will appear in previews and search results. Keep it concise but informative.'
+tags:
+  - Tag1
+  - Tag2
+  - Tag3
+language: '中文'
+heroImage: {src: './images/your-hero-image.png'}
+author: "Your Name"
+authorAvatar: "https://avatars.githubusercontent.com/u/your-username"
+draft: false
+comment: true
+---
+
+在上传mdx文件时，请将相关的图片都加入到一个目录当中，然后将这个图片目录和mdx文件一起打包发送邮箱！！！
+
+## 引言
+
+在这里写入您的博客引言部分。可以介绍文章的主题、背景和主要内容。
+
+## 主要内容
+
+### 1. 基础文本格式
+
+**粗体文本** 和 *斜体文本* 是常用的强调方式。
+
+> 这是一个引用块，用于突出重要的观点或引用他人的话。
+
+### 2. 列表格式
+
+#### 无序列表
+- 项目1
+- 项目2
+  - 子项目2.1
+  - 子项目2.2
+- 项目3
+
+#### 有序列表
+1. 第一步
+2. 第二步
+3. 第三步
+
+### 3. 代码块
+
+#### 行内代码
+使用 `console.log("Hello World")` 来输出信息。
+
+#### 代码块
+```javascript
+// JavaScript 代码示例
+function helloWorld() {
+  console.log("Hello, VapourX!");
+  return "Welcome to our community!";
+}
+
+// 调用函数
+const message = helloWorld();
+```
+
+```python
+# Python 代码示例
+import torch
+import torch.nn as nn
+
+class SimpleModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.linear = nn.Linear(10, 1)
+    
+    def forward(self, x):
+        return self.linear(x)
+
+# 创建模型实例
+model = SimpleModel()
+```
+
+### 4. 图片展示
+
+![图片描述](./images/image1.png)
+
+![图片描述](./images/image2.png)
+
+### 5. 数学公式
+
+在MDX中，您可以使用LaTeX语法来编写数学公式：
+
+行内公式：$E = mc^2$
+
+块级公式：
+$$
+\frac{df}{dx} = \lim_{h0} \frac{f(x + h) - f(x)}{h}
+$$
+
+### 6. 表格
+
+| 列1 | 列2 | 列3 |
+|-----|-----|-----|
+| 数据1 | 数据2 | 数据3 |
+| 数据4 | 数据5 | 数据6 |
+
+### 7. 链接和引用
+
+访问 [VapourX官网](https://vapourx-scalelab.github.io) 了解更多信息。
+
+### 8. 分割线
+
+---
+
+### 9. 任务列表
+
+- [x] 已完成的任务
+- [ ] 未完成的任务
+- [ ] 另一个待办事项
+
+### 10. 脚注
+
+这里是一个脚注示例[^1]。
+
+[^1]: 这是脚注的内容。
+
+### 11. 高亮文本
+
+==这是高亮显示的文本==
+
+### 12. 删除线
+
+~~这是被删除的文本~~
+
+## 高级MDX功能
+
+### 自定义组件
+
+您可以在MDX中使用自定义的React组件：
+
+```jsx
+<CustomComponent 
+  title="组件标题"
+  description="组件描述"
+/>
+```
+
+### 条件渲染
+
+```jsx
+{condition && <Component />}
+```
+
+### 动态内容
+
+```jsx
+{items.map(item => (
+  <div key={item.id}>{item.name}</div>
+))}
+```
+
+## 图片布局示例
+
+### 并排图片
+
+<div class="flex flex-col md:flex-row gap-6 items-start">
+  <div class="flex-shrink-0 md:w-1/2">
+
+![左侧图片](./images/left-image.png)
+
+  </div>
+  <div class="flex-shrink-0 md:w-1/2">
+
+![右侧图片](./images/right-image.png)
+
+  </div>
+</div>
+
+### 图片与文字并排
+
+<div class="flex flex-col md:flex-row gap-6 items-start">
+  <div class="flex-shrink-0 md:w-1/4">
+
+![VapourX Logo](./images/vapourx-logo.png)
+
+  </div>
+</div>
+
+## 总结
+
+在这里总结您的主要观点和结论。
+
+## 未来工作
+
+讨论可能的后续研究方向或改进方向。
+
+## 致谢
+
+感谢所有为本文提供帮助和支持的人。
+
+---
+
+# 参考文献
+
+[1] [论文标题1](https://arxiv.org/abs/xxxx.xxxxx)
+
+[2] [论文标题2](https://arxiv.org/abs/xxxx.xxxxx)
+
+[3] [论文标题3](https://arxiv.org/abs/xxxx.xxxxx)
+
+[4] [博客文章](https://example.com/blog-post)
+
+[5] [官方文档](https://docs.example.com)
