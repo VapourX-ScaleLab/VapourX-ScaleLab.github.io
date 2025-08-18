@@ -1,0 +1,12 @@
+---
+import PersonProfile from '@/components/peoples/PersonProfile.astro'
+import { getMemberById } from '@/utils/members'
+
+const person = getMemberById('ClothingCat')
+
+if (!person) {
+  return Astro.redirect('/404')
+}
+---
+
+<PersonProfile person={person} /> 

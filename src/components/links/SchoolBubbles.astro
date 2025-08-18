@@ -35,14 +35,14 @@ const { list } = Astro.props
     // Get school data from the component
     const schoolsData = JSON.parse(document.querySelector('[data-schools]')?.textContent || '[]');
     
-    // Responsive bubble sizes
+    // Responsive bubble sizes - reduced overall size
     const isMobile = window.innerWidth <= 768;
     
-    // Set up dimensions - increased height for more horizontal layout
+    // Set up dimensions - reduced height for more compact layout
     const width = container.offsetWidth || 800;
-    const height = isMobile ? 700 : 600; // Increased height for mobile to prevent overflow
-    const maxRadius = isMobile ? 30 : 45; // Smaller on mobile
-    const minRadius = isMobile ? 20 : 30; // Smaller on mobile
+    const height = isMobile ? 500 : 450; // Reduced height significantly
+    const maxRadius = isMobile ? 22 : 32; // Reduced from 30/45 to 22/32
+    const minRadius = isMobile ? 15 : 22; // Reduced from 20/30 to 15/22
 
     // Create SVG
     const svg = d3.select('#school-bubbles')
@@ -70,13 +70,13 @@ const { list } = Astro.props
       targetRadius: minRadius + Math.random() * (maxRadius - minRadius)
     }));
 
-    // Set up force simulation for circular layout with responsive settings
+    // Set up force simulation for circular layout with balanced spacing
     const simulation = d3.forceSimulation(nodes)
-      .force('charge', d3.forceManyBody().strength(isMobile ? -150 : -300)) // Reduced repulsion on mobile for tighter spacing
+      .force('charge', d3.forceManyBody().strength(isMobile ? -80 : -150)) // Moderate repulsion for balanced spacing
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 2 : 6))) // Smaller collision padding on mobile for tighter spacing
-      .force('x', d3.forceX(width / 2).strength(0.1)) // Restored balanced x force
-      .force('y', d3.forceY(height / 2).strength(0.1)); // Restored balanced y force
+      .force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 1.5 : 2))) // Small but visible gap
+      .force('x', d3.forceX(width / 2).strength(0.12))
+      .force('y', d3.forceY(height / 2).strength(0.12));
 
     // Create bubble elements
     const bubbles = bubbleGroup.selectAll('.bubble-group')
@@ -92,7 +92,7 @@ const { list } = Astro.props
       .attr('r', (d: any) => d.radius)
       .attr('fill', 'white')
       .attr('stroke', '#e0e0e0')
-      .attr('stroke-width', 3);
+      .attr('stroke-width', 2); // Reduced stroke width
 
     // Add images
     bubbles.append('defs')
@@ -107,17 +107,17 @@ const { list } = Astro.props
       .attr('href', (d: any) => d.avatar)
       .attr('x', 0)
       .attr('y', 0)
-      .attr('width', (d: any) => (d.radius - 6) * 2)
-      .attr('height', (d: any) => (d.radius - 6) * 2)
+      .attr('width', (d: any) => (d.radius - 4) * 2) // Reduced padding
+      .attr('height', (d: any) => (d.radius - 4) * 2) // Reduced padding
       .attr('preserveAspectRatio', 'xMidYMid slice');
 
     // Add image circles
     bubbles.append('circle')
       .attr('class', 'bubble-image')
-      .attr('r', (d: any) => d.radius - 6)
+      .attr('r', (d: any) => d.radius - 4) // Reduced padding
       .attr('fill', (d: any, i: number) => `url(#school-pattern-${i})`)
       .attr('stroke', 'white')
-      .attr('stroke-width', 2);
+      .attr('stroke-width', 1.5); // Reduced stroke width
 
     // Add tooltip
     const tooltip = d3.select('body')
@@ -137,7 +137,7 @@ const { list } = Astro.props
     bubbles
       .on('mouseenter', function(event: any, d: any) {
         d.isHovered = true;
-        d.targetRadius = d.originalRadius * 1.3; // Reduced hover scale
+        d.targetRadius = d.originalRadius * 1.2; // Reduced hover scale for less expansion
         
         // Show tooltip
         tooltip.transition()
@@ -181,7 +181,7 @@ const { list } = Astro.props
       });
 
       // Update collision force with new radii
-      simulation.force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 2 : 6)));
+      simulation.force('collision', d3.forceCollide().radius((d: any) => d.radius + (isMobile ? 1.5 : 2)));
 
       // Position bubbles
       bubbles.attr('transform', (d: any) => `translate(${d.x}, ${d.y})`);
@@ -191,15 +191,15 @@ const { list } = Astro.props
         .attr('r', (d: any) => d.radius);
       
       bubbles.select('.bubble-image')
-        .attr('r', (d: any) => d.radius - 6);
+        .attr('r', (d: any) => d.radius - 4);
 
       // Update pattern size
       bubbles.select('pattern image')
-        .attr('width', (d: any) => (d.radius - 6) * 2)
-        .attr('height', (d: any) => (d.radius - 6) * 2);
+        .attr('width', (d: any) => (d.radius - 4) * 2)
+        .attr('height', (d: any) => (d.radius - 4) * 2);
     });
 
-    // Add mouse force for repulsion
+    // Add mouse force for repulsion with reduced range
     svg.on('mousemove', function(event: any) {
       const [mouseX, mouseY] = d3.pointer(event);
       
@@ -208,8 +208,8 @@ const { list } = Astro.props
         const dy = d.y - mouseY;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        const repulsionRange = isMobile ? 60 : 80; // Smaller range on mobile
-        const repulsionForce = isMobile ? 1.0 : 1.5; // Less force on mobile
+        const repulsionRange = isMobile ? 40 : 50; // Moderate range for balanced spacing
+        const repulsionForce = isMobile ? 0.7 : 1.0; // Moderate force
         
         if (distance < repulsionRange && !d.isHovered) {
           const force = (repulsionRange - distance) / repulsionRange * repulsionForce;
@@ -228,8 +228,8 @@ const { list } = Astro.props
 <style>
   .school-bubbles-container {
     width: 100%;
-    height: 600px; /* Increased from 450px to 900px */
-    margin: 2rem 0;
+    height: 450px; /* Reduced from 600px to 450px */
+    margin: 1.5rem 0; /* Reduced margin */
     overflow: hidden;
   }
 
@@ -243,7 +243,7 @@ const { list } = Astro.props
   }
 
   .bubble-group:hover .bubble-bg {
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15)); /* Reduced shadow */
   }
 
   .bubble-image {
@@ -253,7 +253,8 @@ const { list } = Astro.props
   /* Responsive design */
   @media (max-width: 768px) {
     .school-bubbles-container {
-      height: 700px; /* Increased height for mobile to prevent overflow */
+      height: 500px; /* Reduced height for mobile */
+      margin: 1rem 0; /* Reduced margin for mobile */
     }
   }
 </style> 

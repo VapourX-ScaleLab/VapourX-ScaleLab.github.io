@@ -21,6 +21,18 @@
           "intro": "Building Real-World Embodied Society with Agents",
           "link": "https://mars-eai.github.io/",
           "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250807232146555.png"
+        },        
+        {
+          "name": "AIGC-Class",
+          "intro": "上海交通大学学生创新中心AIGC班",
+          "link": "https://sjtu-aigc.github.io/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250807231827894.png"
+        },
+        {
+          "name": "DataWhale",
+          "intro": "AI学习开源社区",
+          "link": "https://datawhale.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250818201013722.png"
         }
       ]
     }
@@ -43,10 +55,16 @@
           "avatar": "https://i.imgs.ovh/2025/08/08/4xzbq.png"
         },
         {
-          "name": "AIGC-Class",
-          "intro": "上海交通大学学生创新中心AIGC班",
-          "link": "https://sjtu-aigc.github.io/",
-          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250807231827894.png"
+          "name": "地瓜机器人",
+          "intro": "加速机器智能进化，促进人机和谐伴生",
+          "link": "https://d-robotics.cc/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250818201915705.jpg"
+        },
+        {
+          "name": "PNDbotics",
+          "intro": "Liberating human beings from repetitive labor",
+          "link": "https://pndbotics.com/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250818202921751.png"
         }
       ]
     }
@@ -205,6 +223,21 @@
           "name": "University of Washington",
           "link": "https://www.washington.edu/",
           "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250815164003262.png"
+        },
+        {
+          "name": "MBZUAI",
+          "link": "https://mbzuai.ac.ae/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250818205917417.png"
+        },
+        {
+          "name": "南开大学",
+          "link": "https://www.nankai.edu.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250818210036208.png"
+        },
+        {
+          "name": "上海创智学院",
+          "link": "https://www.sii.edu.cn/",
+          "avatar": "https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250818210328982.png"
         }
       ]
     }

@@ -753,6 +753,161 @@
       ],
       "email": "2840369457@qq.com",
       "github": "https://github.com/yinsumirage"
+    },
+    {
+      "id": "SoulHomes",
+      "name": "SoulHomes（王嘉宁）",
+      "avatar": "https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/preview/KWCab7UBNo0lLsxXSS7cHr7TnXd/?preview_type=16",
+      "organization": "Wuhan University（DeepRoute AI）",
+      "role": [
+        "技术开发",
+        "活跃成员"
+      ],
+      "slogan": "血肉苦弱，机械飞升",
+      "description": "武汉大学本硕，三维重建/vla背景，熟悉C++/python，下一个目标是具身智能",
+      "tags": [
+        "世界模型"
+      ],
+      "research": [
+        {
+          "title": "世界模型",
+          "description": "具身智能的数据采集和标注较为困难，如何结合当前的重建和仿真构建新的数据范式，从而为具身智能提供数据闭环，所以我理解世界模型是解决这一问题的关键"
+        }
+      ],
+      "email": "617984231@qq.com"
+    },
+    {
+      "id": "里脊",
+      "name": "里脊",
+      "avatar": "",
+      "organization": "东华大学---《财经杂志》---傅利叶",
+      "role": [
+        "品牌大使"
+      ],
+      "slogan": "玩中学",
+      "description": "你们好，可以叫我里脊。\n我毕业于东华大学信息管理专业，毕业后在国内一家叫《晚点LatePost》的媒体担任新能源汽车记者，大概做了两、三年，今年转行到机器人行业，目前在傅利叶做品牌，负责该公司的技术产品营销、官方口径的内容和维护媒体关系。\n我对机器人充满好奇，尤其是在技术和产品上有很强的探索欲，希望能加入优秀的社区，向最专业、最努力、最有想法的同学学习，大家一起成长。\n玩中学！快乐成长\n\nPS：\n我是工作党，如果是线下活动，我可以贡献周末时间。如果是线上的一些内容，工作日晚上也OK。",
+      "tags": [
+        "具身智能"
+      ],
+      "research": [
+        {
+          "title": "具身智能",
+          "description": "希望的岗位是，能看到整个行业的技术最新热点，能和同学们一起学习。我可以提供非专业视角，帮助社区做更大众向的传播。"
+        }
+      ],
+      "email": "gegeliji00@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/%E4%BA%9A%E5%A8%9F-%E7%AA%A6-437821223/"
+    },
+    {
+      "id": "Square",
+      "name": "石贵文",
+      "avatar": "https://cold-amber-gnpjf9lizq.edgeone.app/a1d2a47284ba1b2ab585fd418aa09b2e.jpg",
+      "organization": "FDU ",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "Bravo！！！",
+      "description": "本科参加ROBOCON，现在在FDU从事机器人相关工作，对具身智能，VLA，AIGC有强烈好奇心",
+      "tags": [
+        "机器人"
+      ],
+      "research": [
+        {
+          "title": "机器人",
+          "description": "RL，VAL带来更加生动，灵巧的控制，赋予硅基生物一点“灵性”"
+        }
+      ],
+      "email": "25113070109@m.fudan.edu.cn"
+    },
+    {
+      "id": "VQuish",
+      "name": "王一",
+      "avatar": "https://avatars.githubusercontent.com/u/36250260?v=4",
+      "organization": "NJU",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "快一步行动，多一步思考",
+      "description": "南京大学计算机学院普通博士生一名，主要方向为3D场景生成，希望探索隐式或显式的3D世界理解、生成与交互",
+      "tags": [
+        "3D重建",
+        "计算机视觉"
+      ],
+      "research": [
+        {
+          "title": "3D重建",
+          "description": "个人理解：“从广义上来看3D生成某种程度上也算一种3D重建”\n3D->3D或其他模态->3D，理解、感知、交互、创建3D世界"
+        },
+        {
+          "title": "计算机视觉",
+          "description": "选择这个方向的初衷：能够体验更加直观的反馈\n对该方向的浅显理解：研究如何让计算机学会用“看”的方式感知世界"
+        }
+      ],
+      "email": "yi.wang@smail.nju.edu.cn",
+      "github": "https://github.com/wy9933"
+    },
+    {
+      "id": "ClothingCat",
+      "name": "林旭升",
+      "avatar": "https://avatars.githubusercontent.com/u/66352064?s=400&u=129c82f3fc9984da3ca2838a7410d9725fd3b779&v=4",
+      "organization": "sysu",
+      "role": [
+        "核心成员",
+        "内容创作者"
+      ],
+      "slogan": "make hay while the sun shines",
+      "description": "本人现为中山大学博0，研究方向为具身智能、强化学习，已经在计算机与机器人顶刊《Robotics and Computer-Integrated Manufacturing》(IF:11.4)发表了一篇旨在解决工业母机的“大脑”--数控系统加工过程难以实时决策优化问题的论文《A Five-Dimensional Digital Twin Framework Driven by Large Language Models-enhanced RL for CNC Systems》，基于大语言模型（LLM）增强强化学习的五维数控系统数字孪生框架，并开源了相关数控轨迹训练数据。",
+      "tags": [
+        "具身智能"
+      ],
+      "research": [
+        {
+          "title": "具身智能",
+          "description": "着眼于虚拟对象在空间中的任务规划，并致力于将模型迁移到物理实体上，实现真正的人机交互。"
+        }
+      ],
+      "email": "zhimaoyi8@gmail.com",
+      "github": "https://github.com/aishulou"
+    },
+    {
+      "id": "iChubai",
+      "name": "侯嘉栋",
+      "avatar": "https://avatars.githubusercontent.com/u/149308795?s=400&u=fa94d22e45466713d5f9a44e08528da281ecffe2&v=4",
+      "organization": "NKU- VCIP",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "qwq",
+      "description": "南开大学计算机科学与技术大三在读，VCIP实验室实习",
+      "tags": [
+        "计算机视觉",
+        "具身智能"
+      ],
+      "research": [
+        {
+          "title": "计算机视觉",
+          "description": "Visual Object Tracking,Point Tracking, Segmentation,Detection...."
+        },
+        {
+          "title": "具身智能",
+          "description": "Manipulation"
+        }
+      ],
+      "email": "2311671@mail.nankai.edu.cn",
+      "github": "https://github.com/iChubai"
+    },
+    {
+      "id": "Rocky Mu",
+      "name": "穆世龙",
+      "avatar": "https://charon-bo.github.io/images/personal-photo.png",
+      "organization": "无界智航 Xspark Ai",
+      "role": [
+        "活跃成员"
+      ],
+      "slogan": "做热爱的事，做改变世界的事！",
+      "description": "穆世龙，无界智航（Xspark Ai）创始人兼CEO，清华大学2025年硕士研究生毕业，具身智能领域青年科学家，曾入选某大厂天才少年计划。",
+      "tags": [],
+      "research": []
     }
   ]
 } 
