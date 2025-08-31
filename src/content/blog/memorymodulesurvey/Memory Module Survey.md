@@ -3,10 +3,9 @@ title: '关于IGV记忆模块的一些近期工作与思考'
 publishDate: 2025-08-29
 description: '高效而精确的记忆模块在IGV系统中至关重要，没有良好的记忆方案，IGV的长度将永远受限于存储和算力。'
 tags:
-  - VLA
-  - Discrete Diffusion
-  - Transformer
-  - 具身智能
+  - IGV
+  - memory
+  - world model
 language: '中文'
 heroImage: {src: './contextasimage.png'}
 author: "Andreo Y."
