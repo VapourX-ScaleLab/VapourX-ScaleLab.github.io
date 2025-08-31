@@ -77,7 +77,7 @@ comment: true
 
 ![image-20250823172855921](https://imgbucket-1313228125.cos.ap-shanghai.myqcloud.com/20250831141933194.png)
 
-方法：https://v-mem.github.io/img/video-1min-encoded_720p.mp4这个视频看了就懂了
+方法：https://v-mem.github.io/img/video-1min-encoded_720p.mp4 很清晰的视频
 
 > Plücker是能表征图中任一点关于当时相机的位置的射线方程（包括相机起点），与拍到的内容无关
 
