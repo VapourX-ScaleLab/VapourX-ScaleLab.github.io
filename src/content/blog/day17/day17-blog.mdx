@@ -2,7 +2,7 @@
 title: 'AC Daily Blog Eps.17 如何理解持续学习'
 publishDate: 2025-08-23
 updatedDate: 2025-08-23
-description: 'A brief description of your blog post that will appear in previews and search results. Keep it concise but informative.'
+description: '持续学习是一个能够面向更加泛化、更加持续进化的模型的学习范式，这或许对于未来而言是个很重要的并且很基本的模型训练思路，所以我们值得去review一下整个历程以及它在具身智能中的能力。'
 tags:
   - Continual Learning
   - 具身智能
@@ -19,6 +19,9 @@ comment: true
 简单来说，持续学习（也叫增量学习）就是一个不断增量新的数据，并且不断更新模型，使之能够逐步掌握越来越多的任务、能力、知识的过程。其更加长期的学习模式，也可以被称为终身学习。持续学习非常关注训练有效性和训练的泛化能力，总的来说，持续学习在追求一个稳定的学习过程。可以说这种思维方式是面向通才模型的一种可能的路径。
 
 很多情况下使用持续学习的原因是，不同组数据之间所包含的内容并不相通，或者说分布上会存在明显的差异，所以需要分批次地进行学习，其实现在的一些多模态大语言模型的训练也有这样的影子，训练者会选择先训练一部分模态数据，然后再增量地训练别的数据。比如π0时期，VLA训练会出现被过分拟合到V-A映射的问题，在后续的KI中，通过一些方式让language也产生了作用。
+
+在一些情况，我们面临的问题可能是数据量过大，那么就很难把之前的数据retrain了，所以我们需要一种能够留存之前的数据中学习的内容，并且可以快速的适应新的数据的算法，这也让持续学习在robotic里面有了非常重要的应用。在早先Boston Dynamic的Spot就有做这样的尝试，当时他们在采集Agile Mobile Robot的时候就会获得每周近乎三万TB的数据，那就很需要使用持续学习来一次成型并且尽可能保留记忆了。
+
 
 ## 正式的定义与训练的方式
 
@@ -50,7 +53,19 @@ $$\mathcal{L}_S(f_n^{CL}, n) = \frac{1}{\sum_{i=1}^{n} \vert \mathcal{D}_{test}^
 
 ## 面临的问题，灾难性遗忘。
 
-灾难性遗忘（Catastrophic Forgetting），在随着新任务的加入后，模型会一定程度上遗忘或者把过去学到的知识和现在的知识进行混叠造成不稳定的问题。
+灾难性遗忘（Catastrophic Forgetting），在随着新任务的加入后，模型会一定程度上遗忘或者把过去学到的知识和现在的知识进行混叠造成不稳定的问题。而且这个过程可能是突然的、骤降的，研究者们认为这可能是源于Gradient Descend这种方法带来的局限。我们可以从下图中看到，当一个模型能够学习到TaskA的能力，但是面对TaskB的学习的时候，会出现两条优化的方向，一个方向面向了TaskA和B的重叠，另一个方向就导致了仅仅偏向于B而离开了A的能力空间当中。
+
+![灾难性遗忘的成因](./Day17-Blog/image3.png)
+
+这也就导向了传统机器学习和持续学习的差异，相比于传统机器学习这种一股脑全部训练的方式，持续学习更加关注如何权衡之前的知识和新的知识的融合。从数据集的角度出发，传统的机器学习可能是在一个固定的set上进行训练，而持续学习则是unbounded的。
+
+那我们该如何解决这个问题，其实非常直观的能想到一些方法，比如通过模型集成的方法、或者用部分之前的数据进行稳定、对模型网络中的一部分进行冻结、或者不同程度上给出训练的权重等等。在后续的章节中我们会聊到一些在近阶段使用的持续学习方法来高效进行robotic manipulation policy learning。
+
+
+
+## Toolkit
+
+Avalanche，提供了一个端到端的持续学习平台，
 
 
 
@@ -60,8 +75,8 @@ $$\mathcal{L}_S(f_n^{CL}, n) = \frac{1}{\sum_{i=1}^{n} \vert \mathcal{D}_{test}^
 
 [2] [Continual Learning for Robotics: Definition, Framework, Learning Strategies, Opportunities and Challenges](https://arxiv.org/pdf/1907.00182)
 
-[3] [论文标题3](https://arxiv.org/abs/xxxx.xxxxx)
+[3] [CORe50 Dataset](https://vlomonaco.github.io/core50/)
 
-[4] [博客文章](https://example.com/blog-post)
+[4] [Overcoming catastrophic forgetting in neural networks](https://arxiv.org/pdf/1612.00796)
 
-[5] [官方文档](https://docs.example.com)
+[5] [Avalanche](https://avalanche.continualai.org/)
