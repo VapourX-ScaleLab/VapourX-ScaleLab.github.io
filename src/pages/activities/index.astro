@@ -12,7 +12,15 @@ export const prerender = true
 // Get all activities (excluding drafts)
 const allActivities = await getCollection('activities') as CollectionEntry<'activities'>[]
 const nonDraftActivities = allActivities.filter(activity => !activity.data.draft)
-const sortedActivities = sortMDByDate(nonDraftActivities) as CollectionEntry<'activities'>[]
+const sortedActivities = (nonDraftActivities as CollectionEntry<'activities'>[])
+  .sort((a, b) => {
+    // order 升序；同 order 时按 publishDate 降序
+    const orderDiff = (a.data.order ?? 999) - (b.data.order ?? 999)
+    if (orderDiff !== 0) return orderDiff
+    const aDate = new Date(a.data.publishDate).getTime()
+    const bDate = new Date(b.data.publishDate).getTime()
+    return bDate - aDate
+  })
 const uniqueActivityTypes = getUniqueActivityTypes(sortedActivities)
 
 const meta = {

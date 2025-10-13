@@ -86,12 +86,13 @@ const activities = defineCollection({
       ]).optional(),
       draft: z.boolean().default(false),
       // Activity specific fields
-      activityType: z.enum(['event', 'project', 'achievement', 'other']).default('other'),
+      activityType: z.enum(['event', 'project', 'achievement', 'read-in', 'other']).default('other'),
       location: z.string().optional(),
       duration: z.string().optional(),
       participants: z.number().optional(),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      order: z.number().default(999)
     })
 })
 
