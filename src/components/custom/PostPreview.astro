@@ -6,6 +6,7 @@ import type { HTMLTag, Polymorphic } from 'astro/types'
 import { cn } from 'astro-pure/utils'
 import { Button, Icon } from 'astro-pure/user'
 import FormattedDate from './FormattedDate.astro'
+import { getActivityGradient } from '@/utils/activities'
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
   post: CollectionEntry<CollectionKey>
@@ -31,6 +32,9 @@ const { id, data } = post
 
 const { remarkPluginFrontmatter } = await render(post)
 const postDate = data.updatedDate ?? data.publishDate
+
+// 获取随机渐变背景
+const gradientBackground = getActivityGradient(post.id)
 ---
 
   <li
@@ -69,10 +73,13 @@ const postDate = data.updatedDate ?? data.publishDate
           {...data.heroImage}
         />
       ) : layout === 'two-column' ? (
-        <div class={cn(
-          'flex-shrink-0 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg',
-          'h-16 w-16 sm:h-20 sm:w-20'
-        )}>
+        <div 
+          class={cn(
+            'flex-shrink-0 rounded-lg flex items-center justify-center text-white font-bold text-lg',
+            'h-16 w-16 sm:h-20 sm:w-20'
+          )}
+          style={`background-image: ${gradientBackground}; background-size: cover; background-position: center;`}
+        >
           {data.title.charAt(0).toUpperCase()}
         </div>
       ) : null

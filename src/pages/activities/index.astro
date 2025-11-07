@@ -1,11 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content'
-import { sortMDByDate } from 'astro-pure/server'
+import { Image } from 'astro:assets'
 import { Button } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import PostPreview from '@/components/custom/PostPreview.astro'
-import Icon from '@/components/custom/Icon.astro'
-import { getUniqueActivityTypes, getActivityTypeDisplayName } from '@/utils/activities'
+import { getUniqueActivityTypes, getActivityTypeDisplayName, getActivitiesByType, getActivityGradient } from '@/utils/activities'
 
 export const prerender = true
 
@@ -27,6 +26,9 @@ const meta = {
   description: 'Our team activities, events, and achievements',
   title: 'Activities'
 }
+
+// url builder for activities
+const getActivityUrl = (post: CollectionEntry<'activities'>) => `/activities/${post.id}`
 ---
 
 <PageLayout {meta}>
@@ -43,59 +45,396 @@ const meta = {
       sortedActivities.length === 0 ? (
         <p>No activities yet.</p>
       ) : (
-        <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
-          <section aria-label='Activities list' class='animate' id='content'>
-            {/* header */}
-            <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
-              <span class='text-muted-foreground'>
-                Showing {sortedActivities.length} activities
-              </span>
-            </div>
-            
-            {/* activities */}
-            <ul class='flex flex-col gap-y-4 text-start'>
-              {sortedActivities.map((activity) => (
-                <PostPreview post={activity} detailed />
-              ))}
-            </ul>
-          </section>
-
-          {/* sidebar */}
-          <aside class='animate' id='sidebar'>
-            {/* Activity Types Section */}
-            {!!uniqueActivityTypes.length && (
-              <div class='mb-8'>
-                <h2 class='mb-4 flex items-center text-lg font-semibold'>
-                  <Icon name='list' class='me-2' />
-                  Activity Types
-                </h2>
-                <ul class='text-bgColor flex flex-wrap gap-2'>
-                  {/* 全部类型 */}
-                  <li>
+        <div class='flex flex-col gap-y-6'>
+          {/* 三个分类横向轮播 */}
+          {uniqueActivityTypes.slice(0, 3).map((activityType) => {
+            const items = getActivitiesByType(sortedActivities, activityType)
+            return (
+              <section class='animate' aria-label={getActivityTypeDisplayName(activityType)}>
+                <div class='rounded-2xl p-4 relative glass-effect'>
+                  <div class='mb-3 flex items-center justify-between sm:mb-4'>
+                    <h2 class='text-lg font-semibold flex items-center gap-2'>
+                      <span class='activity-icon'>{activityType === '学术活动' ? '🎓' : activityType === '社区活动' ? '🤝' : activityType === '读书会' ? '📖' : '📌'}</span>
+                      <span>{getActivityTypeDisplayName(activityType)}</span>
+                    </h2>
                     <Button 
-                      title="All" 
-                      href="/activities" 
-                      style='default'
+                      title='查看全部' 
+                      href={`/activities/type/${activityType}`} 
+                      style='default' 
                     />
-                  </li>
-                  {/* 其他类型 */}
-                  {uniqueActivityTypes.map((activityType) => (
-                    <li>
-                      <Button 
-                        title={getActivityTypeDisplayName(activityType)} 
-                        href={`/activities/type/${activityType}`} 
-                        style='pill' 
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-
-          </aside>
+                  </div>
+                  <div class='marquee-viewport relative mx-auto' style='--gap: 1rem;'>
+                    <ul class={'marquee-track flex'} data-animate='true' data-duplicated='true'>
+                      {items.map((activity) => (
+                        <li class='activity-card relative rounded-xl border overflow-hidden' style='width: var(--card-w); height: var(--card-h); margin-right: var(--gap)'>
+                          <a class='block w-full h-full' href={getActivityUrl(activity)} data-astro-prefetch>
+                            {
+                              activity.data.heroImage ? (
+                                <Image {...activity.data.heroImage} alt={activity.data.title} class='absolute inset-0 h-full w-full object-cover' loading='eager' />
+                              ) : (
+                                <div 
+                                  class='absolute inset-0 h-full w-full'
+                                  style={`background-image: ${getActivityGradient(activity.id)}; background-size: cover; background-position: center;`}
+                                ></div>
+                              )
+                            }
+                            <div class='absolute inset-0 color-scheme-mask'></div>
+                            <div class='absolute inset-0 bottom-gradient'></div>
+                            <div class='absolute inset-x-0 bottom-0 text-overlay' aria-hidden='true'></div>
+                            <div class='absolute inset-x-0 bottom-0 p-3 text-white'>
+                              <div class='flex items-center justify-between gap-2'>
+                                <h3 class='text-sm font-semibold line-clamp-1'>{activity.data.title}</h3>
+                                <span class='text-[10px] opacity-90 whitespace-nowrap'>
+                                  {new Date((activity.data.updatedDate ?? activity.data.publishDate) as any).toLocaleDateString()}
+                                </span>
+                              </div>
+                              {activity.data.description && (
+                                <p class='mt-1 text-xs opacity-95 line-clamp-2'>
+                                  {activity.data.description}
+                                </p>
+                              )}
+                              <div class='mt-1.5 flex items-center gap-2 text-[11px] opacity-95'>
+                                {activity.data.author && <span class='line-clamp-1'>{activity.data.author}</span>}
+                                {activity.data.duration && <span class='opacity-90'>· {activity.data.duration}</span>}
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      ))}
+                      {/* 复制卡片用于无限循环 - 只在有多个活动时才复制 */}
+                      {items.length > 1 && items.map((activity) => (
+                        <li class='activity-card relative rounded-xl border overflow-hidden' style='width: var(--card-w); height: var(--card-h); margin-right: var(--gap)' aria-hidden='true'>
+                          <a class='block w-full h-full' href={getActivityUrl(activity)} data-astro-prefetch tabindex='-1'>
+                            {
+                              activity.data.heroImage ? (
+                                <Image {...activity.data.heroImage} alt={activity.data.title} class='absolute inset-0 h-full w-full object-cover' loading='eager' />
+                              ) : (
+                                <div 
+                                  class='absolute inset-0 h-full w-full'
+                                  style={`background-image: ${getActivityGradient(activity.id)}; background-size: cover; background-position: center;`}
+                                ></div>
+                              )
+                            }
+                            <div class='absolute inset-0 color-scheme-mask'></div>
+                            <div class='absolute inset-0 bottom-gradient'></div>
+                            <div class='absolute inset-x-0 bottom-0 text-overlay' aria-hidden='true'></div>
+                            <div class='absolute inset-x-0 bottom-0 p-3 text-white'>
+                              <div class='flex items-center justify-between gap-2'>
+                                <h3 class='text-sm font-semibold line-clamp-1'>{activity.data.title}</h3>
+                                <span class='text-[10px] opacity-90 whitespace-nowrap'>
+                                  {new Date((activity.data.updatedDate ?? activity.data.publishDate) as any).toLocaleDateString()}
+                                </span>
+                              </div>
+                              {activity.data.description && (
+                                <p class='mt-1 text-xs opacity-95 line-clamp-2'>
+                                  {activity.data.description}
+                                </p>
+                              )}
+                              <div class='mt-1.5 flex items-center gap-2 text-[11px] opacity-95'>
+                                {activity.data.author && <span class='line-clamp-1'>{activity.data.author}</span>}
+                                {activity.data.duration && <span class='opacity-90'>· {activity.data.duration}</span>}
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            )
+          })}
         </div>
       )
     }
   </main>
 </PageLayout> 
+
+<style>
+  /* 活动类型图标动画 */
+  .activity-icon {
+    display: inline-block;
+    font-size: 1.2em;
+    animation: iconFloat 3s ease-in-out infinite;
+  }
+  
+  @keyframes iconFloat {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-3px) scale(1.05);
+    }
+  }
+  
+  /* 鼠标悬停时图标旋转 */
+  .glass-effect:hover .activity-icon {
+    animation: iconRotate 0.6s ease-in-out;
+  }
+  
+  @keyframes iconRotate {
+    0%, 100% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(10deg) scale(1.1);
+    }
+  }
+
+  /* 毛玻璃效果 */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  /* 暗色模式下的毛玻璃效果 */
+  :global(.dark) .glass-effect {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .marquee-viewport {
+    width: 100%;
+    height: calc(var(--card-h) + 0.25rem);
+    overflow: hidden;
+    /* 渐变宽度变量，可按需调节 */
+    --edge-fade: 72px;
+    position: relative;
+  }
+  
+  /* 宽度超出时：直接显示左右两侧渐变 */
+  .marquee-viewport.has-overflow {
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), rgba(0,0,0,0));
+    mask-image: linear-gradient(to right, rgba(0,0,0,0), #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), rgba(0,0,0,0));
+  }
+  
+  .marquee-track {
+    will-change: transform;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .marquee-track > .activity-card:last-child {
+    margin-right: 0;
+  }
+  
+  /* 无限循环动画不需要 animation-iteration-count，用 JavaScript 控制 */
+  .marquee-track[data-animate='true'] {
+    /* animation 由 JavaScript 动态设置 */
+  }
+  
+  /* 卡片悬停时只放大背景图 */
+  .activity-card {
+    z-index: 1;
+    position: relative;
+  }
+  
+  .activity-card:hover {
+    z-index: 10;
+  }
+  
+  /* 背景图片的缩放效果 */
+  .activity-card img,
+  .activity-card > a > div:first-child {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .activity-card:hover img,
+  .activity-card:hover > a > div:first-child {
+    transform: scale(1.15);
+  }
+
+  /* 3:2 统一卡片尺寸（高度为宽度的2/3） */
+  .marquee-viewport { 
+    --card-w: 280px; 
+    --card-h: 187px; /* 280 * 2/3 ≈ 187 */
+  }
+  @media (min-width: 640px) {
+    .marquee-viewport { 
+      --card-w: 320px; 
+      --card-h: 213px; /* 320 * 2/3 ≈ 213 */
+    }
+  }
+  @media (min-width: 1024px) {
+    .marquee-viewport { 
+      --card-w: 360px; 
+      --card-h: 240px; /* 360 * 2/3 = 240 */
+    }
+  }
+
+  /* 强制所有卡片使用统一尺寸 */
+  .activity-card {
+    width: var(--card-w) !important;
+    height: var(--card-h) !important;
+    flex-shrink: 0;
+    aspect-ratio: 3 / 2;
+  }
+  
+  .activity-card img,
+  .activity-card > a {
+    aspect-ratio: 3 / 2;
+  }
+
+  /* 图片透明度渐变遮罩（无色偏，避免纯黑/白覆盖） */
+  .color-scheme-mask {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.10) 35%, rgba(0,0,0,0) 65%);
+  }
+  .bottom-gradient { background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.25), rgba(0,0,0,0)); }
+  .text-overlay {
+    height: 46%;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.72) 0%,
+      rgba(0,0,0,0.50) 60%,
+      rgba(0,0,0,0.20) 85%,
+      rgba(0,0,0,0) 100%
+    );
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  const pxPerSec = 50 // 滚动速度：每秒移动的像素数
+  const animationDelay = 800 // 初始延迟：0.8秒后开始滚动
+
+  /** @type {(viewport: HTMLElement) => void} */
+  const setupMarquee = (viewport) => {
+    const track = viewport.querySelector('.marquee-track')
+    if (!(track instanceof HTMLElement)) return
+
+    const animate = track.getAttribute('data-animate') === 'true'
+    if (!animate) {
+      viewport.classList.remove('has-overflow')
+      track.style.animation = 'none'
+      return
+    }
+
+    const cards = Array.from(track.querySelectorAll('.activity-card'))
+    const originalCards = cards.filter((el) => el instanceof HTMLElement && el.getAttribute('aria-hidden') !== 'true')
+    const originalCount = originalCards.length
+    if (originalCount === 0) {
+      track.style.animation = 'none'
+      viewport.classList.remove('has-overflow')
+      return
+    }
+
+    // 计算首组卡片真实宽度（包含 margin-right）
+    let singleGroupWidth = 0
+    for (let i = 0; i < originalCount; i++) {
+      const el = cards[i] || originalCards[i]
+      if (!(el instanceof HTMLElement)) continue
+      const rect = el.getBoundingClientRect()
+      const style = getComputedStyle(el)
+      const marginRight = parseFloat(style.marginRight) || 0
+      singleGroupWidth += rect.width + marginRight
+    }
+
+    const viewportWidth = viewport.clientWidth
+
+    if (singleGroupWidth > viewportWidth) {
+      viewport.classList.add('has-overflow')
+
+      const duration = singleGroupWidth / pxPerSec
+      track.style.setProperty('--translate-distance', `-${singleGroupWidth}px`)
+      track.style.animation = `marquee-slide ${duration}s linear ${animationDelay / 1000}s infinite`
+
+      // 立即设置动画控制，无需等待
+      let currentPlaybackRate = 1.0
+      let targetPlaybackRate = 1.0
+      let rafId = null
+      let animationObj = null
+
+      // 平滑过渡函数 - 改进版，允许中断和更新目标
+      const smoothTransition = (targetRate) => {
+        targetPlaybackRate = targetRate
+
+        // 取消之前的动画帧
+        if (rafId) {
+          cancelAnimationFrame(rafId)
+        }
+
+        // 如果动画对象还未获取，尝试获取
+        if (!animationObj) {
+          const animations = track.getAnimations()
+          if (animations.length > 0) {
+            animationObj = animations[0]
+          } else {
+            // 动画还未开始，稍后重试
+            setTimeout(() => smoothTransition(targetRate), 50)
+            return
+          }
+        }
+
+        const startRate = currentPlaybackRate
+        const startTime = performance.now()
+        const transitionDuration = 600 // 0.6秒过渡时间（更快响应）
+
+        const animateRate = (currentTime) => {
+          const elapsed = currentTime - startTime
+          const progress = Math.min(elapsed / transitionDuration, 1)
+          
+          // 使用 ease-out 缓动函数，更快响应
+          const easeProgress = 1 - Math.pow(1 - progress, 3)
+
+          currentPlaybackRate = startRate + (targetPlaybackRate - startRate) * easeProgress
+          if (animationObj) {
+            animationObj.playbackRate = currentPlaybackRate
+          }
+
+          if (progress < 1 && currentPlaybackRate !== targetPlaybackRate) {
+            rafId = requestAnimationFrame(animateRate)
+          } else {
+            rafId = null
+          }
+        }
+
+        rafId = requestAnimationFrame(animateRate)
+      }
+
+      // 立即添加事件监听器
+      viewport.addEventListener('mouseenter', () => {
+        smoothTransition(0.5)
+      })
+
+      viewport.addEventListener('mouseleave', () => {
+        smoothTransition(1.0)
+      })
+    } else {
+      viewport.classList.remove('has-overflow')
+      track.style.animation = 'none'
+    }
+  }
+
+  function initMarquees() {
+    document.querySelectorAll('.marquee-viewport').forEach((el) => {
+      if (el instanceof HTMLElement) setupMarquee(el)
+    })
+  }
+
+  /** @type {number} */
+  let resizeRaf = 0
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(resizeRaf)
+    resizeRaf = requestAnimationFrame(() => initMarquees())
+  })
+
+  requestAnimationFrame(() => initMarquees())
+
+  // 添加动画关键帧样式
+  const style = document.createElement('style')
+  style.textContent = `
+    @keyframes marquee-slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(var(--translate-distance, -100%)); }
+    }
+  `
+  document.head.appendChild(style)
+</script>
