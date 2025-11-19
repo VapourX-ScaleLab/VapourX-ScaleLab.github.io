@@ -23,7 +23,16 @@ const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 const allActivities = await getCollection('activities')
 const nonDraftActivities = allActivities.filter(activity => !activity.data.draft)
-const recentActivities = nonDraftActivities.slice(0, 3)
+const recentActivities = nonDraftActivities
+  .sort((a, b) => {
+    // order 升序；同 order 时按 publishDate 降序
+    const orderDiff = (a.data.order ?? 999) - (b.data.order ?? 999)
+    if (orderDiff !== 0) return orderDiff
+    const aDate = new Date(a.data.publishDate).getTime()
+    const bDate = new Date(b.data.publishDate).getTime()
+    return bDate - aDate
+  })
+  .slice(0, 3)
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#5B8BB3'>
