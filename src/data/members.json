@@ -320,34 +320,6 @@
       "email": "StevenSun@sjtu.edu.cn"
     },
     {
-      "id": "wxdong",
-      "name": "Wanxi Dong (董万希)",
-      "avatar": "https://avatars.githubusercontent.com/u/112927884?s=400&v=4",
-      "organization": "SUSTech",
-      "role": [
-        "社区运营维护",
-        "核心成员"
-      ],
-      "slogan": "赋予智能以形，连接世界与行。",
-      "description": "专注于具身智能，探索感知与行动如何赋予机器智慧，连接现实与未来。",
-      "tags": [
-        "具身智能",
-        "强化学习"
-      ],
-      "research": [
-        {
-          "title": "具身智能",
-          "description": "我专注于具身智能在机器人操作中的应用，研究基于 Visuomotor 和 VLA 模型的算法，通过感知与学习优化机械臂的抓取与精细操作。"
-        },
-        {
-          "title": "强化学习",
-          "description": "我专注于强化学习在机器人领域的应用，通过强化学习和模仿学习，使机器人学习复杂任务，优化任务规划与动作生成，应用于智能操作。"
-        }
-      ],
-      "email": "12210432@mail.sustech.edu.cn",
-      "github": "https://github.com/Victor0700"
-    },
-    {
       "id": "dehuiwang",
       "name": "Dehui Wang",
       "avatar": "https://avatars.githubusercontent.com/u/141940219?s=96&v=4",
